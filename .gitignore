@@ -1,0 +1,5 @@
+# Signature files
+*.sig
+
+# Sign script
+Sign.bat

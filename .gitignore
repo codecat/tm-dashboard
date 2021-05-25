@@ -1,5 +1,8 @@
 # Signature files
 *.sig
 
+# Releases
+*.zip
+
 # Sign script
 Sign.bat

@@ -17,7 +17,7 @@ Plugin for Openplanet that displays a bunch of Trackmania vehicle information on
 	* Colors & styles
 
 ## Download
-You can download the plugin [through Openplanet.nl](https://openplanet.nl/).
+You can download the plugin [through Openplanet.nl](https://openplanet.nl/files/103).
 
 ## Screenshots
 ![](Screenshots/PadGamepad.png)

@@ -116,8 +116,8 @@ class DashboardPadGamepad : DashboardThing
 
 		const vec4 colorDown = vec4(1, 0.6f, 0.2f, 1);
 
-		const vec4 colorSteeringOn = vec4(1, 0.2f, 0.6f, 1);
-		const vec4 colorSteeringOff = vec4(1, 0.2f, 0.6f, offAlpha);
+		const vec4 colorSteeringOn = Setting_Gamepad_FillColor;
+		const vec4 colorSteeringOff = WithAlpha(Setting_Gamepad_FillColor, offAlpha);
 
 		auto posLeft = vec2(0, m_size.y / 2);
 		auto posRight = vec2(m_size.x, m_size.y / 2);

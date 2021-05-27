@@ -3,7 +3,7 @@
 #category "Overlay"
 
 #siteid 103
-#version "1.0"
+#version "1.1"
 
 #max_game_version "2021-05-20"
 
@@ -87,8 +87,15 @@ class Dashboard
 
 	void Render()
 	{
-		auto sceneVis = GetApp().GameScene;
+		auto app = GetApp();
+
+		auto sceneVis = app.GameScene;
 		if (sceneVis is null) {
+			return;
+		}
+
+		// Interface hidden
+		if (app.CurrentPlayground is null || app.CurrentPlayground.Interface is null || Dev::GetOffsetUint32(app.CurrentPlayground.Interface, 0x1C) == 0) {
 			return;
 		}
 

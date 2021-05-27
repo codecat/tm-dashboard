@@ -8,6 +8,9 @@ enum ForcePadType
 [Setting category="General" name="Force pad type"]
 ForcePadType Setting_General_ForcePadType = ForcePadType::None;
 
+[Setting category="General" name="Hide on hidden interface"]
+bool Setting_General_HideOnHiddenInterface = false;
+
 [Setting category="General" name="Show controller/pad"]
 bool Setting_General_ShowPad = true;
 

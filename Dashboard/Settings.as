@@ -292,5 +292,8 @@ float Setting_Wheels_RowSpacing = 10.0f;
 [Setting category="Wheels" name="Details spacing" drag min=0 max=100]
 float Setting_Wheels_DetailsSpacing = 20.0f;
 
+[Setting category="Wheels" name="Details font"]
+string Setting_Wheels_DetailsFont = "DroidSans.ttf";
+
 [Setting category="Wheels" name="Details font size" drag min=0 max=50]
 float Setting_Wheels_DetailsFontSize = 16.0f;

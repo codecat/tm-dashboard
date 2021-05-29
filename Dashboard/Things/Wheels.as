@@ -19,8 +19,31 @@ class WheelState
 
 class DashboardWheels : DashboardThing
 {
+	Resources::Font@ m_font;
+	string m_fontPath;
+
 	DashboardWheels()
 	{
+		LoadFont();
+	}
+
+	void LoadFont()
+	{
+		if (Setting_Wheels_DetailsFont == m_fontPath) {
+			return;
+		}
+
+		auto font = Resources::GetFont(Setting_Wheels_DetailsFont);
+		if (font !is null) {
+			m_fontPath = Setting_Wheels_DetailsFont;
+			@m_font = font;
+			nvg::AddFallbackFont(m_font, g_fontIcons);
+		}
+	}
+
+	void OnSettingsChanged() override
+	{
+		LoadFont();
 	}
 
 	WheelState GetWheelState(CSceneVehicleVisState@ vis, WheelType type)
@@ -161,7 +184,7 @@ class DashboardWheels : DashboardThing
 	void RenderWheelDetails(const WheelState &in state, const vec2 &in pos, const vec2 &in size)
 	{
 		nvg::BeginPath();
-		nvg::FontFace(g_font);
+		nvg::FontFace(m_font);
 		nvg::FontSize(Setting_Wheels_DetailsFontSize);
 
 		auto tx = nvg::CurrentTransform();

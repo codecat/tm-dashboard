@@ -199,8 +199,6 @@ void OnSettingsChanged()
 
 void Main()
 {
-	@g_dashboard = Dashboard();
-
 	auto app = GetApp();
 
 	@g_font = Resources::GetFont("DroidSans.ttf");
@@ -209,6 +207,8 @@ void Main()
 
 	nvg::AddFallbackFont(g_font, g_fontIcons);
 	nvg::AddFallbackFont(g_fontBold, g_fontIcons);
+
+	@g_dashboard = Dashboard();
 
 	while (true) {
 		// Find the most recently used pad

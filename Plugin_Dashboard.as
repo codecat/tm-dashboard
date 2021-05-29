@@ -160,7 +160,9 @@ void Render()
 	}
 
 	// Render dashboard
-	g_dashboard.Render();
+	if (g_dashboard !is null) {
+		g_dashboard.Render();
+	}
 }
 
 void RenderInterface()

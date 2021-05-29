@@ -1,6 +1,31 @@
 class DashboardSpeed : DashboardThing
 {
-	int m_lastGear;
+	Resources::Font@ m_font;
+	string m_fontPath;
+
+	DashboardSpeed()
+	{
+		LoadFont();
+	}
+
+	void LoadFont()
+	{
+		if (Setting_Speed_Font == m_fontPath) {
+			return;
+		}
+
+		auto font = Resources::GetFont(Setting_Speed_Font);
+		if (font !is null) {
+			m_fontPath = Setting_Speed_Font;
+			@m_font = font;
+			nvg::AddFallbackFont(m_font, g_fontIcons);
+		}
+	}
+
+	void OnSettingsChanged() override
+	{
+		LoadFont();
+	}
 
 	void Render(CSceneVehicleVisState@ vis) override
 	{
@@ -21,7 +46,7 @@ class DashboardSpeed : DashboardThing
 		nvg::Stroke();
 
 		nvg::BeginPath();
-		nvg::FontFace(g_font);
+		nvg::FontFace(m_font);
 		nvg::FontSize(Setting_Speed_FontSize);
 		nvg::FillColor(Setting_Speed_TextColor);
 

@@ -221,6 +221,9 @@ float Setting_Speed_BorderRadius = 5.0f;
 [Setting category="Speed" name="Padding" drag min=0 max=50]
 float Setting_Speed_Padding = 20.0f;
 
+[Setting category="Speed" name="Font"]
+string Setting_Speed_Font = "DroidSans.ttf";
+
 [Setting category="Speed" name="Font size" drag min=0 max=50]
 float Setting_Speed_FontSize = 24.0f;
 

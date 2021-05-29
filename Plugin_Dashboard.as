@@ -78,10 +78,6 @@ class Dashboard
 			case EPadType::PlayStation:
 				@m_pad = DashboardPadGamepad();
 				break;
-
-			default:
-				warn("Pad is unsupported!");
-				break;
 		}
 	}
 

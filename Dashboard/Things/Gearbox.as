@@ -42,7 +42,7 @@ class DashboardGearbox : DashboardThing
 		nvg::Stroke();
 
 		nvg::FontFace(m_font);
-		nvg::FillColor(vec4(1, 1, 1, 1));
+		nvg::FillColor(Setting_Gearbox_TextColor);
 		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 
 		float gearY = 0.37f;

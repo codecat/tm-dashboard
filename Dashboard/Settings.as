@@ -180,6 +180,9 @@ vec4 Setting_Gearbox_MidRPMColor = vec4(0, 0.9f, 0, 1);
 [Setting category="Gearbox" name="High RPM color" color]
 vec4 Setting_Gearbox_HighRPMColor = vec4(0.8f, 0, 0, 1);
 
+[Setting category="Gearbox" name="Text color" color]
+vec4 Setting_Gearbox_TextColor = vec4(1, 1, 1, 1);
+
 [Setting category="Gearbox" name="Font"]
 string Setting_Gearbox_Font = "DroidSans.ttf";
 

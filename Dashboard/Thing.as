@@ -12,5 +12,6 @@ class DashboardThing
 		nvg::ResetTransform();
 	}
 
+	void OnSettingsChanged() {}
 	void Render(CSceneVehicleVisState@ vis) {}
 }

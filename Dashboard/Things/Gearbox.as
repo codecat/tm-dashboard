@@ -3,8 +3,30 @@ class DashboardGearbox : DashboardThing
 	float m_minRpm = 200.0f; // Minimal RPM to avoid flickering at engine idle
 	float m_maxRpm = 11000.0f;
 
+	Resources::Font@ m_font;
+	string m_fontPath;
+
 	DashboardGearbox()
 	{
+		LoadFont();
+	}
+
+	void LoadFont()
+	{
+		if (Setting_Gearbox_Font == m_fontPath) {
+			return;
+		}
+
+		auto font = Resources::GetFont(Setting_Gearbox_Font);
+		if (font !is null) {
+			m_fontPath = Setting_Gearbox_Font;
+			@m_font = font;
+		}
+	}
+
+	void OnSettingsChanged() override
+	{
+		LoadFont();
 	}
 
 	void RenderNumbers(const vec2 &in pos, const vec2 &in size, uint gear, float rpm)
@@ -19,7 +41,7 @@ class DashboardGearbox : DashboardThing
 		nvg::Fill();
 		nvg::Stroke();
 
-		nvg::FontFace(g_font);
+		nvg::FontFace(m_font);
 		nvg::FillColor(vec4(1, 1, 1, 1));
 		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 

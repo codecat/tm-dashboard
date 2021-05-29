@@ -25,7 +25,7 @@
 #include "Dashboard/Things/Wheels.as"
 
 bool g_visible = true;
-Dashboard g_dashboard;
+Dashboard@ g_dashboard;
 
 Resources::Font@ g_font;
 Resources::Font@ g_fontBold;
@@ -79,6 +79,16 @@ class Dashboard
 				@m_pad = DashboardPadGamepad();
 				break;
 		}
+	}
+
+	void OnSettingsChanged()
+	{
+		if (m_pad !is null) {
+			m_pad.OnSettingsChanged();
+		}
+		m_gearbox.OnSettingsChanged();
+		m_speed.OnSettingsChanged();
+		m_wheels.OnSettingsChanged();
 	}
 
 	void Render()
@@ -180,8 +190,15 @@ void RenderInterface()
 	}
 }
 
+void OnSettingsChanged()
+{
+	g_dashboard.OnSettingsChanged();
+}
+
 void Main()
 {
+	@g_dashboard = Dashboard();
+
 	auto app = GetApp();
 
 	@g_font = Resources::GetFont("DroidSans.ttf");

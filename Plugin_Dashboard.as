@@ -5,7 +5,7 @@
 #siteid 103
 #version "1.1"
 
-#max_game_version "2021-05-20"
+#max_game_version "2021-06-01"
 
 #include "Icons.as"
 

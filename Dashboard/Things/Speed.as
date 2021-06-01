@@ -35,6 +35,11 @@ class DashboardSpeed : DashboardThing
 			case SpeedValue::Velocity: displaySpeed = Vehicle::GetVelocity(vis).Length() * 3.6f; break;
 		}
 
+		// Avoid flickering negative sign
+		if (displaySpeed < 0 && displaySpeed > -0.99f) {
+			displaySpeed = 0;
+		}
+
 		nvg::BeginPath();
 		nvg::RoundedRect(0, 0, m_size.x, m_size.y, Setting_Speed_BorderRadius);
 

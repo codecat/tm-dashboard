@@ -3,9 +3,9 @@
 #category "Overlay"
 
 #siteid 103
-#version "1.1"
+#version "1.2"
 
-#max_game_version "2021-06-01"
+#max_game_version "2021-06-02"
 
 #include "Icons.as"
 

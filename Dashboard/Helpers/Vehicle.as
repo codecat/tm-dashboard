@@ -5,6 +5,26 @@
 
 namespace Vehicle
 {
+	uint VehiclesOffset = 0x1C8;
+
+	bool CheckValidVehicles(CMwNod@ vehicleVisMgr)
+	{
+		auto ptr = Dev::GetOffsetUint64(vehicleVisMgr, VehiclesOffset);
+		auto count = Dev::GetOffsetUint32(vehicleVisMgr, VehiclesOffset + 0x8);
+
+		// Ensure this is a valid pointer
+		if ((ptr & 0xF) != 0) {
+			return false;
+		}
+
+		// Assume we can't have more than 1000 vehicles
+		if (count > 1000) {
+			return false;
+		}
+
+		return true;
+	}
+
 	// Get vehicle vis from a given player.
 	CSceneVehicleVis@ GetVis(ISceneVis@ sceneVis, CSmPlayer@ player)
 	{
@@ -20,9 +40,12 @@ namespace Vehicle
 			return null;
 		}
 
-		uint vehiclesOffset = 0x1C8;
-		auto vehicles = Dev::GetOffsetNod(vehicleVisMgr, vehiclesOffset);
-		auto vehiclesCount = Dev::GetOffsetUint32(vehicleVisMgr, vehiclesOffset + 0x8);
+		if (!CheckValidVehicles(vehicleVisMgr)) {
+			return null;
+		}
+
+		auto vehicles = Dev::GetOffsetNod(vehicleVisMgr, VehiclesOffset);
+		auto vehiclesCount = Dev::GetOffsetUint32(vehicleVisMgr, VehiclesOffset + 0x8);
 
 		for (uint i = 0; i < vehiclesCount; i++) {
 			auto nodVehicle = Dev::GetOffsetNod(vehicles, i * 0x8);
@@ -48,13 +71,16 @@ namespace Vehicle
 			return null;
 		}
 
-		uint vehiclesOffset = 0x1C8;
-		auto vehiclesCount = Dev::GetOffsetUint32(vehicleVisMgr, vehiclesOffset + 0x8);
+		auto vehiclesCount = Dev::GetOffsetUint32(vehicleVisMgr, VehiclesOffset + 0x8);
 		if (vehiclesCount != 1) {
 			return null;
 		}
 
-		auto vehicles = Dev::GetOffsetNod(vehicleVisMgr, vehiclesOffset);
+		if (!CheckValidVehicles(vehicleVisMgr)) {
+			return null;
+		}
+
+		auto vehicles = Dev::GetOffsetNod(vehicleVisMgr, VehiclesOffset);
 		auto nodVehicle = Dev::GetOffsetNod(vehicles, 0);
 		return Dev::ForceCast<CSceneVehicleVis@>(nodVehicle).Get();
 	}
@@ -65,10 +91,9 @@ namespace Vehicle
 		array<CSceneVehicleVis@> ret;
 
 		auto vehicleVisMgr = SceneVis::GetMgr(sceneVis, 5); // NSceneVehicleVis_SMgr
-		if (vehicleVisMgr !is null) {
-			uint vehiclesOffset = 0x1C8;
-			auto vehicles = Dev::GetOffsetNod(vehicleVisMgr, vehiclesOffset);
-			auto vehiclesCount = Dev::GetOffsetUint32(vehicleVisMgr, vehiclesOffset + 0x8);
+		if (vehicleVisMgr !is null && CheckValidVehicles(vehicleVisMgr)) {
+			auto vehicles = Dev::GetOffsetNod(vehicleVisMgr, VehiclesOffset);
+			auto vehiclesCount = Dev::GetOffsetUint32(vehicleVisMgr, VehiclesOffset + 0x8);
 
 			for (uint i = 0; i < vehiclesCount; i++) {
 				auto nodVehicle = Dev::GetOffsetNod(vehicles, i * 0x8);

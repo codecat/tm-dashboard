@@ -3,7 +3,7 @@
 #category "Overlay"
 
 #siteid 103
-#version "1.2"
+#version "1.3"
 
 // Removed - the offsets seem relatively safe
 //#max_game_version "2021-06-02"

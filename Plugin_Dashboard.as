@@ -5,7 +5,8 @@
 #siteid 103
 #version "1.2"
 
-#max_game_version "2021-06-02"
+// Removed - the offsets seem relatively safe
+//#max_game_version "2021-06-02"
 
 #include "Icons.as"
 

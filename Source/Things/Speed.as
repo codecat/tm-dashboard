@@ -32,7 +32,7 @@ class DashboardSpeed : DashboardThing
 		float displaySpeed;
 		switch (Setting_Speed_Value) {
 			case SpeedValue::FrontSpeed: displaySpeed = vis.FrontSpeed * 3.6f; break;
-			case SpeedValue::Velocity: displaySpeed = Vehicle::GetVelocity(vis).Length() * 3.6f; break;
+			case SpeedValue::Velocity: displaySpeed = vis.WorldVel.Length() * 3.6f; break;
 		}
 
 		// Avoid flickering negative sign

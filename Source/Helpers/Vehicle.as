@@ -145,25 +145,6 @@ namespace Vehicle
 		return Dev::GetOffsetFloat(vis, g_offsetWheelDirt[w]);
 	}
 
-	// Get absolute velocity for vehicle vis.
-	vec3 GetVelocity(CSceneVehicleVisState@ vis)
-	{
-		if (g_offsetVelocity == 0) {
-			auto type = Reflection::GetType("CSceneVehicleVisState");
-			if (type is null) {
-				error("Unable to find reflection info for CSceneVehicleVisState!");
-				return vec3();
-			}
-			g_offsetVelocity = type.GetMember("Position").Offset + 4 * 3;
-		}
-
-		vec3 ret;
-		ret.x = Dev::GetOffsetFloat(vis, g_offsetVelocity);
-		ret.y = Dev::GetOffsetFloat(vis, g_offsetVelocity + 4);
-		ret.z = Dev::GetOffsetFloat(vis, g_offsetVelocity + 8);
-		return ret;
-	}
-
 	// Get relative side speed for vehicle.
 	float GetSideSpeed(CSceneVehicleVisState@ vis)
 	{
@@ -181,6 +162,5 @@ namespace Vehicle
 
 	uint16 g_offsetEngineRPM = 0;
 	array<uint16> g_offsetWheelDirt;
-	uint16 g_offsetVelocity = 0;
 	uint16 g_offsetSideSpeed = 0;
 }

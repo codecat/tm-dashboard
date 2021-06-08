@@ -5,6 +5,9 @@
 
 namespace Vehicle
 {
+	// -       ... : 5
+	// - 2021-06-08: 4
+	uint VehiclesManagerIndex = 4;
 	uint VehiclesOffset = 0x1C8;
 
 	bool CheckValidVehicles(CMwNod@ vehicleVisMgr)
@@ -35,7 +38,7 @@ namespace Vehicle
 			vehicleEntityId = player.ScriptAPI.Vehicle.Id.Value;
 		}
 
-		auto vehicleVisMgr = SceneVis::GetMgr(sceneVis, 5); // NSceneVehicleVis_SMgr
+		auto vehicleVisMgr = SceneVis::GetMgr(sceneVis, VehiclesManagerIndex); // NSceneVehicleVis_SMgr
 		if (vehicleVisMgr is null) {
 			return null;
 		}

@@ -27,7 +27,7 @@ namespace SceneVis
 	// Looks up a manager by its type ID. Prefer to use GetMgr if you can.
 	CMwNod@ FindMgr(ISceneVis@ sceneVis, uint classID)
 	{
-		uint sceneVisManagersOffset = 0x240;
+		uint sceneVisManagersOffset = 0x2C0;
 		auto sceneVisManagers = Dev::GetOffsetNod(sceneVis, sceneVisManagersOffset);
 		auto sceneVisManagersCount = Dev::GetOffsetUint32(sceneVis, sceneVisManagersOffset + 0x8);
 
@@ -52,7 +52,7 @@ namespace SceneVis
 			ret.InsertLast(0);
 		}
 
-		uint sceneVisManagersOffset = 0x240;
+		uint sceneVisManagersOffset = 0x2C0;
 		auto sceneVisManagers = Dev::GetOffsetNod(sceneVis, sceneVisManagersOffset);
 		auto sceneVisManagersCount = Dev::GetOffsetUint32(sceneVis, sceneVisManagersOffset + 0x8);
 

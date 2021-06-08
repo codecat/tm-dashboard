@@ -1,0 +1,12 @@
+[meta]
+name = "Dashboard"
+author = "Miss"
+category = "Overlay"
+
+siteid = 103
+version = "1.4"
+
+blocks = [ "Plugin_Dashboard" ]
+
+[script]
+imports = [ "Icons.as" ]

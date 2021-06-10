@@ -7,8 +7,6 @@ class DashboardPadGamepad : DashboardThing
 
 	void RenderUniform(CSceneVehicleVisState@ vis)
 	{
-		const float offAlpha = 0.33f;
-
 		vec4 strokeColor = Setting_Gamepad_BorderColor;
 		vec4 fillColor = Setting_Gamepad_FillColor;
 
@@ -112,12 +110,8 @@ class DashboardPadGamepad : DashboardThing
 
 	void RenderClassic(CSceneVehicleVisState@ vis)
 	{
-		const float offAlpha = 0.33f;
-
-		const vec4 colorDown = vec4(1, 0.6f, 0.2f, 1);
-
 		const vec4 colorSteeringOn = Setting_Gamepad_FillColor;
-		const vec4 colorSteeringOff = WithAlpha(Setting_Gamepad_FillColor, offAlpha);
+		const vec4 colorSteeringOff = WithAlpha(Setting_Gamepad_FillColor, Setting_Gamepad_OffAlpha);
 
 		auto posLeft = vec2(0, m_size.y / 2);
 		auto posRight = vec2(m_size.x, m_size.y / 2);
@@ -165,13 +159,13 @@ class DashboardPadGamepad : DashboardThing
 
 		// Up
 		nvg::Scissor(midX, 0, midSize, m_size.y / 2 - Setting_Gamepad_Spacing / 2);
-		nvg::FillColor(WithAlpha(Setting_Gamepad_ClassicUpColor, vis.InputGasPedal > 0.1f ? 1.0f : offAlpha));
+		nvg::FillColor(WithAlpha(Setting_Gamepad_ClassicUpColor, vis.InputGasPedal > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha));
 		nvg::Fill();
 		nvg::ResetScissor();
 
 		// Down
 		nvg::Scissor(midX, m_size.y / 2 + Setting_Gamepad_Spacing / 2, midSize, m_size.y / 2 - Setting_Gamepad_Spacing / 2);
-		nvg::FillColor(WithAlpha(Setting_Gamepad_ClassicDownColor, vis.InputBrakePedal > 0.1f ? 1.0f : offAlpha));
+		nvg::FillColor(WithAlpha(Setting_Gamepad_ClassicDownColor, vis.InputBrakePedal > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha));
 		nvg::Fill();
 		nvg::ResetScissor();
 	}

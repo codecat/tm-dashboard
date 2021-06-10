@@ -97,6 +97,9 @@ vec4 Setting_Gamepad_ClassicUpColor = vec4(0.2f, 1, 0.6f, 1);
 [Setting category="Gamepad" name="Classic down color" color]
 vec4 Setting_Gamepad_ClassicDownColor = vec4(1, 0.6f, 0.2f, 1);
 
+[Setting category="Gamepad" name="Classic off alpha" drag min=0 max=1]
+float Setting_Gamepad_OffAlpha = 0.33f;
+
 
 
 enum KeyboardShape

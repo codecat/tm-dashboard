@@ -4,7 +4,7 @@ author = "Miss"
 category = "Overlay"
 
 siteid = 103
-version = "1.4"
+version = "1.5"
 
 blocks = [ "Plugin_Dashboard" ]
 

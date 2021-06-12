@@ -69,17 +69,17 @@ namespace Vehicle
 	// Get the only existing vehicle vis state, if there is only one. Otherwise, this returns null.
 	CSceneVehicleVis@ GetSingularVis(ISceneVis@ sceneVis)
 	{
-		auto vehicleVisMgr = SceneVis::GetMgr(sceneVis, 5); // NSceneVehicleVis_SMgr
+		auto vehicleVisMgr = SceneVis::GetMgr(sceneVis, VehiclesManagerIndex); // NSceneVehicleVis_SMgr
 		if (vehicleVisMgr is null) {
+			return null;
+		}
+
+		if (!CheckValidVehicles(vehicleVisMgr)) {
 			return null;
 		}
 
 		auto vehiclesCount = Dev::GetOffsetUint32(vehicleVisMgr, VehiclesOffset + 0x8);
 		if (vehiclesCount != 1) {
-			return null;
-		}
-
-		if (!CheckValidVehicles(vehicleVisMgr)) {
 			return null;
 		}
 
@@ -93,7 +93,7 @@ namespace Vehicle
 	{
 		array<CSceneVehicleVis@> ret;
 
-		auto vehicleVisMgr = SceneVis::GetMgr(sceneVis, 5); // NSceneVehicleVis_SMgr
+		auto vehicleVisMgr = SceneVis::GetMgr(sceneVis, VehiclesManagerIndex); // NSceneVehicleVis_SMgr
 		if (vehicleVisMgr !is null && CheckValidVehicles(vehicleVisMgr)) {
 			auto vehicles = Dev::GetOffsetNod(vehicleVisMgr, VehiclesOffset);
 			auto vehiclesCount = Dev::GetOffsetUint32(vehicleVisMgr, VehiclesOffset + 0x8);

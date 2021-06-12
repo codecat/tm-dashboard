@@ -69,8 +69,10 @@ class Dashboard
 
 		// Interface hidden
 		if (Setting_General_HideOnHiddenInterface) {
-			if (app.CurrentPlayground is null || app.CurrentPlayground.Interface is null || Dev::GetOffsetUint32(app.CurrentPlayground.Interface, 0x1C) == 0) {
-				return;
+			if (app.CurrentPlayground !is null && app.CurrentPlayground.Interface !is null) {
+				if (Dev::GetOffsetUint32(app.CurrentPlayground.Interface, 0x1C) == 0) {
+					return;
+				}
 			}
 		}
 

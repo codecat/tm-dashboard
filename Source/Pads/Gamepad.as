@@ -99,13 +99,15 @@ class DashboardPadGamepad : DashboardThing
 		nvg::Stroke();
 
 		// Up & Down texts
-		nvg::BeginPath();
-		nvg::FontFace(g_font);
-		nvg::FontSize(midSize / 2);
-		nvg::FillColor(strokeColor);
-		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
-		nvg::TextBox(midX, topSize / 2, midSize, Icons::AngleUp);
-		nvg::TextBox(midX, bottomY + bottomSize / 2, midSize, Icons::AngleDown);
+		if (Setting_Gamepad_UpDownSymbols) {
+			nvg::BeginPath();
+			nvg::FontFace(g_font);
+			nvg::FontSize(midSize / 2);
+			nvg::FillColor(strokeColor);
+			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
+			nvg::TextBox(midX, topSize / 2, midSize, Icons::AngleUp);
+			nvg::TextBox(midX, bottomY + bottomSize / 2, midSize, Icons::AngleDown);
+		}
 	}
 
 	void RenderClassic(CSceneVehicleVisState@ vis)

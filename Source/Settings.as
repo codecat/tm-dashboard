@@ -104,6 +104,9 @@ vec4 Setting_Gamepad_ClassicDownColor = vec4(1, 0.6f, 0.2f, 1);
 [Setting category="Gamepad" name="Classic off alpha" drag min=0 max=1]
 float Setting_Gamepad_OffAlpha = 0.33f;
 
+[Setting category="Gamepad" name="Display up/down arrow symbols"]
+bool Setting_Gamepad_UpDownSymbols = true;
+
 
 
 enum KeyboardShape

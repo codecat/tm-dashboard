@@ -95,6 +95,16 @@ class Dashboard
 			return;
 		}
 
+		uint entityId = Dev::GetOffsetUint32(vis, 0);
+		if ((entityId & 0xFF000000) == 0x04000000) {
+			// If the entity ID has this mask, then we are either watching a replay, or placing
+			// down the car in the editor. So, we will check if we are currently in the editor,
+			// and stop if we are.
+			if (cast<CGameCtnEditorFree>(app.Editor) !is null) {
+				return;
+			}
+		}
+
 		if (Setting_General_ShowPad && m_pad !is null) {
 			m_pad.m_pos = Setting_General_PadPos;
 			m_pad.m_size = Setting_General_PadSize;

@@ -266,11 +266,23 @@ vec4 Setting_Wheels_BackdropColor = vec4(0, 0, 0, 0.7f);
 [Setting category="Wheels" name="Border color" color]
 vec4 Setting_Wheels_BorderColor = vec4(1, 1, 1, 1);
 
+[Setting category="Wheels" name="Border width" drag min=0 max=10]
+float Setting_Wheels_BorderWidth = 3.0f;
+
+[Setting category="Wheels" name="Border radius" drag min=0 max=50]
+float Setting_Wheels_BorderRadius = 5.0f;
+
 [Setting category="Wheels" name="Wheel fill color" color]
 vec3 Setting_Wheels_WheelFillColor = vec3(0, 0, 0);
 
 [Setting category="Wheels" name="Wheel border color" color]
 vec4 Setting_Wheels_WheelBorderColor = vec4(1, 1, 1, 1);
+
+[Setting category="Wheels" name="Wheel border width" drag min=0 max=10]
+float Setting_Wheels_WheelBorderWidth = 3.0f;
+
+[Setting category="Wheels" name="Wheel border radius" drag min=0 max=5]
+float Setting_Wheels_WheelBorderRadius = 5.0f;
 
 [Setting category="Wheels" name="Slip color" color]
 vec3 Setting_Wheels_SlipColor = vec3(1, 1, 0);

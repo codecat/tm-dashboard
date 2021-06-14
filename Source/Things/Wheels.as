@@ -115,7 +115,7 @@ class DashboardWheels : DashboardThing
 
 		// Wheel fill
 		nvg::BeginPath();
-		nvg::RoundedRect(pos.x, pos.y, size.x, size.y, 5);
+		nvg::RoundedRect(pos.x, pos.y, size.x, size.y, Setting_Wheels_WheelBorderRadius);
 
 		vec3 fillColor = Setting_Wheels_WheelFillColor;
 		if (state.m_icing > 0) {
@@ -153,8 +153,8 @@ class DashboardWheels : DashboardThing
 
 		// Wheel border
 		nvg::BeginPath();
-		nvg::RoundedRect(pos.x, pos.y, size.x, size.y, 5);
-		nvg::StrokeWidth(3);
+		nvg::RoundedRect(pos.x, pos.y, size.x, size.y, Setting_Wheels_WheelBorderRadius);
+		nvg::StrokeWidth(Setting_Wheels_WheelBorderWidth);
 		nvg::StrokeColor(Setting_Wheels_WheelBorderColor);
 		nvg::Stroke();
 
@@ -229,7 +229,7 @@ class DashboardWheels : DashboardThing
 	{
 		// Backdrop
 		nvg::BeginPath();
-		nvg::RoundedRect(0, 0, m_size.x, m_size.y, 5);
+		nvg::RoundedRect(0, 0, m_size.x, m_size.y, Setting_Wheels_BorderRadius);
 		nvg::FillColor(Setting_Wheels_BackdropColor);
 		nvg::Fill();
 
@@ -284,8 +284,8 @@ class DashboardWheels : DashboardThing
 
 		// Border around everything
 		nvg::BeginPath();
-		nvg::RoundedRect(0, 0, m_size.x, m_size.y, 5);
-		nvg::StrokeWidth(3);
+		nvg::RoundedRect(0, 0, m_size.x, m_size.y, Setting_Wheels_BorderRadius);
+		nvg::StrokeWidth(Setting_Wheels_BorderWidth);
 		nvg::StrokeColor(Setting_Wheels_BorderColor);
 		nvg::Stroke();
 	}

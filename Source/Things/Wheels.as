@@ -16,6 +16,7 @@ class WheelState
 	float m_icing;
 	float m_breakCoef;
 	float m_tireWear;
+	float m_wetness;
 }
 
 class DashboardWheels : DashboardThing
@@ -96,6 +97,10 @@ class DashboardWheels : DashboardThing
 				ret.m_tireWear = vis.RRTireWear01;
 				break;
 		}
+
+		// Wetness is applied on all wheels at the same time, so just duplicate it
+		ret.m_wetness = vis.WetnessValue01;
+
 		return ret;
 	}
 
@@ -129,6 +134,9 @@ class DashboardWheels : DashboardThing
 		}
 		if (state.m_tireWear > 0) {
 			fillColor = Math::Lerp(fillColor, Setting_Wheels_WearColor, state.m_tireWear);
+		}
+		if (state.m_wetness > 0) {
+			fillColor = Math::Lerp(fillColor, Setting_Wheels_WetColor, state.m_wetness);
 		}
 		nvg::FillColor(vec4(fillColor.x, fillColor.y, fillColor.z, Setting_Wheels_WheelFillAlpha));
 		nvg::Fill();
@@ -209,6 +217,10 @@ class DashboardWheels : DashboardThing
 
 		if (state.m_dirt > 0) {
 			RenderWheelLine(state, Setting_Wheels_DirtColor, size.x, Icons::Road, Text::Format("%.0f%%", state.m_dirt * 100));
+		}
+
+		if (state.m_wetness > 0) {
+			RenderWheelLine(state, Setting_Wheels_WetColor, size.x, Icons::Tint, Text::Format("%.0f%%", state.m_wetness * 100));
 		}
 
 		nvg::SetTransform(tx);

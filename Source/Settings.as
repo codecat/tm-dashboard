@@ -299,6 +299,9 @@ vec3 Setting_Wheels_BreakColor = vec3(1, 0, 0);
 [Setting category="Wheels" name="Wear color" color]
 vec3 Setting_Wheels_WearColor = vec3(1, 1, 0);
 
+[Setting category="Wheels" name="Wet color" color]
+vec3 Setting_Wheels_WetColor = vec3(0, 0.5f, 1);
+
 [Setting category="Wheels" name="Wheel width" drag min=0 max=100]
 float Setting_Wheels_WheelWidth = 32.0f;
 

@@ -4,5 +4,6 @@
 # Releases
 *.zip
 
-# Sign script
+# Sign scripts
 Sign.bat
+SignComp.bat

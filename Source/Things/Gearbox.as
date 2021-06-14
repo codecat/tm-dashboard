@@ -1,3 +1,4 @@
+#if !COMPETITION
 class DashboardGearbox : DashboardThing
 {
 	float m_minRpm = 200.0f; // Minimal RPM to avoid flickering at engine idle
@@ -194,3 +195,4 @@ class DashboardGearbox : DashboardThing
 		}
 	}
 }
+#endif

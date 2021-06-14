@@ -23,6 +23,7 @@ vec2 Setting_General_PadPos = vec2(0.9f, 0.1f);
 [Setting category="General" name="Controller/pad size"]
 vec2 Setting_General_PadSize = vec2(350, 200);
 
+#if !COMPETITION
 [Setting category="General" name="Show gearbox"]
 bool Setting_General_ShowGearbox = true;
 
@@ -34,6 +35,7 @@ vec2 Setting_General_GearboxPos = vec2(0.9f, 0.32f);
 
 [Setting category="General" name="Gearbox size"]
 vec2 Setting_General_GearboxSize = vec2(350, 50);
+#endif
 
 [Setting category="General" name="Show speed"]
 bool Setting_General_ShowSpeed = true;
@@ -47,6 +49,7 @@ vec2 Setting_General_SpeedPos = vec2(0.909f, 0.4f);
 [Setting category="General" name="Speed size"]
 vec2 Setting_General_SpeedSize = vec2(230, 50);
 
+#if !COMPETITION
 [Setting category="General" name="Show wheels"]
 bool Setting_General_ShowWheels = false;
 
@@ -58,6 +61,7 @@ vec2 Setting_General_WheelsPos = vec2(0.909f, 0.9f);
 
 [Setting category="General" name="Wheels size"]
 vec2 Setting_General_WheelsSize = vec2(230, 370);
+#endif
 
 
 
@@ -134,6 +138,7 @@ float Setting_Keyboard_InactiveAlpha = 0.4f;
 
 
 
+#if !COMPETITION
 [Setting category="Gearbox" name="Show text"]
 bool Setting_Gearbox_ShowText = true;
 
@@ -188,6 +193,7 @@ vec4 Setting_Gearbox_TextColor = vec4(1, 1, 1, 1);
 
 [Setting category="Gearbox" name="Font"]
 string Setting_Gearbox_Font = "DroidSans.ttf";
+#endif
 
 
 
@@ -235,6 +241,7 @@ float Setting_Speed_FontSize = 24.0f;
 
 
 
+#if !COMPETITION
 enum WheelsStyle
 {
 	Detailed,
@@ -303,3 +310,4 @@ string Setting_Wheels_DetailsFont = "DroidSans.ttf";
 
 [Setting category="Wheels" name="Details font size" drag min=0 max=50]
 float Setting_Wheels_DetailsFontSize = 16.0f;
+#endif

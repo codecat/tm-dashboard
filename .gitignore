@@ -3,6 +3,7 @@
 
 # Releases
 *.zip
+*.op
 
 # Sign scripts
 Sign.bat

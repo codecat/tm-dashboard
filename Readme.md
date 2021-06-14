@@ -2,12 +2,12 @@
 Plugin for Openplanet that displays a bunch of Trackmania vehicle information on screen. Nice for streaming overlays!
 
 ## Features
-* Controller visualization
+* Controller visualization ℹ
 	* Gamepad
 	* Keyboard
-* Gearbox visualization ⚠
+* Gearbox visualization ℹ
+* Wheel info visualization ℹ
 * Speed visualization
-* Wheel info visualization ⚠
 * Works in solo
 * Works online (including spectating)
 * Works for replays
@@ -16,7 +16,7 @@ Plugin for Openplanet that displays a bunch of Trackmania vehicle information on
 	* Positions & size
 	* Colors & styles
 
-⚠: These are not available on the special "Competition" build of Openplanet, which is required for TMWC.
+ℹ: These are not available on the special "Competition" build of Openplanet, which is required for TMWC.
 
 ## Download
 You can download the plugin [through Openplanet.nl](https://openplanet.nl/files/103).

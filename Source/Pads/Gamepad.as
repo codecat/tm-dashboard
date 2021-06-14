@@ -1,3 +1,4 @@
+#if !COMPETITION
 class DashboardPadGamepad : DashboardThing
 {
 	DashboardPadGamepad()
@@ -190,3 +191,4 @@ class DashboardPadGamepad : DashboardThing
 		);
 	}
 }
+#endif

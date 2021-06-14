@@ -26,19 +26,13 @@ void Render()
 
 void RenderInterface()
 {
+#if !COMPETITION
 	if (Setting_General_MovePad) {
 		Locator::Render("Controller/pad", Setting_General_PadPos, Setting_General_PadSize);
 		Setting_General_PadPos = Locator::GetPos();
 		Setting_General_PadSize = Locator::GetSize();
 	}
 
-	if (Setting_General_MoveSpeed) {
-		Locator::Render("Speed", Setting_General_SpeedPos, Setting_General_SpeedSize);
-		Setting_General_SpeedPos = Locator::GetPos();
-		Setting_General_SpeedSize = Locator::GetSize();
-	}
-
-#if !COMPETITION
 	if (Setting_General_MoveGearbox) {
 		Locator::Render("Gearbox", Setting_General_GearboxPos, Setting_General_GearboxSize);
 		Setting_General_GearboxPos = Locator::GetPos();
@@ -51,6 +45,12 @@ void RenderInterface()
 		Setting_General_WheelsSize = Locator::GetSize();
 	}
 #endif
+
+	if (Setting_General_MoveSpeed) {
+		Locator::Render("Speed", Setting_General_SpeedPos, Setting_General_SpeedSize);
+		Setting_General_SpeedPos = Locator::GetPos();
+		Setting_General_SpeedSize = Locator::GetSize();
+	}
 }
 
 void OnSettingsChanged()
@@ -71,6 +71,7 @@ void Main()
 
 	@g_dashboard = Dashboard();
 
+#if !COMPETITION
 	while (true) {
 		// Find the most recently used pad
 		CInputScriptPad@ mostRecentPad;
@@ -101,4 +102,5 @@ void Main()
 
 		yield();
 	}
+#endif
 }

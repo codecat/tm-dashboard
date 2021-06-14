@@ -1,13 +1,13 @@
 class Dashboard
 {
+#if !COMPETITION
 	EPadType m_currentPadType = EPadType(-1);
 
 	DashboardThing@ m_pad;
-	DashboardSpeed@ m_speed;
-#if !COMPETITION
 	DashboardGearbox@ m_gearbox;
 	DashboardWheels@ m_wheels;
 #endif
+	DashboardSpeed@ m_speed;
 
 	Dashboard()
 	{
@@ -27,6 +27,7 @@ class Dashboard
 		return cast<CSmPlayer>(playground.GameTerminals[0].GUIPlayer);
 	}
 
+#if !COMPETITION
 	void ClearPad()
 	{
 		m_currentPadType = EPadType(-1);
@@ -51,17 +52,18 @@ class Dashboard
 				break;
 		}
 	}
+#endif
 
 	void OnSettingsChanged()
 	{
+#if !COMPETITION
 		if (m_pad !is null) {
 			m_pad.OnSettingsChanged();
 		}
-		m_speed.OnSettingsChanged();
-#if !COMPETITION
 		m_gearbox.OnSettingsChanged();
 		m_wheels.OnSettingsChanged();
 #endif
+		m_speed.OnSettingsChanged();
 	}
 
 	void Render()
@@ -105,19 +107,13 @@ class Dashboard
 			}
 		}
 
+#if !COMPETITION
 		if (Setting_General_ShowPad && m_pad !is null) {
 			m_pad.m_pos = Setting_General_PadPos;
 			m_pad.m_size = Setting_General_PadSize;
 			m_pad.InternalRender(vis.AsyncState);
 		}
 
-		if (Setting_General_ShowSpeed) {
-			m_speed.m_pos = Setting_General_SpeedPos;
-			m_speed.m_size = Setting_General_SpeedSize;
-			m_speed.InternalRender(vis.AsyncState);
-		}
-
-#if !COMPETITION
 		if (Setting_General_ShowGearbox) {
 			m_gearbox.m_pos = Setting_General_GearboxPos;
 			m_gearbox.m_size = Setting_General_GearboxSize;
@@ -130,5 +126,11 @@ class Dashboard
 			m_wheels.InternalRender(vis.AsyncState);
 		}
 #endif
+
+		if (Setting_General_ShowSpeed) {
+			m_speed.m_pos = Setting_General_SpeedPos;
+			m_speed.m_size = Setting_General_SpeedSize;
+			m_speed.InternalRender(vis.AsyncState);
+		}
 	}
 }

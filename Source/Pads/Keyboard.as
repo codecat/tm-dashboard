@@ -12,16 +12,24 @@ class DashboardPadKeyboard : DashboardThing
 			(m_size.y - Setting_Keyboard_Spacing) / 2
 		);
 
-		RenderKey(vec2(keySize.x + Setting_Keyboard_Spacing, 0), keySize, Icons::AngleUp, vis.InputGasPedal > 0.1f);
-		RenderKey(vec2(0, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleLeft, vis.InputSteer < -0.1f);
-		RenderKey(vec2(keySize.x + Setting_Keyboard_Spacing, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleDown, vis.InputBrakePedal > 0.1f);
-		RenderKey(vec2(keySize.x * 2 + Setting_Keyboard_Spacing * 2, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleRight, vis.InputSteer > 0.1f);
+		float steerLeft = vis.InputSteer < 0 ? Math::Abs(vis.InputSteer) : 0.0f;
+		float steerRight = vis.InputSteer > 0 ? vis.InputSteer : 0.0f;
+
+		RenderKey(vec2(keySize.x + Setting_Keyboard_Spacing, 0), keySize, Icons::AngleUp, vis.InputGasPedal);
+		RenderKey(vec2(keySize.x + Setting_Keyboard_Spacing, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleDown, vis.InputBrakePedal);
+
+		RenderKey(vec2(0, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleLeft, steerLeft, -1);
+		RenderKey(vec2(keySize.x * 2 + Setting_Keyboard_Spacing * 2, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleRight, steerRight, 1);
 	}
 
-	void RenderKey(const vec2 &in pos, const vec2 &in size, const string &in text, bool on)
+	void RenderKey(const vec2 &in pos, const vec2 &in size, const string &in text, float value, int fillDir = 0)
 	{
 		vec4 borderColor = Setting_Keyboard_BorderColor;
-		borderColor.w *= on ? 1.0f : Setting_Keyboard_InactiveAlpha;
+		if (fillDir == 0) {
+			borderColor.w = Math::Abs(value) > 0.1f ? 1.0f : Setting_Keyboard_InactiveAlpha;
+		} else {
+			borderColor.w *= Math::Lerp(Setting_Keyboard_InactiveAlpha, 1.0f, value);
+		}
 
 		nvg::BeginPath();
 		nvg::StrokeWidth(Setting_Keyboard_BorderWidth);
@@ -31,12 +39,23 @@ class DashboardPadKeyboard : DashboardThing
 			case KeyboardShape::Ellipse: nvg::Ellipse(pos + size / 2, size.x / 2, size.y / 2); break;
 		}
 
-		if (on) {
-			nvg::FillColor(Setting_Keyboard_FillColor);
+		if (fillDir == 0) {
+			if (Math::Abs(value) > 0.1f) {
+				nvg::FillColor(Setting_Keyboard_FillColor);
+				nvg::Fill();
+			}
 		} else {
-			nvg::FillColor(Setting_Keyboard_EmptyFillColor);
+			if (fillDir == -1) {
+				float valueWidth = value * size.x;
+				nvg::Scissor(size.x - valueWidth, pos.y, valueWidth, size.y);
+			} else if (fillDir == 1) {
+				float valueWidth = value * size.x;
+				nvg::Scissor(pos.x, pos.y, valueWidth, size.y);
+			}
+			nvg::FillColor(Setting_Keyboard_FillColor);
+			nvg::Fill();
+			nvg::ResetScissor();
 		}
-		nvg::Fill();
 
 		nvg::StrokeColor(borderColor);
 		nvg::Stroke();

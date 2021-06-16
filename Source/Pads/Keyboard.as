@@ -45,7 +45,7 @@ class DashboardPadKeyboard : DashboardThing
 				nvg::FillColor(Setting_Keyboard_FillColor);
 				nvg::Fill();
 			}
-		} else {
+		} else if (value > 0) {
 			if (fillDir == -1) {
 				float valueWidth = value * size.x;
 				nvg::Scissor(size.x - valueWidth, pos.y, valueWidth, size.y);

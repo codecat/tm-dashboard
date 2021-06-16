@@ -40,6 +40,9 @@ class DashboardPadKeyboard : DashboardThing
 			case KeyboardShape::Ellipse: nvg::Ellipse(pos + size / 2, size.x / 2, size.y / 2); break;
 		}
 
+		nvg::FillColor(Setting_Keyboard_EmptyFillColor);
+		nvg::Fill();
+
 		if (fillDir == 0) {
 			if (Math::Abs(value) > 0.1f) {
 				nvg::FillColor(Setting_Keyboard_FillColor);

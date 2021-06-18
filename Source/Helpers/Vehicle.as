@@ -10,6 +10,33 @@ namespace Vehicle
 	uint VehiclesManagerIndex = 4;
 	uint VehiclesOffset = 0x1C8;
 
+	uint GetPlayerVehicleID(CSmPlayer@ player)
+	{
+		// When Vehicle is null, we're either playing offline, or we're spectating in multiplayer
+		if (player.ScriptAPI.Vehicle !is null) {
+			return player.ScriptAPI.Vehicle.Id.Value;
+		}
+
+		// Without the Vehicle object, we can find the ID at an offset in CSmPlayer
+		if (g_offsetSpawnableObjectModelIndex == 0) {
+			auto type = Reflection::GetType("CSmPlayer");
+			if (type is null) {
+				error("Unable to find reflection info for CSmPlayer!");
+			}
+			g_offsetSpawnableObjectModelIndex = type.GetMember("SpawnableObjectModelIndex").Offset - 0x14;
+		}
+
+		// Get the ID and make sure it actually matches the 0x02000000 mask
+		uint maybeID = Dev::GetOffsetUint32(player, g_offsetSpawnableObjectModelIndex);
+		//print("maybe ID = " + Text::Format("%08x", maybeID));
+		if (maybeID & 0xFFF00000 == 0x02000000) {
+			return maybeID;
+		}
+
+		// Not found :(
+		return 0;
+	}
+
 	bool CheckValidVehicles(CMwNod@ vehicleVisMgr)
 	{
 		auto ptr = Dev::GetOffsetUint64(vehicleVisMgr, VehiclesOffset);
@@ -31,12 +58,7 @@ namespace Vehicle
 	// Get vehicle vis from a given player.
 	CSceneVehicleVis@ GetVis(ISceneVis@ sceneVis, CSmPlayer@ player)
 	{
-		// When Vehicle is null, we're playing offline. In that case, we'll just grab the first entity
-		// that matches the ID mask 0x02000000.
-		uint vehicleEntityId = 0;
-		if (player.ScriptAPI.Vehicle !is null) {
-			vehicleEntityId = player.ScriptAPI.Vehicle.Id.Value;
-		}
+		uint vehicleEntityId = GetPlayerVehicleID(player);
 
 		auto vehicleVisMgr = SceneVis::GetMgr(sceneVis, VehiclesManagerIndex); // NSceneVehicleVis_SMgr
 		if (vehicleVisMgr is null) {
@@ -160,6 +182,7 @@ namespace Vehicle
 		return Dev::GetOffsetFloat(vis, g_offsetSideSpeed);
 	}
 
+	uint16 g_offsetSpawnableObjectModelIndex = 0;
 	uint16 g_offsetEngineRPM = 0;
 	array<uint16> g_offsetWheelDirt;
 	uint16 g_offsetSideSpeed = 0;

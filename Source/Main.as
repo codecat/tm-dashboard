@@ -93,8 +93,8 @@ void Main()
 			// Force a pad type if the settings demand it
 			auto padType = mostRecentPad.Type;
 			switch (Setting_General_ForcePadType) {
-				case ForcePadType::Gamepad: padType = EPadType::XBox; break;
-				case ForcePadType::Keyboard: padType = EPadType::Keyboard; break;
+				case ForcePadType::Gamepad: padType = CInputScriptPad::EPadType::XBox; break;
+				case ForcePadType::Keyboard: padType = CInputScriptPad::EPadType::Keyboard; break;
 			}
 
 			g_dashboard.SetPad(padType);

@@ -8,7 +8,7 @@ enum WheelType
 class WheelState
 {
 	bool m_right;
-	EPlugSurfaceMaterialId m_surface;
+	CSceneVehicleVisState::EPlugSurfaceMaterialId m_surface;
 	float m_steerAngle;
 	float m_rot;
 	float m_slipCoef;

@@ -1,7 +1,7 @@
 class Dashboard
 {
 #if !COMPETITION
-	EPadType m_currentPadType = EPadType(-1);
+	CInputScriptPad::EPadType m_currentPadType = CInputScriptPad::EPadType(-1);
 
 	DashboardThing@ m_pad;
 	DashboardGearbox@ m_gearbox;
@@ -30,11 +30,11 @@ class Dashboard
 #if !COMPETITION
 	void ClearPad()
 	{
-		m_currentPadType = EPadType(-1);
+		m_currentPadType = CInputScriptPad::EPadType(-1);
 		@m_pad = null;
 	}
 
-	void SetPad(EPadType type)
+	void SetPad(CInputScriptPad::EPadType type)
 	{
 		if (m_currentPadType == type) {
 			return;
@@ -42,12 +42,12 @@ class Dashboard
 		m_currentPadType = type;
 
 		switch (type) {
-			case EPadType::Keyboard:
+			case CInputScriptPad::EPadType::Keyboard:
 				@m_pad = DashboardPadKeyboard();
 				break;
 
-			case EPadType::XBox:
-			case EPadType::PlayStation:
+			case CInputScriptPad::EPadType::XBox:
+			case CInputScriptPad::EPadType::PlayStation:
 				@m_pad = DashboardPadGamepad();
 				break;
 		}

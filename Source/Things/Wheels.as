@@ -8,15 +8,16 @@ enum WheelType
 class WheelState
 {
 	bool m_right;
-	CSceneVehicleVisState::EPlugSurfaceMaterialId m_surface;
 	float m_steerAngle;
 	float m_rot;
 	float m_slipCoef;
 	float m_dirt;
-	float m_icing;
+#if NEXT
 	float m_breakCoef;
 	float m_tireWear;
+	float m_icing;
 	float m_wetness;
+#endif
 }
 
 class DashboardWheels : DashboardThing
@@ -54,52 +55,58 @@ class DashboardWheels : DashboardThing
 		switch (type) {
 			case WheelType::FL:
 				ret.m_right = false;
-				ret.m_surface = vis.FLGroundContactMaterial;
 				ret.m_steerAngle = vis.FLSteerAngle;
 				ret.m_rot = vis.FLWheelRot;
 				ret.m_slipCoef = vis.FLSlipCoef;
+#if NEXT
 				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
-				ret.m_icing = vis.FLIcing01;
 				ret.m_breakCoef = vis.FLBreakNormedCoef;
 				ret.m_tireWear = vis.FLTireWear01;
+				ret.m_icing = vis.FLIcing01;
+#endif
 				break;
 			case WheelType::FR:
 				ret.m_right = true;
-				ret.m_surface = vis.FRGroundContactMaterial;
 				ret.m_steerAngle = vis.FRSteerAngle;
 				ret.m_rot = vis.FRWheelRot;
 				ret.m_slipCoef = vis.FRSlipCoef;
+#if NEXT
 				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
-				ret.m_icing = vis.FRIcing01;
 				ret.m_breakCoef = vis.FRBreakNormedCoef;
 				ret.m_tireWear = vis.FRTireWear01;
+				ret.m_icing = vis.FRIcing01;
+#endif
 				break;
 			case WheelType::RL:
 				ret.m_right = false;
-				ret.m_surface = vis.RLGroundContactMaterial;
 				ret.m_steerAngle = vis.RLSteerAngle;
 				ret.m_rot = vis.RLWheelRot;
 				ret.m_slipCoef = vis.RLSlipCoef;
+#if NEXT
 				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
-				ret.m_icing = vis.RLIcing01;
 				ret.m_breakCoef = vis.RLBreakNormedCoef;
 				ret.m_tireWear = vis.RLTireWear01;
+				ret.m_icing = vis.RLIcing01;
+#endif
 				break;
 			case WheelType::RR:
 				ret.m_right = true;
-				ret.m_surface = vis.RRGroundContactMaterial;
 				ret.m_steerAngle = vis.RRSteerAngle;
 				ret.m_rot = vis.RRWheelRot;
 				ret.m_slipCoef = vis.RRSlipCoef;
+#if NEXT
 				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
-				ret.m_icing = vis.RRIcing01;
 				ret.m_breakCoef = vis.RRBreakNormedCoef;
 				ret.m_tireWear = vis.RRTireWear01;
+				ret.m_icing = vis.RRIcing01;
+#endif
 				break;
 		}
 
+#if NEXT
 		// Wetness is applied on all wheels at the same time, so just duplicate it
 		ret.m_wetness = vis.WetnessValue01;
+#endif
 
 		return ret;
 	}
@@ -123,6 +130,8 @@ class DashboardWheels : DashboardThing
 		nvg::RoundedRect(pos.x, pos.y, size.x, size.y, Setting_Wheels_WheelBorderRadius);
 
 		vec3 fillColor = Setting_Wheels_WheelFillColor;
+
+#if NEXT
 		if (state.m_icing > 0) {
 			fillColor = Math::Lerp(fillColor, Setting_Wheels_IceColor, state.m_icing);
 		}
@@ -138,6 +147,8 @@ class DashboardWheels : DashboardThing
 		if (state.m_wetness > 0) {
 			fillColor = Math::Lerp(fillColor, Setting_Wheels_WetColor, state.m_wetness);
 		}
+#endif
+
 		nvg::FillColor(vec4(fillColor.x, fillColor.y, fillColor.z, Setting_Wheels_WheelFillAlpha));
 		nvg::Fill();
 
@@ -203,6 +214,7 @@ class DashboardWheels : DashboardThing
 			RenderWheelLine(state, Setting_Wheels_SlipColor, size.x, Icons::Exclamation, "Slip");
 		}
 
+#if NEXT
 		if (state.m_icing > 0) {
 			RenderWheelLine(state, Setting_Wheels_IceColor, size.x, Icons::Snowflake, Text::Format("%.0f%%", state.m_icing * 100));
 		}
@@ -222,6 +234,7 @@ class DashboardWheels : DashboardThing
 		if (state.m_wetness > 0) {
 			RenderWheelLine(state, Setting_Wheels_WetColor, size.x, Icons::Tint, Text::Format("%.0f%%", state.m_wetness * 100));
 		}
+#endif
 
 		nvg::SetTransform(tx);
 	}

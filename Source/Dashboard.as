@@ -18,6 +18,7 @@ class Dashboard
 		@m_speed = DashboardSpeed();
 	}
 
+#if NEXT
 	CSmPlayer@ GetViewingPlayer()
 	{
 		auto playground = GetApp().CurrentPlayground;
@@ -26,6 +27,16 @@ class Dashboard
 		}
 		return cast<CSmPlayer>(playground.GameTerminals[0].GUIPlayer);
 	}
+#elif TURBO
+	CGameMobil@ GetViewingPlayer()
+	{
+		auto playground = cast<CTrackManiaRace>(GetApp().CurrentPlayground);
+		if (playground is null) {
+			return null;
+		}
+		return playground.LocalPlayerMobil;
+	}
+#endif
 
 #if !COMPETITION
 	void ClearPad()
@@ -97,7 +108,8 @@ class Dashboard
 			return;
 		}
 
-		uint entityId = Dev::GetOffsetUint32(vis, 0);
+#if NEXT
+		uint entityId = Vehicle::GetEntityId(vis);
 		if ((entityId & 0xFF000000) == 0x04000000) {
 			// If the entity ID has this mask, then we are either watching a replay, or placing
 			// down the car in the editor. So, we will check if we are currently in the editor,
@@ -106,6 +118,7 @@ class Dashboard
 				return;
 			}
 		}
+#endif
 
 #if !COMPETITION
 		if (Setting_General_ShowPad && m_pad !is null) {

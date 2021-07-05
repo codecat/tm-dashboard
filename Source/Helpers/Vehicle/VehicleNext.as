@@ -3,6 +3,7 @@
 // to use this code keep this in mind! Use `#max_game_version` to avoid crashes on unexpected game
 // updates.
 
+#if NEXT
 namespace Vehicle
 {
 	// -       ... : 5
@@ -53,6 +54,12 @@ namespace Vehicle
 		}
 
 		return true;
+	}
+
+	// Get entity ID of the given vehicle vis.
+	uint GetEntityId(CSceneVehicleVis@ vis)
+	{
+		return Dev::GetOffsetUint32(vis, 0);
 	}
 
 	// Get vehicle vis from a given player.
@@ -187,3 +194,4 @@ namespace Vehicle
 	array<uint16> g_offsetWheelDirt;
 	uint16 g_offsetSideSpeed = 0;
 }
+#endif

@@ -12,7 +12,7 @@ class WheelState
 	float m_rot;
 	float m_slipCoef;
 	float m_dirt;
-#if NEXT
+#if TMNEXT
 	float m_breakCoef;
 	float m_tireWear;
 	float m_icing;
@@ -58,7 +58,7 @@ class DashboardWheels : DashboardThing
 				ret.m_steerAngle = vis.FLSteerAngle;
 				ret.m_rot = vis.FLWheelRot;
 				ret.m_slipCoef = vis.FLSlipCoef;
-#if NEXT
+#if TMNEXT
 				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
 				ret.m_breakCoef = vis.FLBreakNormedCoef;
 				ret.m_tireWear = vis.FLTireWear01;
@@ -70,7 +70,7 @@ class DashboardWheels : DashboardThing
 				ret.m_steerAngle = vis.FRSteerAngle;
 				ret.m_rot = vis.FRWheelRot;
 				ret.m_slipCoef = vis.FRSlipCoef;
-#if NEXT
+#if TMNEXT
 				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
 				ret.m_breakCoef = vis.FRBreakNormedCoef;
 				ret.m_tireWear = vis.FRTireWear01;
@@ -82,7 +82,7 @@ class DashboardWheels : DashboardThing
 				ret.m_steerAngle = vis.RLSteerAngle;
 				ret.m_rot = vis.RLWheelRot;
 				ret.m_slipCoef = vis.RLSlipCoef;
-#if NEXT
+#if TMNEXT
 				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
 				ret.m_breakCoef = vis.RLBreakNormedCoef;
 				ret.m_tireWear = vis.RLTireWear01;
@@ -94,7 +94,7 @@ class DashboardWheels : DashboardThing
 				ret.m_steerAngle = vis.RRSteerAngle;
 				ret.m_rot = vis.RRWheelRot;
 				ret.m_slipCoef = vis.RRSlipCoef;
-#if NEXT
+#if TMNEXT
 				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
 				ret.m_breakCoef = vis.RRBreakNormedCoef;
 				ret.m_tireWear = vis.RRTireWear01;
@@ -103,7 +103,7 @@ class DashboardWheels : DashboardThing
 				break;
 		}
 
-#if NEXT
+#if TMNEXT
 		// Wetness is applied on all wheels at the same time, so just duplicate it
 		ret.m_wetness = vis.WetnessValue01;
 #endif
@@ -131,7 +131,7 @@ class DashboardWheels : DashboardThing
 
 		vec3 fillColor = Setting_Wheels_WheelFillColor;
 
-#if NEXT
+#if TMNEXT
 		if (state.m_icing > 0) {
 			fillColor = Math::Lerp(fillColor, Setting_Wheels_IceColor, state.m_icing);
 		}
@@ -214,7 +214,7 @@ class DashboardWheels : DashboardThing
 			RenderWheelLine(state, Setting_Wheels_SlipColor, size.x, Icons::Exclamation, "Slip");
 		}
 
-#if NEXT
+#if TMNEXT
 		if (state.m_icing > 0) {
 			RenderWheelLine(state, Setting_Wheels_IceColor, size.x, Icons::Snowflake, Text::Format("%.0f%%", state.m_icing * 100));
 		}

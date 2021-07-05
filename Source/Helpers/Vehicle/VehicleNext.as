@@ -3,7 +3,7 @@
 // to use this code keep this in mind! Use `#max_game_version` to avoid crashes on unexpected game
 // updates.
 
-#if NEXT
+#if TMNEXT
 namespace Vehicle
 {
 	// -       ... : 5

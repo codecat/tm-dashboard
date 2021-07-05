@@ -18,7 +18,7 @@ class Dashboard
 		@m_speed = DashboardSpeed();
 	}
 
-#if NEXT
+#if TMNEXT
 	CSmPlayer@ GetViewingPlayer()
 	{
 		auto playground = GetApp().CurrentPlayground;
@@ -108,7 +108,7 @@ class Dashboard
 			return;
 		}
 
-#if NEXT
+#if TMNEXT
 		uint entityId = Vehicle::GetEntityId(vis);
 		if ((entityId & 0xFF000000) == 0x04000000) {
 			// If the entity ID has this mask, then we are either watching a replay, or placing

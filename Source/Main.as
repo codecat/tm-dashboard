@@ -7,7 +7,7 @@ Resources::Font@ g_fontIcons;
 
 void RenderMenu()
 {
-	if (UI::MenuItem("\\$9f3" + Icons::Stopwatch + "\\$z Dashboard", "", g_visible)) {
+	if (UI::MenuItem("\\$9f3" + Icons::BarChart + "\\$z Dashboard", "", g_visible)) {
 		g_visible = !g_visible;
 	}
 }

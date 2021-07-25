@@ -216,7 +216,7 @@ class DashboardWheels : DashboardThing
 
 #if TMNEXT
 		if (state.m_icing > 0) {
-			RenderWheelLine(state, Setting_Wheels_IceColor, size.x, Icons::Snowflake, Text::Format("%.0f%%", state.m_icing * 100));
+			RenderWheelLine(state, Setting_Wheels_IceColor, size.x, Icons::SnowflakeO, Text::Format("%.0f%%", state.m_icing * 100));
 		}
 
 		if (state.m_breakCoef > 0) {

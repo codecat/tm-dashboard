@@ -36,6 +36,15 @@ class Dashboard
 		}
 		return playground.LocalPlayerMobil;
 	}
+#elif MP4
+	CGamePlayer@ GetViewingPlayer()
+	{
+		auto playground = GetApp().CurrentPlayground;
+		if (playground is null || playground.GameTerminals.Length != 1) {
+			return null;
+		}
+		return playground.GameTerminals[0].GUIPlayer;
+	}
 #endif
 
 #if !COMPETITION
@@ -81,11 +90,6 @@ class Dashboard
 	{
 		auto app = GetApp();
 
-		auto sceneVis = app.GameScene;
-		if (sceneVis is null) {
-			return;
-		}
-
 		// Interface hidden
 		if (Setting_General_HideOnHiddenInterface) {
 			if (app.CurrentPlayground !is null && app.CurrentPlayground.Interface !is null) {
@@ -94,8 +98,16 @@ class Dashboard
 				}
 			}
 		}
-
+#if !MP4
+		auto sceneVis = app.GameScene;
+		if (sceneVis is null) {
+			return;
+		}
 		CSceneVehicleVis@ vis = null;
+#else
+		CGameScene@ sceneVis = null;
+		CSceneVehicleVisInner@ vis = null;
+#endif
 
 		auto player = GetViewingPlayer();
 		if (player !is null) {

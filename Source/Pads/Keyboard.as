@@ -17,7 +17,7 @@ class DashboardPadKeyboard : DashboardThing
 		float steerRight = vis.InputSteer > 0 ? vis.InputSteer : 0.0f;
 
 		RenderKey(vec2(keySize.x + Setting_Keyboard_Spacing, 0), keySize, Icons::AngleUp, vis.InputGasPedal);
-		RenderKey(vec2(keySize.x + Setting_Keyboard_Spacing, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleDown, vis.InputBrakePedal);
+		RenderKey(vec2(keySize.x + Setting_Keyboard_Spacing, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleDown, vis.InputIsBraking ? 1.0f : vis.InputBrakePedal);
 
 		RenderKey(vec2(0, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleLeft, steerLeft, -1);
 		RenderKey(vec2(keySize.x * 2 + Setting_Keyboard_Spacing * 2, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleRight, steerRight, 1);

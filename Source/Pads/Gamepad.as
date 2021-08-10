@@ -137,6 +137,15 @@ class DashboardPadGamepad : DashboardThing
 		// Steering scales
 		float steerLeft = vis.InputSteer < 0 ? Math::Abs(vis.InputSteer) : 0.0f;
 		float steerRight = vis.InputSteer > 0 ? vis.InputSteer : 0.0f;
+		float pedalGas = vis.InputGasPedal;
+		float pedalBrake = vis.InputBrakePedal;
+
+		// It's possible that the brake pedal value is not set (eg. during replay playback), but we do
+		// have a binary value whether we're currently braking or not, so we use that to force the
+		// pedal value.
+		if (vis.InputIsBraking) {
+			pedalBrake = 1.0f;
+		}
 
 		// Left
 		nvg::Scissor(0, 0, leftSize, m_size.y);
@@ -162,13 +171,13 @@ class DashboardPadGamepad : DashboardThing
 
 		// Up
 		nvg::Scissor(midX, 0, midSize, m_size.y / 2 - Setting_Gamepad_Spacing / 2);
-		nvg::FillColor(WithAlpha(Setting_Gamepad_ClassicUpColor, vis.InputGasPedal > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha));
+		nvg::FillColor(WithAlpha(Setting_Gamepad_ClassicUpColor, pedalGas > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha));
 		nvg::Fill();
 		nvg::ResetScissor();
 
 		// Down
 		nvg::Scissor(midX, m_size.y / 2 + Setting_Gamepad_Spacing / 2, midSize, m_size.y / 2 - Setting_Gamepad_Spacing / 2);
-		nvg::FillColor(WithAlpha(Setting_Gamepad_ClassicDownColor, vis.InputBrakePedal > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha));
+		nvg::FillColor(WithAlpha(Setting_Gamepad_ClassicDownColor, pedalBrake > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha));
 		nvg::Fill();
 		nvg::ResetScissor();
 	}

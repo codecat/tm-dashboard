@@ -40,10 +40,10 @@ class Dashboard
 	CGamePlayer@ GetViewingPlayer()
 	{
 		auto playground = GetApp().CurrentPlayground;
-		if (playground is null || playground.Interface is null) {
+		if (playground is null || playground.GameTerminals.Length != 1) {
 			return null;
 		}
-        return cast<CTrackManiaRaceInterface>(playground.Interface).UiPlayer0;
+		return playground.GameTerminals[0].GUIPlayer;
 	}
 #endif
 

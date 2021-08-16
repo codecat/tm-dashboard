@@ -6,6 +6,7 @@ class Dashboard
 	DashboardThing@ m_pad;
 	DashboardGearbox@ m_gearbox;
 	DashboardWheels@ m_wheels;
+	DashboardAcceleration@ m_acc;
 #endif
 	DashboardSpeed@ m_speed;
 
@@ -14,6 +15,7 @@ class Dashboard
 #if !COMPETITION
 		@m_gearbox = DashboardGearbox();
 		@m_wheels = DashboardWheels();
+		@m_acc = DashboardAcceleration();
 #endif
 		@m_speed = DashboardSpeed();
 	}
@@ -82,6 +84,7 @@ class Dashboard
 		}
 		m_gearbox.OnSettingsChanged();
 		m_wheels.OnSettingsChanged();
+		m_acc.OnSettingsChanged();
 #endif
 		m_speed.OnSettingsChanged();
 	}
@@ -149,6 +152,12 @@ class Dashboard
 			m_wheels.m_pos = Setting_General_WheelsPos;
 			m_wheels.m_size = Setting_General_WheelsSize;
 			m_wheels.InternalRender(vis.AsyncState);
+		}
+
+		if (Setting_General_ShowAcceleration) {
+			m_acc.m_pos = Setting_General_AccelerationPos;
+			m_acc.m_size = Setting_General_AccelerationSize;
+			m_acc.InternalRender(vis.AsyncState);
 		}
 #endif
 

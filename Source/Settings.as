@@ -49,6 +49,18 @@ vec2 Setting_General_WheelsPos = vec2(0.909f, 0.9f);
 
 [Setting category="General" name="Wheels size"]
 vec2 Setting_General_WheelsSize = vec2(230, 370);
+
+[Setting category="General" name="Show acceleration"]
+bool Setting_General_ShowAcceleration = true;
+
+[Setting category="General" name="Move acceleration" description="Use this to easily move the acceleration position."]
+bool Setting_General_MoveAcceleration = false;
+
+[Setting category="General" name="Acceleration position"]
+vec2 Setting_General_AccelerationPos = vec2(0.9f, 0.475f);
+
+[Setting category="General" name="Acceleration size"]
+vec2 Setting_General_AccelerationSize = vec2(350, 50);
 #endif
 
 [Setting category="General" name="Show speed"]
@@ -196,6 +208,33 @@ vec4 Setting_Gearbox_TextColor = vec4(1, 1, 1, 1);
 
 [Setting category="Gearbox" name="Font"]
 string Setting_Gearbox_Font = "DroidSans.ttf";
+
+
+[Setting category="Acceleration" name="Acceleration color" color]
+vec4 Setting_Acceleration_Positive_Color = vec4(0, 0.9f, 0, 1);
+
+[Setting category="Acceleration" name="Negative acceleration color" color]
+vec4 Setting_Acceleration_Negative_Color = vec4(0.8f, 0, 0, 1);
+
+[Setting category="Acceleration" name="Backdrop color" color]
+vec4 Setting_Acceleration_BackdropColor = vec4(0, 0, 0, 0.7f);
+
+[Setting category="Acceleration" name="Border color" color]
+vec4 Setting_Acceleration_BorderColor = vec4(1, 1, 1, 1);
+
+[Setting category="Acceleration" name="Border width" drag min=0 max=10]
+float Setting_Acceleration_BorderWidth = 3.0f;
+
+[Setting category="Acceleration" name="Border radius" drag min=0 max=50]
+float Setting_Acceleration_BorderRadius = 5.0f;
+
+[Setting category="Acceleration" name="Zoom Factor" drag min=0 max=15]
+float Setting_Acceleration_ZoomFactor = 10.0f;
+
+[Setting category="Acceleration" name="Max Acceleration value" drag min=0 max=50]
+float Setting_Acceleration_MaxAcceleration = 10.0f;
+
+
 #endif
 
 

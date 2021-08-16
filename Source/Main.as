@@ -1,4 +1,5 @@
 bool g_visible = true;
+float g_prev_speed = 0;
 Dashboard@ g_dashboard;
 
 Resources::Font@ g_font;
@@ -43,6 +44,12 @@ void RenderInterface()
 		Locator::Render("Overview", Setting_General_WheelsPos, Setting_General_WheelsSize);
 		Setting_General_WheelsPos = Locator::GetPos();
 		Setting_General_WheelsSize = Locator::GetSize();
+	}
+
+	if (Setting_General_MoveAcceleration) {
+		Locator::Render("Acceleration", Setting_General_AccelerationPos, Setting_General_AccelerationSize);
+		Setting_General_AccelerationPos = Locator::GetPos();
+		Setting_General_AccelerationSize = Locator::GetSize();
 	}
 #endif
 

@@ -57,10 +57,10 @@ bool Setting_General_ShowAcceleration = true;
 bool Setting_General_MoveAcceleration = false;
 
 [Setting category="General" name="Acceleration position"]
-vec2 Setting_General_AccelerationPos = vec2(0.9f, 0.475f);
+vec2 Setting_General_AccelerationPos = vec2(0.720f, 0.120f);
 
 [Setting category="General" name="Acceleration size"]
-vec2 Setting_General_AccelerationSize = vec2(350, 50);
+vec2 Setting_General_AccelerationSize = vec2(50, 350);
 #endif
 
 [Setting category="General" name="Show speed"]
@@ -234,6 +234,17 @@ float Setting_Acceleration_ZoomFactor = 10.0f;
 [Setting category="Acceleration" name="Max Acceleration value" drag min=0 max=50]
 float Setting_Acceleration_MaxAcceleration = 10.0f;
 
+[Setting category="Acceleration" name="Show text value"]
+bool Setting_Acceleration_ShowTextValue = true;
+
+[Setting category="Acceleration" name="Padding" drag min=0 max=100]
+float Setting_Acceleration_Padding = 20.0f;
+
+[Setting category="Acceleration" name="Text color" color]
+vec4 Setting_Acceleration_TextColor = vec4(1, 1, 1, 1);
+
+[Setting category="Acceleration" name="Font size" drag min=0 max=50]
+float Setting_Acceleration_FontSize = 20.0f;
 
 #endif
 

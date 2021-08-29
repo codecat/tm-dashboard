@@ -1,5 +1,6 @@
 bool g_visible = true;
 Dashboard@ g_dashboard;
+Sharing@ g_sharing;
 
 Resources::Font@ g_font;
 Resources::Font@ g_fontBold;
@@ -53,6 +54,13 @@ void RenderInterface()
 	}
 }
 
+void RenderSettings()
+{
+	if (g_sharing !is null) {
+		g_sharing.RenderSettings();
+	}
+}
+
 void OnSettingsChanged()
 {
 	g_dashboard.OnSettingsChanged();
@@ -70,6 +78,7 @@ void Main()
 	nvg::AddFallbackFont(g_fontBold, g_fontIcons);
 
 	@g_dashboard = Dashboard();
+	@g_sharing = Sharing();
 
 #if !COMPETITION
 	while (true) {

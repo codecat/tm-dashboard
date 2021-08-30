@@ -9,7 +9,7 @@ class DashboardAcceleration : DashboardThing
 	{
 	}
 
-	void RenderAcceleratorMeter(const vec2 &in pos, const vec2 &in size, float acc)
+	void RenderAccelerometer(const vec2 &in pos, const vec2 &in size, float acc)
 	{
 		vec2 psize = vec2(size.x, size.y/2);
 		vec2 npos = vec2(pos.x, pos.y);
@@ -84,7 +84,7 @@ class DashboardAcceleration : DashboardThing
 		vec2 offset = vec2(0.0f, 0.0f);
 		vec2 size = m_size;
 
-		RenderAcceleratorMeter(offset, size, sum / arr_size);
+		RenderAccelerometer(offset, size, sum / arr_size);
 	}
 }
 #endif

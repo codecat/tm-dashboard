@@ -1,5 +1,8 @@
 bool g_visible = true;
+float g_dt = 0;
 float g_prev_speed = 0;
+array<float> g_acc = {0, 0, 0, 0};
+int g_idx = 0;
 Dashboard@ g_dashboard;
 
 Resources::Font@ g_font;
@@ -58,6 +61,10 @@ void RenderInterface()
 		Setting_General_SpeedPos = Locator::GetPos();
 		Setting_General_SpeedSize = Locator::GetSize();
 	}
+}
+
+void Update(float dt) {
+	g_dt = dt;
 }
 
 void OnSettingsChanged()

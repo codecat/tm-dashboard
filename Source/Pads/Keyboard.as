@@ -27,7 +27,7 @@ class DashboardPadKeyboard : DashboardThing
 	{
 		vec4 borderColor = Setting_Keyboard_BorderColor;
 		if (fillDir == 0) {
-			borderColor.w = Math::Abs(value) > 0.1f ? 1.0f : Setting_Keyboard_InactiveAlpha;
+			borderColor.w *= Math::Abs(value) > 0.1f ? 1.0f : Setting_Keyboard_InactiveAlpha;
 		} else {
 			borderColor.w *= Math::Lerp(Setting_Keyboard_InactiveAlpha, 1.0f, value);
 		}

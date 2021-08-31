@@ -1,8 +1,5 @@
 bool g_visible = true;
 float g_dt = 0;
-float g_prev_speed = 0;
-array<float> g_acc = {0, 0, 0, 0};
-int g_idx = 0;
 Dashboard@ g_dashboard;
 
 Resources::Font@ g_font;
@@ -63,7 +60,11 @@ void RenderInterface()
 	}
 }
 
-void Update(float dt) {
+void Update(float dt)
+{
+	// We need to save this for the Accelerometer:
+	// Specifically to get an accurate acceleration value in meters per second per second.
+	// Without this dt we can only get a fake 'acceleration' that doesn't incorporate time properly.
 	g_dt = dt;
 }
 

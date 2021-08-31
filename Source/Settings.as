@@ -60,7 +60,7 @@ bool Setting_General_MoveAcceleration = false;
 vec2 Setting_General_AccelerationPos = vec2(0.720f, 0.120f);
 
 [Setting category="General" name="Acceleration size"]
-vec2 Setting_General_AccelerationSize = vec2(350, 50);
+vec2 Setting_General_AccelerationSize = vec2(50, 350);
 #endif
 
 [Setting category="General" name="Show speed"]
@@ -210,7 +210,7 @@ vec4 Setting_Gearbox_TextColor = vec4(1, 1, 1, 1);
 string Setting_Gearbox_Font = "DroidSans.ttf";
 
 
-[Setting category="Acceleration" name="Acceleration color" color]
+[Setting category="Acceleration" name="Positive acceleration color" color]
 vec4 Setting_Acceleration_Positive_Color = vec4(0, 0.9f, 0, 1);
 
 [Setting category="Acceleration" name="Negative acceleration color" color]
@@ -228,20 +228,26 @@ float Setting_Acceleration_BorderWidth = 3.0f;
 [Setting category="Acceleration" name="Border radius" drag min=0 max=50]
 float Setting_Acceleration_BorderRadius = 5.0f;
 
-[Setting category="Acceleration" name="Max Acceleration value" drag min=0 max=200]
-float Setting_Acceleration_MaxAcceleration = 15.0f;
+[Setting category="Acceleration" name="Maximum acceleration value" drag min=0 max=200]
+float Setting_Acceleration_MaximumAcceleration = 15.0f;
 
 [Setting category="Acceleration" name="Show text value"]
 bool Setting_Acceleration_ShowTextValue = true;
 
-[Setting category="Acceleration" name="Padding" drag min=0 max=100]
-float Setting_Acceleration_Padding = 20.0f;
+[Setting category="Acceleration" name="Text padding" drag min=0 max=100]
+float Setting_Acceleration_TextPadding = 20.0f;
+
+[Setting category="Acceleration" name="Padding between negative and position bars" drag min=0 max=100]
+float Setting_Acceleration_BarPadding = 7.5f;
 
 [Setting category="Acceleration" name="Text color" color]
 vec4 Setting_Acceleration_TextColor = vec4(1, 1, 1, 1);
 
 [Setting category="Acceleration" name="Font size" drag min=0 max=50]
-float Setting_Acceleration_FontSize = 12.5f;
+float Setting_Acceleration_FontSize = 15.0f;
+
+[Setting category="Acceleration" name="Enable smoothing"]
+bool Setting_Acceleration_Smoothing = true;
 
 #endif
 

@@ -51,7 +51,7 @@ vec2 Setting_General_WheelsPos = vec2(0.909f, 0.9f);
 vec2 Setting_General_WheelsSize = vec2(230, 370);
 
 [Setting category="General" name="Show acceleration"]
-bool Setting_General_ShowAcceleration = true;
+bool Setting_General_ShowAcceleration = false;
 
 [Setting category="General" name="Move acceleration" description="Use this to easily move the acceleration position."]
 bool Setting_General_MoveAcceleration = false;
@@ -248,6 +248,9 @@ float Setting_Acceleration_FontSize = 15.0f;
 
 [Setting category="Acceleration" name="Enable smoothing"]
 bool Setting_Acceleration_Smoothing = true;
+
+[Setting category="Acceleration" name="Font"]
+string Setting_Acceleration_Font = "DroidSans.ttf";
 
 #endif
 

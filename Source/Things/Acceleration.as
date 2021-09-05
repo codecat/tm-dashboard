@@ -6,12 +6,30 @@ class DashboardAcceleration : DashboardThing
 	array<float> acc = {0, 0, 0, 0};
 	int idx = 0;
 
+	Resources::Font@ m_font;
+	string m_fontPath;
+
 	DashboardAcceleration()
 	{
+		LoadFont();
+	}
+
+	void LoadFont()
+	{
+		if (Setting_Acceleration_Font == m_fontPath) {
+			return;
+		}
+
+		auto font = Resources::GetFont(Setting_Acceleration_Font);
+		if (font !is null) {
+			m_fontPath = Setting_Acceleration_Font;
+			@m_font = font;
+		}
 	}
 
 	void OnSettingsChanged() override
 	{
+		LoadFont();
 	}
 
 	void RenderNegativeAccelerometer(const vec2 &in pos, const vec2 &in size, float acc)
@@ -45,6 +63,7 @@ class DashboardAcceleration : DashboardThing
 		if (Setting_Acceleration_ShowTextValue) {
 			float text_x_pos = pos.x + (psize.x / 2) - Setting_Acceleration_TextPadding*1.5;
 			float text_y_pos_negative = npos.y + psize.y * 1.5;
+			nvg::FontFace(m_font);
 			nvg::FontSize(Setting_Acceleration_FontSize);
 			nvg::FillColor(Setting_Acceleration_TextColor);
 			nvg::TextBox(text_x_pos, text_y_pos_negative, Setting_Acceleration_TextPadding * 3, Icons::AngleDoubleDown + "\n" + Text::Format("%.2f", acc < 0 ? Math::Abs(acc) : 0));
@@ -84,6 +103,7 @@ class DashboardAcceleration : DashboardThing
 		if (Setting_Acceleration_ShowTextValue) {
 			float text_x_pos = pos.x + (psize.x / 2) - Setting_Acceleration_TextPadding*1.5;
 			float text_y_pos_positive = pos.y + (psize.y / 2) - Setting_Acceleration_BarPadding;
+			nvg::FontFace(m_font);
 			nvg::FontSize(Setting_Acceleration_FontSize);
 			nvg::FillColor(Setting_Acceleration_TextColor);
 			nvg::TextBox(text_x_pos, text_y_pos_positive, Setting_Acceleration_TextPadding * 3, Icons::AngleDoubleUp + "\n" + Text::Format("%.2f", acc > 0 ? acc : 0));
@@ -100,19 +120,17 @@ class DashboardAcceleration : DashboardThing
 		vec2 offset = vec2(0.0f, 0.0f);
 		vec2 size = m_size;
 
-		if (Setting_Acceleration_Smoothing)
-		{
+		if (Setting_Acceleration_Smoothing) {
 			acc[idx] = curr_acc;
 			idx = (idx + 1) % arr_size;
 			float sum = 0;
-			for(int n = 0; n < arr_size; n++)
+			for (int n = 0; n < arr_size; n++) {
 				sum += acc[n];
+			}
 			float avg = sum / arr_size;
 			RenderPositiveAccelerometer(offset, size, avg);
 			RenderNegativeAccelerometer(offset, size, avg);
-		}
-		else
-		{
+		} else {
 			RenderPositiveAccelerometer(offset, size, curr_acc);
 			RenderNegativeAccelerometer(offset, size, curr_acc);
 		}

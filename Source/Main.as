@@ -66,6 +66,10 @@ void Update(float dt)
 	// Specifically to get an accurate acceleration value in meters per second per second.
 	// Without this dt we can only get a fake 'acceleration' that doesn't incorporate time properly.
 	g_dt = dt;
+
+	if (g_dashboard !is null) {
+		g_dashboard.Update(dt);
+	}
 }
 
 void OnSettingsChanged()

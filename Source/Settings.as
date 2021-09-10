@@ -152,6 +152,20 @@ float Setting_Keyboard_Spacing = 10.0f;
 [Setting category="Keyboard" name="Inactive alpha" drag min=0 max=1]
 float Setting_Keyboard_InactiveAlpha = 0.4f;
 
+enum KeyboardAnimation
+{
+	None,
+	Shrink,
+	Fade,
+	ShrinkAndFade
+}
+
+[Setting category="Keyboard" name="Release Animation"]
+KeyboardAnimation Setting_Keyboard_ReleaseAnimation = KeyboardAnimation::None;
+
+[Setting category="Keyboard" name="Release Animation Length" drag min=50 max=500]
+float Setting_Keyboard_ReleaseAnimationLength = 150.0f;
+
 
 
 [Setting category="Gearbox" name="Show text"]

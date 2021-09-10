@@ -14,4 +14,5 @@ class DashboardThing
 
 	void OnSettingsChanged() {}
 	void Render(CSceneVehicleVisState@ vis) {}
+	void Update(float dt) {}
 }

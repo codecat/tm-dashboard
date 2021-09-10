@@ -167,4 +167,10 @@ class Dashboard
 			m_speed.InternalRender(vis.AsyncState);
 		}
 	}
+
+	void Update(float dt) {
+		if (m_pad !is null) {
+			m_pad.Update(dt);
+		}
+	}
 }

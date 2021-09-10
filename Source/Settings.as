@@ -228,8 +228,8 @@ float Setting_Acceleration_BorderWidth = 3.0f;
 [Setting category="Acceleration" name="Border radius" drag min=0 max=50]
 float Setting_Acceleration_BorderRadius = 5.0f;
 
-[Setting category="Acceleration" name="Maximum acceleration value" drag min=0 max=200]
-float Setting_Acceleration_MaximumAcceleration = 15.0f;
+[Setting category="Acceleration" name="Maximum acceleration value" drag min=0 max=250]
+float Setting_Acceleration_MaximumAcceleration = 54.0f;
 
 [Setting category="Acceleration" name="Show text value"]
 bool Setting_Acceleration_ShowTextValue = true;

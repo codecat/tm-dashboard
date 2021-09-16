@@ -79,7 +79,7 @@ void Main()
 
 	@g_font = Resources::GetFont("DroidSans.ttf");
 	@g_fontBold = Resources::GetFont("DroidSans-Bold.ttf");
-	@g_fontIcons = Resources::GetFont("forkawesome.ttf");
+	@g_fontIcons = Resources::GetFont("ManiaIcons.ttf");
 
 	nvg::AddFallbackFont(g_font, g_fontIcons);
 	nvg::AddFallbackFont(g_fontBold, g_fontIcons);

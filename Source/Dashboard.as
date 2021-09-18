@@ -101,6 +101,14 @@ class Dashboard
 				}
 			}
 		}
+
+		if (Setting_General_HideWhenNotPlaying) {
+			if (app.CurrentPlayground !is null && (app.CurrentPlayground.UIConfigs.Length > 0)) {
+				if (app.CurrentPlayground.UIConfigs[0].UISequence != CGamePlaygroundUIConfig::EUISequence::Playing) {
+					return;
+				}
+			}
+		}
 #if !MP4
 		auto sceneVis = app.GameScene;
 		if (sceneVis is null) {

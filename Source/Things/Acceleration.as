@@ -114,7 +114,10 @@ class DashboardAcceleration : DashboardThing
 	void Render(CSceneVehicleVisState@ vis) override
 	{
 		float speed = vis.FrontSpeed;
-		float curr_acc = ((speed - prev_speed) / (g_dt/1000)) * 3.6;
+		float curr_acc = ((speed - prev_speed) / (g_dt/1000));
+		if (Setting_Acceleration_Unit == AccelerationUnit::KilometersPerHourPerSecond) {
+			curr_acc *= 3.6;
+		}
 		prev_speed = speed;
 
 		vec2 offset = vec2(0.0f, 0.0f);

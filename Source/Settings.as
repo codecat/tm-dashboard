@@ -210,6 +210,15 @@ vec4 Setting_Gearbox_TextColor = vec4(1, 1, 1, 1);
 string Setting_Gearbox_Font = "DroidSans.ttf";
 
 
+enum AccelerationUnit
+{
+	MetersPerSecondPerSecond,
+	KilometersPerHourPerSecond
+}
+
+[Setting category="Acceleration" name="Acceleration unit of measurement" description="Make sure to change max acceleration, for km/h/s = 54, for m/s/s = 15"]
+AccelerationUnit Setting_Acceleration_Unit = AccelerationUnit::MetersPerSecondPerSecond;
+
 [Setting category="Acceleration" name="Positive acceleration color" color]
 vec4 Setting_Acceleration_Positive_Color = vec4(0, 0.9f, 0, 1);
 
@@ -229,7 +238,7 @@ float Setting_Acceleration_BorderWidth = 3.0f;
 float Setting_Acceleration_BorderRadius = 5.0f;
 
 [Setting category="Acceleration" name="Maximum acceleration value" drag min=0 max=250]
-float Setting_Acceleration_MaximumAcceleration = 54.0f;
+float Setting_Acceleration_MaximumAcceleration = 15.0f;
 
 [Setting category="Acceleration" name="Show text value"]
 bool Setting_Acceleration_ShowTextValue = true;

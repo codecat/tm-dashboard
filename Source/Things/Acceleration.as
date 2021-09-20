@@ -34,9 +34,10 @@ class DashboardAcceleration : DashboardThing
 
 	void RenderNegativeAccelerometer(const vec2 &in pos, const vec2 &in size, float acc)
 	{
+		float max_accel = (Setting_Acceleration_Unit == AccelerationUnit::KilometersPerHourPerSecond) ? Setting_Acceleration_MaximumAccelerationKMHS : Setting_Acceleration_MaximumAccelerationMSS;
 		vec2 psize = vec2(size.x, size.y/2);
 		vec2 npos = vec2(pos.x, pos.y);
-		float accHeight = (acc / Setting_Acceleration_MaximumAcceleration) * psize.y;
+		float accHeight = (acc / max_accel) * psize.y;
 
 		nvg::Save();
 		nvg::BeginPath();
@@ -73,8 +74,9 @@ class DashboardAcceleration : DashboardThing
 
 	void RenderPositiveAccelerometer(const vec2 &in pos, const vec2 &in size, float acc)
 	{
+		float max_accel = (Setting_Acceleration_Unit == AccelerationUnit::KilometersPerHourPerSecond) ? Setting_Acceleration_MaximumAccelerationKMHS : Setting_Acceleration_MaximumAccelerationMSS;
 		vec2 psize = vec2(size.x, size.y/2);
-		float accHeight = (acc / Setting_Acceleration_MaximumAcceleration) * psize.y;
+		float accHeight = (acc / max_accel) * psize.y;
 
 		nvg::Save();
 		nvg::BeginPath();

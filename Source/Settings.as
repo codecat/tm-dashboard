@@ -216,7 +216,7 @@ enum AccelerationUnit
 	KilometersPerHourPerSecond
 }
 
-[Setting category="Acceleration" name="Acceleration unit of measurement" description="Make sure to change max acceleration, for km/h/s = 54, for m/s/s = 15"]
+[Setting category="Acceleration" name="Acceleration unit of measurement"]
 AccelerationUnit Setting_Acceleration_Unit = AccelerationUnit::MetersPerSecondPerSecond;
 
 [Setting category="Acceleration" name="Positive acceleration color" color]
@@ -237,8 +237,11 @@ float Setting_Acceleration_BorderWidth = 3.0f;
 [Setting category="Acceleration" name="Border radius" drag min=0 max=50]
 float Setting_Acceleration_BorderRadius = 5.0f;
 
-[Setting category="Acceleration" name="Maximum acceleration value" drag min=0 max=250]
-float Setting_Acceleration_MaximumAcceleration = 15.0f;
+[Setting category="Acceleration" name="Maximum acceleration value for m/s/s" drag min=0 max=250]
+float Setting_Acceleration_MaximumAccelerationMSS = 15.0f;
+
+[Setting category="Acceleration" name="Maximum acceleration value for km/h/s" drag min=0 max=250]
+float Setting_Acceleration_MaximumAccelerationKMHS = 54.0f;
 
 [Setting category="Acceleration" name="Show text value"]
 bool Setting_Acceleration_ShowTextValue = true;

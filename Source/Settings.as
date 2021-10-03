@@ -80,6 +80,7 @@ enum GamepadStyle
 {
 	Uniform,
 	Classic,
+	Cateye,
 }
 
 [Setting category="Gamepad" name="Style" description="Note: Not all styles use all customization options. Use Uniform for the best experience."]

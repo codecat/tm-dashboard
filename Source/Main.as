@@ -27,7 +27,6 @@ void Render()
 
 void RenderInterface()
 {
-#if !COMPETITION
 	if (Setting_General_MovePad) {
 		Locator::Render("Controller/pad", Setting_General_PadPos, Setting_General_PadSize);
 		Setting_General_PadPos = Locator::GetPos();
@@ -51,7 +50,6 @@ void RenderInterface()
 		Setting_General_AccelerationPos = Locator::GetPos();
 		Setting_General_AccelerationSize = Locator::GetSize();
 	}
-#endif
 
 	if (Setting_General_MoveSpeed) {
 		Locator::Render("Speed", Setting_General_SpeedPos, Setting_General_SpeedSize);
@@ -86,7 +84,6 @@ void Main()
 
 	@g_dashboard = Dashboard();
 
-#if !COMPETITION
 	while (true) {
 		// Find the most recently used pad
 		CInputScriptPad@ mostRecentPad;
@@ -117,5 +114,4 @@ void Main()
 
 		yield();
 	}
-#endif
 }

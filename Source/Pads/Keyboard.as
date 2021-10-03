@@ -1,4 +1,3 @@
-#if !COMPETITION
 class DashboardPadKeyboard : DashboardThing
 {
 	DashboardPadKeyboard()
@@ -72,4 +71,3 @@ class DashboardPadKeyboard : DashboardThing
 		nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, text);
 	}
 }
-#endif

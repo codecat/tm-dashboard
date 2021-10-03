@@ -1,4 +1,3 @@
-#if !COMPETITION
 enum WheelType
 {
 	FL, FR,
@@ -315,4 +314,3 @@ class DashboardWheels : DashboardThing
 		nvg::Stroke();
 	}
 }
-#endif

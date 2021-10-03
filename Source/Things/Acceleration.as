@@ -1,4 +1,3 @@
-#if !COMPETITION
 class DashboardAcceleration : DashboardThing
 {
 	float prev_speed = 0;
@@ -69,7 +68,6 @@ class DashboardAcceleration : DashboardThing
 			nvg::FillColor(Setting_Acceleration_TextColor);
 			nvg::TextBox(text_x_pos, text_y_pos_negative, Setting_Acceleration_TextPadding * 3, Icons::AngleDoubleDown + "\n" + Text::Format("%.2f", acc < 0 ? Math::Abs(acc) : 0));
 		}
-		
 	}
 
 	void RenderPositiveAccelerometer(const vec2 &in pos, const vec2 &in size, float acc)
@@ -139,7 +137,5 @@ class DashboardAcceleration : DashboardThing
 			RenderPositiveAccelerometer(offset, size, curr_acc);
 			RenderNegativeAccelerometer(offset, size, curr_acc);
 		}
-		
 	}
 }
-#endif

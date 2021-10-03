@@ -1,22 +1,18 @@
 class Dashboard
 {
-#if !COMPETITION
 	CInputScriptPad::EPadType m_currentPadType = CInputScriptPad::EPadType(-1);
 
 	DashboardThing@ m_pad;
 	DashboardGearbox@ m_gearbox;
 	DashboardWheels@ m_wheels;
 	DashboardAcceleration@ m_acc;
-#endif
 	DashboardSpeed@ m_speed;
 
 	Dashboard()
 	{
-#if !COMPETITION
 		@m_gearbox = DashboardGearbox();
 		@m_wheels = DashboardWheels();
 		@m_acc = DashboardAcceleration();
-#endif
 		@m_speed = DashboardSpeed();
 	}
 
@@ -49,7 +45,6 @@ class Dashboard
 	}
 #endif
 
-#if !COMPETITION
 	void ClearPad()
 	{
 		m_currentPadType = CInputScriptPad::EPadType(-1);
@@ -74,18 +69,15 @@ class Dashboard
 				break;
 		}
 	}
-#endif
 
 	void OnSettingsChanged()
 	{
-#if !COMPETITION
 		if (m_pad !is null) {
 			m_pad.OnSettingsChanged();
 		}
 		m_gearbox.OnSettingsChanged();
 		m_wheels.OnSettingsChanged();
 		m_acc.OnSettingsChanged();
-#endif
 		m_speed.OnSettingsChanged();
 	}
 
@@ -143,7 +135,6 @@ class Dashboard
 		}
 #endif
 
-#if !COMPETITION
 		if (Setting_General_ShowPad && m_pad !is null) {
 			m_pad.m_pos = Setting_General_PadPos;
 			m_pad.m_size = Setting_General_PadSize;
@@ -167,7 +158,6 @@ class Dashboard
 			m_acc.m_size = Setting_General_AccelerationSize;
 			m_acc.InternalRender(vis.AsyncState);
 		}
-#endif
 
 		if (Setting_General_ShowSpeed) {
 			m_speed.m_pos = Setting_General_SpeedPos;

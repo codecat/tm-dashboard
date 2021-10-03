@@ -1,4 +1,3 @@
-#if !COMPETITION
 enum ForcePadType
 {
 	None,
@@ -8,7 +7,6 @@ enum ForcePadType
 
 [Setting category="General" name="Force pad type"]
 ForcePadType Setting_General_ForcePadType = ForcePadType::None;
-#endif
 
 [Setting category="General" name="Hide on hidden interface"]
 bool Setting_General_HideOnHiddenInterface = false;
@@ -16,7 +14,6 @@ bool Setting_General_HideOnHiddenInterface = false;
 [Setting category="General" name="Hide during Intro sequences"]
 bool Setting_General_HideWhenNotPlaying = true;
 
-#if !COMPETITION
 [Setting category="General" name="Show controller/pad"]
 bool Setting_General_ShowPad = true;
 
@@ -64,7 +61,6 @@ vec2 Setting_General_AccelerationPos = vec2(0.720f, 0.120f);
 
 [Setting category="General" name="Acceleration size"]
 vec2 Setting_General_AccelerationSize = vec2(50, 350);
-#endif
 
 [Setting category="General" name="Show speed"]
 bool Setting_General_ShowSpeed = true;
@@ -80,7 +76,6 @@ vec2 Setting_General_SpeedSize = vec2(230, 50);
 
 
 
-#if !COMPETITION
 enum GamepadStyle
 {
 	Uniform,
@@ -267,8 +262,6 @@ bool Setting_Acceleration_Smoothing = true;
 [Setting category="Acceleration" name="Font"]
 string Setting_Acceleration_Font = "DroidSans.ttf";
 
-#endif
-
 
 
 enum SpeedValue
@@ -315,7 +308,6 @@ float Setting_Speed_FontSize = 24.0f;
 
 
 
-#if !COMPETITION
 enum WheelsStyle
 {
 	Detailed,
@@ -399,4 +391,3 @@ string Setting_Wheels_DetailsFont = "DroidSans.ttf";
 
 [Setting category="Wheels" name="Details font size" drag min=0 max=50]
 float Setting_Wheels_DetailsFontSize = 16.0f;
-#endif

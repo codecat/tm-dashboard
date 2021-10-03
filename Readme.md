@@ -8,6 +8,7 @@ Plugin for Openplanet that displays a bunch of Trackmania vehicle information on
 * Gearbox visualization
 * Wheel info visualization
 * Speed visualization
+* Acceleration visualization
 * Works in solo
 * Works online (including spectating)
 * Works for replays

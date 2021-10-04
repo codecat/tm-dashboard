@@ -183,34 +183,9 @@ class DashboardPadGamepad : DashboardThing
 
 	void RenderCateye(CSceneVehicleVisState@ vis)
 	{
-		auto posLeft = vec2(0, m_size.y / 2);
-		auto posRight = vec2(m_size.x, m_size.y / 2);
-		auto posTop = vec2(m_size.x / 2, 0);
-		auto posBottom = vec2(m_size.x / 2, m_size.y);
-
-		float leftInflectionX = (m_size.x / 2) - (m_size.x / 2 * Setting_Gamepad_MiddleScale);
-		float midX_Left = (m_size.x / 2) - (m_size.x / 2 * Setting_Gamepad_MiddleScale * ((100.0f - Setting_Gamepad_Spacing) / 100.0f));
-		float midX_Right = (m_size.x / 2) + (m_size.x / 2 * Setting_Gamepad_MiddleScale * ((100.0f - Setting_Gamepad_Spacing) / 100.0f));
-		float rightInflectionX = (m_size.x / 2) + (m_size.x / 2 * Setting_Gamepad_MiddleScale);
-		float midY_Top = Setting_Gamepad_Spacing / 100.0f * m_size.y / 2;
-		float midY_Bot = m_size.y - midY_Top;
-		float midY_TopInflection = (m_size.y / 2) - ((((m_size.y / 2) - midY_Top) * 2) * Setting_Gamepad_ArrowPadding);
-		float midY_BotInflection = (m_size.y / 2) + ((((m_size.y / 2) - midY_Top) * 2) * Setting_Gamepad_ArrowPadding);
-
-		auto posLeftInflection = vec2(leftInflectionX, m_size.y / 2);
-		auto posRightInflection = vec2(rightInflectionX, m_size.y / 2);
-		auto posMidLeft = vec2(midX_Left, m_size.y / 2);
-		auto posMidRight = vec2(midX_Right, m_size.y / 2);
-		auto posMidTop = vec2(m_size.x / 2, midY_Top);
-		auto posMidBot = vec2(m_size.x / 2, midY_Bot);
-		auto posTopInflection = vec2(m_size.x / 2, midY_TopInflection);
-		auto posBotInflection = vec2(m_size.x / 2, midY_BotInflection);
-
-		bool validWidthCheckLeft = Math::Abs(posLeft.x - posLeftInflection.x) > 0.01f;
-		bool validWidthCheckRight = Math::Abs(posRight.x - posRightInflection.x) > 0.01f;
-		bool validHeightCheckTop = Math::Abs(posMidTop.y - posTopInflection.y) > 0.01f;
-		bool validHeightCheckBot = Math::Abs(posMidBot.y - posBotInflection.y) > 0.01f;
-		bool validWidthCheckMid = Math::Abs(posMidLeft.x - posMidRight.x) > 0.01f;
+		nvg::StrokeWidth(Setting_Gamepad_BorderWidth);
+		nvg::StrokeColor(Setting_Gamepad_BorderColor);
+		nvg::LineJoin(nvg::LineCapType::Round);
 
 		// Steering scales
 		float steerLeft = vis.InputSteer < 0 ? Math::Abs(vis.InputSteer) : 0.0f;
@@ -225,83 +200,83 @@ class DashboardPadGamepad : DashboardThing
 			pedalBrake = 1.0f;
 		}
 
+		auto posLeft = vec2(0, m_size.y / 2);
+		auto posRight = vec2(m_size.x, m_size.y / 2);
+		auto posTop = vec2(m_size.x / 2, 0);
+		auto posBottom = vec2(m_size.x / 2, m_size.y);
+
+		float leftInflectionX = (m_size.x / 2) - (m_size.x / 2 * Setting_Gamepad_MiddleScale);
+		float leftSteerX = (1.0 - steerLeft) * leftInflectionX;
+		float midX_Left = (m_size.x / 2) - (m_size.x / 2 * Setting_Gamepad_MiddleScale * ((100.0f - Setting_Gamepad_Spacing) / 100.0f));
+		float midX_Right = (m_size.x / 2) + (m_size.x / 2 * Setting_Gamepad_MiddleScale * ((100.0f - Setting_Gamepad_Spacing) / 100.0f));
+		float rightInflectionX = (m_size.x / 2) + (m_size.x / 2 * Setting_Gamepad_MiddleScale);
+		float rightSteerX = rightInflectionX + (steerRight * (m_size.x - rightInflectionX));
+		float midY_Top = Setting_Gamepad_Spacing / 100.0f * m_size.y / 2;
+		float midY_Bot = m_size.y - midY_Top;
+		float midY_TopInflection = (m_size.y / 2) - ((((m_size.y / 2) - midY_Top) * 2) * Setting_Gamepad_ArrowPadding);
+		float midY_BotInflection = (m_size.y / 2) + ((((m_size.y / 2) - midY_Top) * 2) * Setting_Gamepad_ArrowPadding);
+
+		vec2 posLeftInflection = vec2(leftInflectionX, m_size.y / 2);
+		vec2 posRightInflection = vec2(rightInflectionX, m_size.y / 2);
+		vec2 posLeftSteer = vec2(leftSteerX, m_size.y / 2);
+		vec2 posRightSteer = vec2(rightSteerX, m_size.y / 2);
+		vec2 posMidLeft = vec2(midX_Left, m_size.y / 2);
+		vec2 posMidRight = vec2(midX_Right, m_size.y / 2);
+		vec2 posMidTop = vec2(m_size.x / 2, midY_Top);
+		vec2 posMidBot = vec2(m_size.x / 2, midY_Bot);
+		vec2 posTopInflection = vec2(m_size.x / 2, midY_TopInflection);
+		vec2 posBotInflection = vec2(m_size.x / 2, midY_BotInflection);
+
 		// Left
-		if (validWidthCheckLeft) {
-			if (steerLeft > 0) {
-				auto v = vec2((m_size.x / 2) - steerLeft * (m_size.x / 2), 0);
-				nvg::FillPaint(nvg::LinearGradient(v - vec2(1, 0), v, Setting_Gamepad_EmptyFillColor, Setting_Gamepad_FillColor));
-			} else {
-				nvg::FillColor(Setting_Gamepad_EmptyFillColor);
-			}
-			nvg::BeginPath();
-			nvg::MoveTo(posLeft);
-			nvg::LineTo(posTop);
-			nvg::LineTo(posLeftInflection);
-			nvg::ClosePath();
-			nvg::Fill();
-			nvg::BeginPath();
-			nvg::MoveTo(posLeft);
-			nvg::LineTo(posBottom);
-			nvg::LineTo(posLeftInflection);
-			nvg::ClosePath();
-			nvg::Fill();
+		FillInflectedTriangle(Setting_Gamepad_EmptyFillColor, posLeft, posLeftInflection, posTop, posBottom);
+		if (Math::Abs(posLeftSteer.x - posLeftInflection.x) > 0.01f) {
+			FillInflectedTriangle(Setting_Gamepad_FillColor, posLeftSteer, posLeftInflection, posTop, posBottom);
 		}
+		StrokeInflectedTriangle(posLeft, posLeftInflection, posTop, posBottom);
 
 		// Right
-		if (validWidthCheckRight) {
-			if (steerRight > 0) {
-				auto v = vec2((m_size.x / 2) + steerRight * (m_size.x / 2), 0);
-				nvg::FillPaint(nvg::LinearGradient(v, v + vec2(1, 0), Setting_Gamepad_FillColor, Setting_Gamepad_EmptyFillColor));
-			} else {
-				nvg::FillColor(Setting_Gamepad_EmptyFillColor);
-			}
-			nvg::BeginPath();
-			nvg::MoveTo(posRight);
-			nvg::LineTo(posTop);
-			nvg::LineTo(posRightInflection);
-			nvg::ClosePath();
-			nvg::Fill();
-			nvg::BeginPath();
-			nvg::MoveTo(posRight);
-			nvg::LineTo(posBottom);
-			nvg::LineTo(posRightInflection);
-			nvg::ClosePath();
-			nvg::Fill();
+		FillInflectedTriangle(Setting_Gamepad_EmptyFillColor, posRight, posRightInflection, posTop, posBottom);
+		if (Math::Abs(posRightSteer.x - posRightInflection.x) > 0.01f) {
+			FillInflectedTriangle(Setting_Gamepad_FillColor, posRightSteer, posRightInflection, posTop, posBottom);
 		}
+		StrokeInflectedTriangle(posRight, posRightInflection, posTop, posBottom);
 
 		// Up
-		if (validWidthCheckMid && validHeightCheckTop) {
-			nvg::FillColor(pedalGas > 0.1f ? Setting_Gamepad_FillColor : Setting_Gamepad_EmptyFillColor);
-			nvg::BeginPath();
-			nvg::MoveTo(posMidTop);
-			nvg::LineTo(posMidLeft);
-			nvg::LineTo(posTopInflection);
-			nvg::ClosePath();
-			nvg::Fill();
-			nvg::BeginPath();
-			nvg::MoveTo(posMidTop);
-			nvg::LineTo(posMidRight);
-			nvg::LineTo(posTopInflection);
-			nvg::ClosePath();
-			nvg::Fill();
-		}
+		FillInflectedTriangle(pedalGas > 0.1f ? Setting_Gamepad_FillColor : Setting_Gamepad_EmptyFillColor, posMidTop, posTopInflection, posMidLeft, posMidRight);
+		StrokeInflectedTriangle(posMidTop, posTopInflection, posMidLeft, posMidRight);
 
 		// Down
-		if (validWidthCheckMid && validHeightCheckBot) {
-			nvg::FillColor(pedalBrake > 0.1f ? Setting_Gamepad_FillColor : Setting_Gamepad_EmptyFillColor);
-			nvg::BeginPath();
-			nvg::MoveTo(posMidBot);
-			nvg::LineTo(posMidLeft);
-			nvg::LineTo(posBotInflection);
-			nvg::ClosePath();
-			nvg::Fill();
-			nvg::BeginPath();
-			nvg::MoveTo(posMidBot);
-			nvg::LineTo(posMidRight);
-			nvg::LineTo(posBotInflection);
-			nvg::ClosePath();
-			nvg::Fill();
-		}
+		FillInflectedTriangle(pedalBrake > 0.1f ? Setting_Gamepad_FillColor : Setting_Gamepad_EmptyFillColor, posMidBot, posBotInflection, posMidLeft, posMidRight);
+		StrokeInflectedTriangle(posMidBot, posBotInflection, posMidLeft, posMidRight);
+	}
+
+	private void FillInflectedTriangle(vec4 fillColor, vec2 posApex, vec2 posInflection, vec2 posSide1, vec2 posSide2)
+	{
+		if (Math::Abs(posApex.x - posInflection.x) < 0.01f && Math::Abs(posApex.y - posInflection.y) < 0.01f) return;
+		nvg::FillColor(fillColor);
+		nvg::BeginPath();
+		nvg::MoveTo(posApex);
+		nvg::LineTo(posSide1);
+		nvg::LineTo(posInflection);
+		nvg::ClosePath();
+		nvg::Fill();
+		nvg::BeginPath();
+		nvg::MoveTo(posApex);
+		nvg::LineTo(posSide2);
+		nvg::LineTo(posInflection);
+		nvg::ClosePath();
+		nvg::Fill();
+	}
+
+	private void StrokeInflectedTriangle(vec2 posApex, vec2 posInflection, vec2 posSide1, vec2 posSide2)
+	{
+		nvg::BeginPath();
+		nvg::MoveTo(posApex);
+		nvg::LineTo(posSide1);
+		nvg::LineTo(posInflection);
+		nvg::LineTo(posSide2);
+		nvg::ClosePath();
+		nvg::Stroke();
 	}
 
 	void Render(CSceneVehicleVisState@ vis) override

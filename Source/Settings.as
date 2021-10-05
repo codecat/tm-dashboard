@@ -119,6 +119,9 @@ float Setting_Gamepad_OffAlpha = 0.33f;
 [Setting category="Gamepad" name="Display up/down arrow symbols"]
 bool Setting_Gamepad_UpDownSymbols = true;
 
+[Setting category="Gamepad" name="Cateye use simple steer"]
+bool Setting_Gamepad_CateyeUseSimpleSteer = false;
+
 
 
 enum KeyboardShape

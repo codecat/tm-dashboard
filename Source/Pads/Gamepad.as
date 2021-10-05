@@ -228,32 +228,47 @@ class DashboardPadGamepad : DashboardThing
 		vec2 posBotInflection = vec2(m_size.x / 2, midY_BotInflection);
 
 		// Left
-		FillInflectedTriangle(Setting_Gamepad_EmptyFillColor, posLeft, posLeftInflection, posTop, posBottom);
-		if (Math::Abs(posLeftSteer.x - posLeftInflection.x) > 0.01f) {
-			FillInflectedTriangle(Setting_Gamepad_FillColor, posLeftSteer, posLeftInflection, posTop, posBottom);
+		if (Setting_Gamepad_CateyeUseSimpleSteer && steerLeft > 0) {
+			auto v = vec2((m_size.x / 2) - steerLeft * (m_size.x / 2), 0);
+			nvg::FillPaint(nvg::LinearGradient(v - vec2(1, 0), v, Setting_Gamepad_EmptyFillColor, Setting_Gamepad_FillColor));
+		} else {
+			nvg::FillColor(Setting_Gamepad_EmptyFillColor);
+		}
+		FillInflectedTriangle(posLeft, posLeftInflection, posTop, posBottom);
+		if (!Setting_Gamepad_CateyeUseSimpleSteer) {
+			nvg::FillColor(Setting_Gamepad_FillColor);
+			FillInflectedTriangle(posLeftSteer, posLeftInflection, posTop, posBottom);
 		}
 		StrokeInflectedTriangle(posLeft, posLeftInflection, posTop, posBottom);
 
 		// Right
-		FillInflectedTriangle(Setting_Gamepad_EmptyFillColor, posRight, posRightInflection, posTop, posBottom);
-		if (Math::Abs(posRightSteer.x - posRightInflection.x) > 0.01f) {
-			FillInflectedTriangle(Setting_Gamepad_FillColor, posRightSteer, posRightInflection, posTop, posBottom);
+		if (Setting_Gamepad_CateyeUseSimpleSteer && steerRight > 0) {
+			auto v = vec2((m_size.x / 2) + steerRight * (m_size.x / 2), 0);
+			nvg::FillPaint(nvg::LinearGradient(v, v + vec2(1, 0), Setting_Gamepad_FillColor, Setting_Gamepad_EmptyFillColor));
+		} else {
+			nvg::FillColor(Setting_Gamepad_EmptyFillColor);
+		}
+		FillInflectedTriangle(posRight, posRightInflection, posTop, posBottom);
+		if (!Setting_Gamepad_CateyeUseSimpleSteer) {
+			nvg::FillColor(Setting_Gamepad_FillColor);
+			FillInflectedTriangle(posRightSteer, posRightInflection, posTop, posBottom);
 		}
 		StrokeInflectedTriangle(posRight, posRightInflection, posTop, posBottom);
 
 		// Up
-		FillInflectedTriangle(pedalGas > 0.1f ? Setting_Gamepad_FillColor : Setting_Gamepad_EmptyFillColor, posMidTop, posTopInflection, posMidLeft, posMidRight);
+		nvg::FillColor(pedalGas > 0.1f ? Setting_Gamepad_FillColor : Setting_Gamepad_EmptyFillColor);
+		FillInflectedTriangle(posMidTop, posTopInflection, posMidLeft, posMidRight);
 		StrokeInflectedTriangle(posMidTop, posTopInflection, posMidLeft, posMidRight);
 
 		// Down
-		FillInflectedTriangle(pedalBrake > 0.1f ? Setting_Gamepad_FillColor : Setting_Gamepad_EmptyFillColor, posMidBot, posBotInflection, posMidLeft, posMidRight);
+		nvg::FillColor(pedalBrake > 0.1f ? Setting_Gamepad_FillColor : Setting_Gamepad_EmptyFillColor);
+		FillInflectedTriangle(posMidBot, posBotInflection, posMidLeft, posMidRight);
 		StrokeInflectedTriangle(posMidBot, posBotInflection, posMidLeft, posMidRight);
 	}
 
-	private void FillInflectedTriangle(vec4 fillColor, vec2 posApex, vec2 posInflection, vec2 posSide1, vec2 posSide2)
+	private void FillInflectedTriangle(vec2 posApex, vec2 posInflection, vec2 posSide1, vec2 posSide2)
 	{
 		if (Math::Abs(posApex.x - posInflection.x) < 0.01f && Math::Abs(posApex.y - posInflection.y) < 0.01f) return;
-		nvg::FillColor(fillColor);
 		nvg::BeginPath();
 		nvg::MoveTo(posApex);
 		nvg::LineTo(posSide1);

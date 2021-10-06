@@ -12,7 +12,7 @@ ForcePadType Setting_General_ForcePadType = ForcePadType::None;
 bool Setting_General_HideOnHiddenInterface = false;
 
 [Setting category="General" name="Hide during Intro sequences"]
-bool Setting_General_HideWhenNotPlaying = true;
+bool Setting_General_HideWhenNotPlaying = false;
 
 [Setting category="General" name="Show controller/pad"]
 bool Setting_General_ShowPad = true;

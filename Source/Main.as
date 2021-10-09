@@ -79,6 +79,11 @@ void Main()
 	@g_fontBold = Resources::GetFont("DroidSans-Bold.ttf");
 	@g_fontIcons = Resources::GetFont("ManiaIcons.ttf");
 
+	// On older versions of Openplanet, ManiaIcons.ttf doesn't exist.
+	if (g_fontIcons is null) {
+		@g_fontIcons = Resources::GetFont("forkawesome.ttf");
+	}
+
 	nvg::AddFallbackFont(g_font, g_fontIcons);
 	nvg::AddFallbackFont(g_fontBold, g_fontIcons);
 

@@ -96,7 +96,7 @@ class Dashboard
 
 		if (Setting_General_HideWhenNotPlaying) {
 			if (app.CurrentPlayground !is null && (app.CurrentPlayground.UIConfigs.Length > 0)) {
-				if (app.CurrentPlayground.UIConfigs[0].UISequence != CGamePlaygroundUIConfig::EUISequence::Playing) {
+				if (app.CurrentPlayground.UIConfigs[0].UISequence == CGamePlaygroundUIConfig::EUISequence::Intro) {
 					return;
 				}
 			}

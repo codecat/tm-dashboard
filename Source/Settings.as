@@ -80,6 +80,7 @@ enum GamepadStyle
 {
 	Uniform,
 	Classic,
+	Cateye,
 }
 
 [Setting category="Gamepad" name="Style" description="Note: Not all styles use all customization options. Use Uniform for the best experience."]
@@ -117,6 +118,9 @@ float Setting_Gamepad_OffAlpha = 0.33f;
 
 [Setting category="Gamepad" name="Display up/down arrow symbols"]
 bool Setting_Gamepad_UpDownSymbols = true;
+
+[Setting category="Gamepad" name="Cateye use simple steer"]
+bool Setting_Gamepad_CateyeUseSimpleSteer = false;
 
 
 

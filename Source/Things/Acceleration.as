@@ -57,16 +57,17 @@ class DashboardAcceleration : DashboardThing
 		nvg::BeginPath();
 		nvg::RoundedRect(npos.x, npos.y, psize.x, psize.y, Setting_Acceleration_BorderRadius);
 		nvg::Stroke();
-
 		nvg::Restore();
 
 		if (Setting_Acceleration_ShowTextValue) {
 			float text_x_pos = pos.x + (psize.x / 2) - Setting_Acceleration_TextPadding*1.5;
 			float text_y_pos_negative = npos.y + psize.y * 1.5;
+			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 			nvg::FontFace(m_font);
 			nvg::FontSize(Setting_Acceleration_FontSize);
 			nvg::FillColor(Setting_Acceleration_TextColor);
 			nvg::TextBox(text_x_pos, text_y_pos_negative, Setting_Acceleration_TextPadding * 3, Icons::AngleDoubleDown + "\n" + Text::Format("%.2f", acc < 0 ? Math::Abs(acc) : 0));
+			nvg::Restore();
 		}
 	}
 
@@ -103,12 +104,13 @@ class DashboardAcceleration : DashboardThing
 		if (Setting_Acceleration_ShowTextValue) {
 			float text_x_pos = pos.x + (psize.x / 2) - Setting_Acceleration_TextPadding*1.5;
 			float text_y_pos_positive = pos.y + (psize.y / 2) - Setting_Acceleration_BarPadding;
+			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 			nvg::FontFace(m_font);
 			nvg::FontSize(Setting_Acceleration_FontSize);
 			nvg::FillColor(Setting_Acceleration_TextColor);
 			nvg::TextBox(text_x_pos, text_y_pos_positive, Setting_Acceleration_TextPadding * 3, Icons::AngleDoubleUp + "\n" + Text::Format("%.2f", acc > 0 ? acc : 0));
+			nvg::Restore();
 		}
-
 	}
 
 	void Render(CSceneVehicleVisState@ vis) override

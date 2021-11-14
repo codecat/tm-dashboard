@@ -67,7 +67,6 @@ class DashboardAcceleration : DashboardThing
 			nvg::FontSize(Setting_Acceleration_FontSize);
 			nvg::FillColor(Setting_Acceleration_TextColor);
 			nvg::TextBox(text_x_pos, text_y_pos_negative, Setting_Acceleration_TextPadding * 3, Icons::AngleDoubleDown + "\n" + Text::Format("%.2f", acc < 0 ? Math::Abs(acc) : 0));
-			nvg::Restore();
 		}
 	}
 
@@ -109,7 +108,6 @@ class DashboardAcceleration : DashboardThing
 			nvg::FontSize(Setting_Acceleration_FontSize);
 			nvg::FillColor(Setting_Acceleration_TextColor);
 			nvg::TextBox(text_x_pos, text_y_pos_positive, Setting_Acceleration_TextPadding * 3, Icons::AngleDoubleUp + "\n" + Text::Format("%.2f", acc > 0 ? acc : 0));
-			nvg::Restore();
 		}
 	}
 

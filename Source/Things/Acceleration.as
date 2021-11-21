@@ -34,8 +34,8 @@ class DashboardAcceleration : DashboardThing
 	void RenderNegativeAccelerometer(const vec2 &in pos, const vec2 &in size, float acc)
 	{
 		float max_accel = (Setting_Acceleration_Unit == AccelerationUnit::KilometersPerHourPerSecond) ? Setting_Acceleration_MaximumAccelerationKMHS : Setting_Acceleration_MaximumAccelerationMSS;
-		vec2 psize = vec2(size.x, size.y/2);
-		vec2 npos = vec2(pos.x, pos.y);
+		vec2 psize = vec2(size.x, size.y/2 - (Setting_Acceleration_BarPadding / 2));
+		vec2 npos = vec2(pos.x, pos.y + Setting_Acceleration_BarPadding);
 		float accHeight = (acc / max_accel) * psize.y;
 
 		nvg::Save();
@@ -73,7 +73,7 @@ class DashboardAcceleration : DashboardThing
 	void RenderPositiveAccelerometer(const vec2 &in pos, const vec2 &in size, float acc)
 	{
 		float max_accel = (Setting_Acceleration_Unit == AccelerationUnit::KilometersPerHourPerSecond) ? Setting_Acceleration_MaximumAccelerationKMHS : Setting_Acceleration_MaximumAccelerationMSS;
-		vec2 psize = vec2(size.x, size.y/2);
+		vec2 psize = vec2(size.x, size.y/2 - (Setting_Acceleration_BarPadding / 2));
 		float accHeight = (acc / max_accel) * psize.y;
 
 		nvg::Save();
@@ -82,27 +82,27 @@ class DashboardAcceleration : DashboardThing
 		nvg::Translate(0, psize.y);
 		nvg::Scale(1,-1);
 
-		nvg::RoundedRect(pos.x, pos.y + Setting_Acceleration_BarPadding, psize.x, psize.y, Setting_Acceleration_BorderRadius);
+		nvg::RoundedRect(pos.x, pos.y, psize.x, psize.y, Setting_Acceleration_BorderRadius);
 		nvg::StrokeWidth(Setting_Acceleration_BorderWidth);
 		nvg::StrokeColor(Setting_Acceleration_BorderColor);
 		nvg::FillColor(Setting_Acceleration_BackdropColor);
 		nvg::Fill();
 
 		if (accHeight >= 0) {
-			nvg::Scissor(pos.x, pos.y + Setting_Acceleration_BarPadding, psize.x, accHeight * 1.0f);
+			nvg::Scissor(pos.x, pos.y, psize.x, accHeight * 1.0f);
 			nvg::FillColor(Setting_Acceleration_Positive_Color);
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
 
 		nvg::BeginPath();
-		nvg::RoundedRect(pos.x, pos.y + Setting_Acceleration_BarPadding, psize.x, psize.y, Setting_Acceleration_BorderRadius);
+		nvg::RoundedRect(pos.x, pos.y, psize.x, psize.y, Setting_Acceleration_BorderRadius);
 		nvg::Stroke();
 		nvg::Restore();
 
 		if (Setting_Acceleration_ShowTextValue) {
 			float text_x_pos = pos.x + (psize.x / 2) - Setting_Acceleration_TextPadding*1.5;
-			float text_y_pos_positive = pos.y + (psize.y / 2) - Setting_Acceleration_BarPadding;
+			float text_y_pos_positive = pos.y + (psize.y / 2);
 			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 			nvg::FontFace(m_font);
 			nvg::FontSize(Setting_Acceleration_FontSize);

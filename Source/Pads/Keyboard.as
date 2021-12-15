@@ -7,19 +7,28 @@ class DashboardPadKeyboard : DashboardThing
 
 	void Render(CSceneVehicleVisState@ vis) override
 	{
-		auto keySize = vec2(
-			(m_size.x - Setting_Keyboard_Spacing * 2) / 3,
-			(m_size.y - Setting_Keyboard_Spacing) / 2
-		);
-
 		float steerLeft = vis.InputSteer < 0 ? Math::Abs(vis.InputSteer) : 0.0f;
 		float steerRight = vis.InputSteer > 0 ? vis.InputSteer : 0.0f;
 
-		RenderKey(vec2(keySize.x + Setting_Keyboard_Spacing, 0), keySize, Icons::AngleUp, vis.InputGasPedal);
-		RenderKey(vec2(keySize.x + Setting_Keyboard_Spacing, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleDown, vis.InputIsBraking ? 1.0f : vis.InputBrakePedal);
+		vec2 keySize = vec2((m_size.x - Setting_Keyboard_Spacing * 2) / 3, (m_size.y - Setting_Keyboard_Spacing) / 2);
+		vec2 sideKeySize = keySize;
 
-		RenderKey(vec2(0, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleLeft, steerLeft, -1);
-		RenderKey(vec2(keySize.x * 2 + Setting_Keyboard_Spacing * 2, keySize.y + Setting_Keyboard_Spacing), keySize, Icons::AngleRight, steerRight, 1);
+		vec2 upPos = vec2(keySize.x + Setting_Keyboard_Spacing, 0);
+		vec2 downPos = vec2(keySize.x + Setting_Keyboard_Spacing, keySize.y + Setting_Keyboard_Spacing);
+		vec2 leftPos = vec2(0, keySize.y + Setting_Keyboard_Spacing);
+		vec2 rightPos = vec2(keySize.x * 2 + Setting_Keyboard_Spacing * 2, keySize.y + Setting_Keyboard_Spacing);
+
+		if (Setting_Keyboard_Shape == KeyboardShape::Compact) {
+			sideKeySize.y = m_size.y;
+			leftPos.y = 0;
+			rightPos.y = 0;
+		}
+
+		RenderKey(upPos, keySize, Icons::AngleUp, vis.InputGasPedal);
+		RenderKey(downPos, keySize, Icons::AngleDown, vis.InputIsBraking ? 1.0f : vis.InputBrakePedal);
+
+		RenderKey(leftPos, sideKeySize, Icons::AngleLeft, steerLeft, -1);
+		RenderKey(rightPos, sideKeySize, Icons::AngleRight, steerRight, 1);
 	}
 
 	void RenderKey(const vec2 &in pos, const vec2 &in size, const string &in text, float value, int fillDir = 0)
@@ -35,8 +44,13 @@ class DashboardPadKeyboard : DashboardThing
 		nvg::StrokeWidth(Setting_Keyboard_BorderWidth);
 
 		switch (Setting_Keyboard_Shape) {
-			case KeyboardShape::Rectangle: nvg::RoundedRect(pos.x, pos.y, size.x, size.y, Setting_Keyboard_BorderRadius); break;
-			case KeyboardShape::Ellipse: nvg::Ellipse(pos + size / 2, size.x / 2, size.y / 2); break;
+			case KeyboardShape::Rectangle:
+			case KeyboardShape::Compact:
+				nvg::RoundedRect(pos.x, pos.y, size.x, size.y, Setting_Keyboard_BorderRadius);
+				break;
+			case KeyboardShape::Ellipse:
+				nvg::Ellipse(pos + size / 2, size.x / 2, size.y / 2);
+				break;
 		}
 
 		nvg::FillColor(Setting_Keyboard_EmptyFillColor);

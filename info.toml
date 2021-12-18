@@ -10,3 +10,8 @@ blocks = [ "Plugin_Dashboard" ]
 
 [script]
 imports = [ "Icons.as" ]
+
+exports = [ "Source/Export/Export.as" ]
+shared_exports = [ "Source/Export/StateWrappers.as" ]
+
+timeout = 0

@@ -45,6 +45,47 @@ class Dashboard
 	}
 #endif
 
+	CSceneVehicleVisState@ GetViewingPlayerState()
+	{
+		auto app = GetApp();
+
+#if !MP4
+		auto sceneVis = app.GameScene;
+		if (sceneVis is null) {
+			return null;
+		}
+		CSceneVehicleVis@ vis = null;
+#else
+		CGameScene@ sceneVis = null;
+		CSceneVehicleVisInner@ vis = null;
+#endif
+
+		auto player = GetViewingPlayer();
+		if (player !is null) {
+			@vis = Vehicle::GetVis(sceneVis, player);
+		} else {
+			@vis = Vehicle::GetSingularVis(sceneVis);
+		}
+
+		if (vis is null) {
+			return null;
+		}
+
+#if TMNEXT
+		uint entityId = Vehicle::GetEntityId(vis);
+		if ((entityId & 0xFF000000) == 0x04000000) {
+			// If the entity ID has this mask, then we are either watching a replay, or placing
+			// down the car in the editor. So, we will check if we are currently in the editor,
+			// and stop if we are.
+			if (cast<CGameCtnEditorFree>(app.Editor) !is null) {
+				return null;
+			}
+		}
+#endif
+
+		return vis.AsyncState;
+	}
+
 	void ClearPad()
 	{
 		m_currentPadType = CInputScriptPad::EPadType(-1);
@@ -101,68 +142,40 @@ class Dashboard
 				}
 			}
 		}
-#if !MP4
-		auto sceneVis = app.GameScene;
-		if (sceneVis is null) {
+
+		auto visState = GetViewingPlayerState();
+		if (visState is null) {
 			return;
 		}
-		CSceneVehicleVis@ vis = null;
-#else
-		CGameScene@ sceneVis = null;
-		CSceneVehicleVisInner@ vis = null;
-#endif
-
-		auto player = GetViewingPlayer();
-		if (player !is null) {
-			@vis = Vehicle::GetVis(sceneVis, player);
-		} else {
-			@vis = Vehicle::GetSingularVis(sceneVis);
-		}
-
-		if (vis is null) {
-			return;
-		}
-
-#if TMNEXT
-		uint entityId = Vehicle::GetEntityId(vis);
-		if ((entityId & 0xFF000000) == 0x04000000) {
-			// If the entity ID has this mask, then we are either watching a replay, or placing
-			// down the car in the editor. So, we will check if we are currently in the editor,
-			// and stop if we are.
-			if (cast<CGameCtnEditorFree>(app.Editor) !is null) {
-				return;
-			}
-		}
-#endif
 
 		if (Setting_General_ShowPad && m_pad !is null) {
 			m_pad.m_pos = Setting_General_PadPos;
 			m_pad.m_size = Setting_General_PadSize;
-			m_pad.InternalRender(vis.AsyncState);
+			m_pad.InternalRender(visState);
 		}
 
 		if (Setting_General_ShowGearbox) {
 			m_gearbox.m_pos = Setting_General_GearboxPos;
 			m_gearbox.m_size = Setting_General_GearboxSize;
-			m_gearbox.InternalRender(vis.AsyncState);
+			m_gearbox.InternalRender(visState);
 		}
 
 		if (Setting_General_ShowWheels) {
 			m_wheels.m_pos = Setting_General_WheelsPos;
 			m_wheels.m_size = Setting_General_WheelsSize;
-			m_wheels.InternalRender(vis.AsyncState);
+			m_wheels.InternalRender(visState);
 		}
 
 		if (Setting_General_ShowAcceleration) {
 			m_acc.m_pos = Setting_General_AccelerationPos;
 			m_acc.m_size = Setting_General_AccelerationSize;
-			m_acc.InternalRender(vis.AsyncState);
+			m_acc.InternalRender(visState);
 		}
 
 		if (Setting_General_ShowSpeed) {
 			m_speed.m_pos = Setting_General_SpeedPos;
 			m_speed.m_size = Setting_General_SpeedSize;
-			m_speed.InternalRender(vis.AsyncState);
+			m_speed.InternalRender(visState);
 		}
 	}
 }

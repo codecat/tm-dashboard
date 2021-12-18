@@ -128,7 +128,7 @@ enum KeyboardShape
 {
 	Rectangle,
 	Ellipse,
-	Compact
+	Compact,
 }
 
 [Setting category="Keyboard" name="Shape"]

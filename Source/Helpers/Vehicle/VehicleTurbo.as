@@ -1,7 +1,4 @@
-// This file contains code to access some visual information that is not normally available. This
-// code isn't entirely future-proof, so it might stop working after some game updates. If you want
-// to use this code keep this in mind! Use `#max_game_version` to avoid crashes on unexpected game
-// updates.
+// Note: If you wish to use some of these functions, consider adding Dashboard as a plugin dependency!
 
 #if TURBO
 class CSceneVehicleVis

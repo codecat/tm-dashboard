@@ -249,6 +249,36 @@ class DashboardWheels : DashboardThing
 		}
 	}
 
+	void RenderUnifiedWheels(const array<WheelState> &in wheels)
+	{
+		WheelState state;
+
+		for (uint i = 0; i < wheels.Length; i++) {
+			auto@ w = wheels[i];
+
+			state.m_slipCoef = Math::Max(state.m_slipCoef, w.m_slipCoef);
+			state.m_dirt = Math::Max(state.m_dirt, w.m_dirt);
+#if TMNEXT
+			state.m_breakCoef = Math::Max(state.m_breakCoef, w.m_breakCoef);
+			state.m_tireWear = Math::Max(state.m_tireWear, w.m_tireWear);
+			state.m_icing = Math::Max(state.m_icing, w.m_icing);
+			state.m_wetness = Math::Max(state.m_wetness, w.m_wetness);
+#endif
+		}
+
+		vec2 pos(
+			Setting_Wheels_Padding,
+			Setting_Wheels_Padding
+		);
+
+		vec2 size(
+			m_size.x - Setting_Wheels_Padding * 2,
+			(m_size.y - Setting_Wheels_Padding * 2 - Setting_Wheels_RowSpacing * 3) / 4
+		);
+
+		RenderWheelDetails(state, pos, size);
+	}
+
 	void Render(CSceneVehicleVisState@ vis) override
 	{
 		// Backdrop
@@ -264,45 +294,49 @@ class DashboardWheels : DashboardThing
 		wheels.InsertLast(GetWheelState(vis, WheelType::RL));
 		wheels.InsertLast(GetWheelState(vis, WheelType::RR));
 
-		switch (Setting_Wheels_Style) {
-			case WheelsStyle::Detailed: {
-				vec2 wheelSize(
-					m_size.x - Setting_Wheels_Padding * 2,
-					(m_size.y - Setting_Wheels_Padding * 2 - Setting_Wheels_RowSpacing * 3) / 4
-				);
+		if (Setting_Wheels_Style == WheelsStyle::Unified) {
+			RenderUnifiedWheels(wheels);
+		} else {
+			switch (Setting_Wheels_Style) {
+				case WheelsStyle::Detailed: {
+					vec2 wheelSize(
+						m_size.x - Setting_Wheels_Padding * 2,
+						(m_size.y - Setting_Wheels_Padding * 2 - Setting_Wheels_RowSpacing * 3) / 4
+					);
 
-				for (uint i = 0; i < wheels.Length; i++) {
-					RenderWheel(wheels[i], vec2(
-						Setting_Wheels_Padding,
-						Setting_Wheels_Padding + i * (wheelSize.y + Setting_Wheels_RowSpacing)
-					), wheelSize);
-				}
-				break;
-			}
-
-			case WheelsStyle::Simple: {
-				vec2 wheelSize(
-					Setting_Wheels_WheelWidth,
-					(m_size.y - Setting_Wheels_Padding * 2 - Setting_Wheels_RowSpacing) / 2
-				);
-
-				for (uint i = 0; i < wheels.Length; i++) {
-					vec2 pos;
-					if (i % 2 == 0) {
-						pos = vec2(
-							m_size.x - Setting_Wheels_Padding - Setting_Wheels_WheelWidth,
-							Setting_Wheels_Padding + i / 2 * (wheelSize.y + Setting_Wheels_RowSpacing)
-						);
-					} else {
-						pos = vec2(
+					for (uint i = 0; i < wheels.Length; i++) {
+						RenderWheel(wheels[i], vec2(
 							Setting_Wheels_Padding,
-							Setting_Wheels_Padding + i / 2 * (wheelSize.y + Setting_Wheels_RowSpacing)
-						);
+							Setting_Wheels_Padding + i * (wheelSize.y + Setting_Wheels_RowSpacing)
+						), wheelSize);
 					}
-
-					RenderWheelVisual(wheels[i], pos, wheelSize);
+					break;
 				}
-				break;
+
+				case WheelsStyle::Simple: {
+					vec2 wheelSize(
+						Setting_Wheels_WheelWidth,
+						(m_size.y - Setting_Wheels_Padding * 2 - Setting_Wheels_RowSpacing) / 2
+					);
+
+					for (uint i = 0; i < wheels.Length; i++) {
+						vec2 pos;
+						if (i % 2 == 0) {
+							pos = vec2(
+								m_size.x - Setting_Wheels_Padding - Setting_Wheels_WheelWidth,
+								Setting_Wheels_Padding + i / 2 * (wheelSize.y + Setting_Wheels_RowSpacing)
+							);
+						} else {
+							pos = vec2(
+								Setting_Wheels_Padding,
+								Setting_Wheels_Padding + i / 2 * (wheelSize.y + Setting_Wheels_RowSpacing)
+							);
+						}
+
+						RenderWheelVisual(wheels[i], pos, wheelSize);
+					}
+					break;
+				}
 			}
 		}
 

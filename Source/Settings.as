@@ -314,6 +314,7 @@ enum WheelsStyle
 {
 	Detailed,
 	Simple,
+	Unified,
 }
 
 [Setting category="Wheels" name="Style"]

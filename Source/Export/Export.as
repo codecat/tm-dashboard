@@ -16,7 +16,7 @@ namespace Dashboard
 namespace Vehicle
 {
 	// Get RPM for vehicle vis.
-	import float GetRPM(CSceneVehicleVisState@ vis);
+	import float GetRPM(CSceneVehicleVisState@ vis) from "Dashboard";
 
 	// Get wheel dirt amount for vehicle vis. For w, use one of the following:
 	//  0 = Front Left

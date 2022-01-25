@@ -279,6 +279,7 @@ enum SpeedStyle
 {
 	Single,
 	Double,
+	Directional,
 }
 
 [Setting category="Speed" name="Style"]

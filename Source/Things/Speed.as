@@ -83,8 +83,10 @@ class DashboardSpeed : DashboardThing
 				float textSize = (m_size.x - Setting_Speed_Padding * 2) / 2;
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
 				nvg::TextBox(Setting_Speed_Padding, m_size.y / 2, textSize, Icons::ArrowUp + " " + Text::Format("%.0f", absSpeed));
-
-				float carAngle = Math::Abs((Math::Asin(vis.FrontSpeed * 3.6f / absSpeed) * 57) - 90) ;
+				float carAngle = 0;
+				if (absSpeed != 0) {
+					carAngle = Math::Abs((Math::Asin(vis.FrontSpeed * 3.6f / absSpeed) * 57) - 90);
+				}
 				// Avoid flickering negative sign
 				if (absSpeed < 0.99f && absSpeed > -0.99f) {
 					carAngle = 0;

@@ -75,7 +75,7 @@ class DashboardSpeed : DashboardThing
 				nvg::TextBox(Setting_Speed_Padding + textSize, m_size.y / 2, textSize, Icons::AngleDoubleRight + " " + Text::Format("%.0f", sideSpeed));
 				break;
 			}
-			
+
 			case SpeedStyle::Directional: {
 				float sideSpeed = Vehicle::GetSideSpeed(vis) * 3.6f;
 				float absSpeed = Math::Sqrt(Math::Pow(sideSpeed, 2) + Math::Pow(vis.FrontSpeed * 3.6f, 2));

@@ -2,8 +2,6 @@
 name = "Dashboard"
 author = "Miss"
 category = "Overlay"
-
-siteid = 103
 version = "1.8.1"
 
 blocks = [ "Plugin_Dashboard" ]

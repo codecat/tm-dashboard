@@ -7,7 +7,5 @@ version = "1.8.1"
 blocks = [ "Plugin_Dashboard" ]
 
 [script]
-exports = [ "Source/Export/Export.as" ]
-shared_exports = [ "Source/Export/StateWrappers.as" ]
-
+dependencies = [ "VehicleState" ]
 timeout = 0

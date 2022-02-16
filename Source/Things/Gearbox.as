@@ -172,7 +172,7 @@ class DashboardGearbox : DashboardThing
 	void Render(CSceneVehicleVisState@ vis) override
 	{
 		uint gear = vis.CurGear;
-		float rpm = Vehicle::GetRPM(vis);
+		float rpm = VehicleState::GetRPM(vis);
 
 		vec2 offset;
 		vec2 size = m_size;

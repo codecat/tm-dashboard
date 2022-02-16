@@ -67,7 +67,7 @@ class DashboardSpeed : DashboardThing
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
 				nvg::TextBox(Setting_Speed_Padding, m_size.y / 2, textSize, Icons::AngleDoubleUp + " " + Text::Format("%.0f", displaySpeed));
 
-				float sideSpeed = Vehicle::GetSideSpeed(vis) * 3.6f;
+				float sideSpeed = VehicleState::GetSideSpeed(vis) * 3.6f;
 				// Avoid flickering negative sign
 				if (sideSpeed < 0 && sideSpeed > -0.99f) {
 					sideSpeed = 0;
@@ -77,7 +77,7 @@ class DashboardSpeed : DashboardThing
 			}
 
 			case SpeedStyle::Directional: {
-				float sideSpeed = Vehicle::GetSideSpeed(vis) * 3.6f;
+				float sideSpeed = VehicleState::GetSideSpeed(vis) * 3.6f;
 				float absSpeed = Math::Sqrt(Math::Pow(sideSpeed, 2) + Math::Pow(vis.FrontSpeed * 3.6f, 2));
 
 				float textSize = (m_size.x - Setting_Speed_Padding * 2) / 2;

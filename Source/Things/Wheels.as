@@ -58,7 +58,7 @@ class DashboardWheels : DashboardThing
 				ret.m_rot = vis.FLWheelRot;
 				ret.m_slipCoef = vis.FLSlipCoef;
 #if TMNEXT
-				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
+				ret.m_dirt = VehicleState::GetWheelDirt(vis, int(type));
 				ret.m_breakCoef = vis.FLBreakNormedCoef;
 				ret.m_tireWear = vis.FLTireWear01;
 				ret.m_icing = vis.FLIcing01;
@@ -70,7 +70,7 @@ class DashboardWheels : DashboardThing
 				ret.m_rot = vis.FRWheelRot;
 				ret.m_slipCoef = vis.FRSlipCoef;
 #if TMNEXT
-				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
+				ret.m_dirt = VehicleState::GetWheelDirt(vis, int(type));
 				ret.m_breakCoef = vis.FRBreakNormedCoef;
 				ret.m_tireWear = vis.FRTireWear01;
 				ret.m_icing = vis.FRIcing01;
@@ -82,7 +82,7 @@ class DashboardWheels : DashboardThing
 				ret.m_rot = vis.RLWheelRot;
 				ret.m_slipCoef = vis.RLSlipCoef;
 #if TMNEXT
-				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
+				ret.m_dirt = VehicleState::GetWheelDirt(vis, int(type));
 				ret.m_breakCoef = vis.RLBreakNormedCoef;
 				ret.m_tireWear = vis.RLTireWear01;
 				ret.m_icing = vis.RLIcing01;
@@ -94,7 +94,7 @@ class DashboardWheels : DashboardThing
 				ret.m_rot = vis.RRWheelRot;
 				ret.m_slipCoef = vis.RRSlipCoef;
 #if TMNEXT
-				ret.m_dirt = Vehicle::GetWheelDirt(vis, int(type));
+				ret.m_dirt = VehicleState::GetWheelDirt(vis, int(type));
 				ret.m_breakCoef = vis.RRBreakNormedCoef;
 				ret.m_tireWear = vis.RRTireWear01;
 				ret.m_icing = vis.RRIcing01;

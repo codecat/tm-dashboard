@@ -255,7 +255,7 @@ float Setting_Acceleration_BarPadding = 7.5f;
 [Setting category="Acceleration" name="Text color" color]
 vec4 Setting_Acceleration_TextColor = vec4(1, 1, 1, 1);
 
-[Setting category="Acceleration" name="Font size" drag min=0 max=50]
+[Setting category="Acceleration" name="Font size" drag min=0 max=100]
 float Setting_Acceleration_FontSize = 15.0f;
 
 [Setting category="Acceleration" name="Enable smoothing"]
@@ -306,7 +306,7 @@ float Setting_Speed_Padding = 20.0f;
 [Setting category="Speed" name="Font"]
 string Setting_Speed_Font = "DroidSans.ttf";
 
-[Setting category="Speed" name="Font size" drag min=0 max=50]
+[Setting category="Speed" name="Font size" drag min=0 max=100]
 float Setting_Speed_FontSize = 24.0f;
 
 
@@ -393,5 +393,5 @@ float Setting_Wheels_DetailsSpacing = 20.0f;
 [Setting category="Wheels" name="Details font"]
 string Setting_Wheels_DetailsFont = "DroidSans.ttf";
 
-[Setting category="Wheels" name="Details font size" drag min=0 max=50]
+[Setting category="Wheels" name="Details font size" drag min=0 max=100]
 float Setting_Wheels_DetailsFontSize = 16.0f;

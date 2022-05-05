@@ -11,64 +11,49 @@ ForcePadType Setting_General_ForcePadType = ForcePadType::None;
 [Setting category="General" name="Hide during Intro sequences"]
 bool Setting_General_HideWhenNotPlaying = false;
 
-[Setting category="General" name="Show controller/pad"]
+[Setting hidden category="General" name="Show controller/pad"]
 bool Setting_General_ShowPad = true;
 
-[Setting category="General" name="Move controller/pad" description="Use this to easily move the pad position."]
-bool Setting_General_MovePad = false;
-
-[Setting category="General" name="Controller/pad position"]
+[Setting hidden category="General" name="Controller/pad position"]
 vec2 Setting_General_PadPos = vec2(0.9f, 0.1f);
 
-[Setting category="General" name="Controller/pad size"]
+[Setting hidden category="General" name="Controller/pad size"]
 vec2 Setting_General_PadSize = vec2(350, 200);
 
-[Setting category="General" name="Show gearbox"]
+[Setting hidden category="General" name="Show gearbox"]
 bool Setting_General_ShowGearbox = true;
 
-[Setting category="General" name="Move gearbox" description="Use this to easily move the gearbox position."]
-bool Setting_General_MoveGearbox = false;
-
-[Setting category="General" name="Gearbox position"]
+[Setting hidden category="General" name="Gearbox position"]
 vec2 Setting_General_GearboxPos = vec2(0.9f, 0.32f);
 
-[Setting category="General" name="Gearbox size"]
+[Setting hidden category="General" name="Gearbox size"]
 vec2 Setting_General_GearboxSize = vec2(350, 50);
 
-[Setting category="General" name="Show wheels"]
+[Setting hidden category="General" name="Show wheels"]
 bool Setting_General_ShowWheels = false;
 
-[Setting category="General" name="Move wheels" description="Use this to easily move the pad position."]
-bool Setting_General_MoveWheels = false;
-
-[Setting category="General" name="Wheels position"]
+[Setting hidden category="General" name="Wheels position"]
 vec2 Setting_General_WheelsPos = vec2(0.909f, 0.9f);
 
-[Setting category="General" name="Wheels size"]
+[Setting hidden category="General" name="Wheels size"]
 vec2 Setting_General_WheelsSize = vec2(230, 370);
 
-[Setting category="General" name="Show acceleration"]
+[Setting hidden category="General" name="Show acceleration"]
 bool Setting_General_ShowAcceleration = false;
 
-[Setting category="General" name="Move acceleration" description="Use this to easily move the acceleration position."]
-bool Setting_General_MoveAcceleration = false;
-
-[Setting category="General" name="Acceleration position"]
+[Setting hidden category="General" name="Acceleration position"]
 vec2 Setting_General_AccelerationPos = vec2(0.720f, 0.120f);
 
-[Setting category="General" name="Acceleration size"]
+[Setting hidden category="General" name="Acceleration size"]
 vec2 Setting_General_AccelerationSize = vec2(50, 350);
 
-[Setting category="General" name="Show speed"]
+[Setting hidden category="General" name="Show speed"]
 bool Setting_General_ShowSpeed = true;
 
-[Setting category="General" name="Move speed" description="Use this to easily move the speed position."]
-bool Setting_General_MoveSpeed = false;
-
-[Setting category="General" name="Speed position"]
+[Setting hidden category="General" name="Speed position"]
 vec2 Setting_General_SpeedPos = vec2(0.909f, 0.4f);
 
-[Setting category="General" name="Speed size"]
+[Setting hidden category="General" name="Speed size"]
 vec2 Setting_General_SpeedSize = vec2(230, 50);
 
 

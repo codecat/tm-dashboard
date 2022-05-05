@@ -25,39 +25,6 @@ void Render()
 	}
 }
 
-void RenderInterface()
-{
-	if (Setting_General_MovePad) {
-		Locator::Render("Controller/pad", Setting_General_PadPos, Setting_General_PadSize);
-		Setting_General_PadPos = Locator::GetPos();
-		Setting_General_PadSize = Locator::GetSize();
-	}
-
-	if (Setting_General_MoveGearbox) {
-		Locator::Render("Gearbox", Setting_General_GearboxPos, Setting_General_GearboxSize);
-		Setting_General_GearboxPos = Locator::GetPos();
-		Setting_General_GearboxSize = Locator::GetSize();
-	}
-
-	if (Setting_General_MoveWheels) {
-		Locator::Render("Overview", Setting_General_WheelsPos, Setting_General_WheelsSize);
-		Setting_General_WheelsPos = Locator::GetPos();
-		Setting_General_WheelsSize = Locator::GetSize();
-	}
-
-	if (Setting_General_MoveAcceleration) {
-		Locator::Render("Acceleration", Setting_General_AccelerationPos, Setting_General_AccelerationSize);
-		Setting_General_AccelerationPos = Locator::GetPos();
-		Setting_General_AccelerationSize = Locator::GetSize();
-	}
-
-	if (Setting_General_MoveSpeed) {
-		Locator::Render("Speed", Setting_General_SpeedPos, Setting_General_SpeedSize);
-		Setting_General_SpeedPos = Locator::GetPos();
-		Setting_General_SpeedSize = Locator::GetSize();
-	}
-}
-
 void Update(float dt)
 {
 	// We need to save this for the Accelerometer:

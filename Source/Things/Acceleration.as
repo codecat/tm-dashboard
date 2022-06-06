@@ -5,7 +5,7 @@ class DashboardAcceleration : DashboardThing
 	array<float> acc = {0, 0, 0, 0};
 	int idx = 0;
 
-	Resources::Font@ m_font;
+	nvg::Font m_font;
 	string m_fontPath;
 
 	DashboardAcceleration()
@@ -19,10 +19,10 @@ class DashboardAcceleration : DashboardThing
 			return;
 		}
 
-		auto font = Resources::GetFont(Setting_Acceleration_Font);
-		if (font !is null) {
+		auto font = nvg::LoadFont(Setting_Acceleration_Font);
+		if (font > 0) {
 			m_fontPath = Setting_Acceleration_Font;
-			@m_font = font;
+			m_font = font;
 		}
 	}
 

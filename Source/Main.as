@@ -2,9 +2,8 @@ bool g_visible = true;
 float g_dt = 0;
 Dashboard@ g_dashboard;
 
-Resources::Font@ g_font;
-Resources::Font@ g_fontBold;
-Resources::Font@ g_fontIcons;
+nvg::Font g_font;
+nvg::Font g_fontBold;
 
 void RenderMenu()
 {
@@ -42,17 +41,8 @@ void Main()
 {
 	auto app = GetApp();
 
-	@g_font = Resources::GetFont("DroidSans.ttf");
-	@g_fontBold = Resources::GetFont("DroidSans-Bold.ttf");
-	@g_fontIcons = Resources::GetFont("ManiaIcons.ttf");
-
-	// On older versions of Openplanet, ManiaIcons.ttf doesn't exist.
-	if (g_fontIcons is null) {
-		@g_fontIcons = Resources::GetFont("forkawesome.ttf");
-	}
-
-	nvg::AddFallbackFont(g_font, g_fontIcons);
-	nvg::AddFallbackFont(g_fontBold, g_fontIcons);
+	g_font = nvg::LoadFont("DroidSans.ttf", true);
+	g_fontBold = nvg::LoadFont("DroidSans-Bold.ttf", true);
 
 	@g_dashboard = Dashboard();
 

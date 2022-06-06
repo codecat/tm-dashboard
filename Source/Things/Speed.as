@@ -1,6 +1,6 @@
 class DashboardSpeed : DashboardThing
 {
-	Resources::Font@ m_font;
+	nvg::Font m_font;
 	string m_fontPath;
 
 	DashboardSpeed()
@@ -14,11 +14,10 @@ class DashboardSpeed : DashboardThing
 			return;
 		}
 
-		auto font = Resources::GetFont(Setting_Speed_Font);
-		if (font !is null) {
+		auto font = nvg::LoadFont(Setting_Speed_Font, true);
+		if (font > 0) {
 			m_fontPath = Setting_Speed_Font;
-			@m_font = font;
-			nvg::AddFallbackFont(m_font, g_fontIcons);
+			m_font = font;
 		}
 	}
 

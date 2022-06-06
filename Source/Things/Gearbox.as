@@ -3,7 +3,7 @@ class DashboardGearbox : DashboardThing
 	float m_minRpm = 200.0f; // Minimal RPM to avoid flickering at engine idle
 	float m_maxRpm = 11000.0f;
 
-	Resources::Font@ m_font;
+	nvg::Font m_font;
 	string m_fontPath;
 
 	DashboardGearbox()
@@ -17,10 +17,10 @@ class DashboardGearbox : DashboardThing
 			return;
 		}
 
-		auto font = Resources::GetFont(Setting_Gearbox_Font);
-		if (font !is null) {
+		auto font = nvg::LoadFont(Setting_Gearbox_Font);
+		if (font > 0) {
 			m_fontPath = Setting_Gearbox_Font;
-			@m_font = font;
+			m_font = font;
 		}
 	}
 

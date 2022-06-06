@@ -21,7 +21,7 @@ class WheelState
 
 class DashboardWheels : DashboardThing
 {
-	Resources::Font@ m_font;
+	nvg::Font m_font;
 	string m_fontPath;
 
 	DashboardWheels()
@@ -35,11 +35,10 @@ class DashboardWheels : DashboardThing
 			return;
 		}
 
-		auto font = Resources::GetFont(Setting_Wheels_DetailsFont);
-		if (font !is null) {
+		auto font = nvg::LoadFont(Setting_Wheels_DetailsFont, true);
+		if (font > 0) {
 			m_fontPath = Setting_Wheels_DetailsFont;
-			@m_font = font;
-			nvg::AddFallbackFont(m_font, g_fontIcons);
+			m_font = font;
 		}
 	}
 

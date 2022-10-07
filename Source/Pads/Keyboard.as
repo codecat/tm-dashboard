@@ -1,16 +1,11 @@
-class DashboardPadKeyboard : DashboardThing
+class DashboardPadKeyboard : IDashboardPad
 {
-	DashboardPadKeyboard()
-	{
-		super();
-	}
-
-	void Render(CSceneVehicleVisState@ vis) override
+	void Render(const vec2 &in size, CSceneVehicleVisState@ vis) override
 	{
 		float steerLeft = vis.InputSteer < 0 ? Math::Abs(vis.InputSteer) : 0.0f;
 		float steerRight = vis.InputSteer > 0 ? vis.InputSteer : 0.0f;
 
-		vec2 keySize = vec2((m_size.x - Setting_Keyboard_Spacing * 2) / 3, (m_size.y - Setting_Keyboard_Spacing) / 2);
+		vec2 keySize = vec2((size.x - Setting_Keyboard_Spacing * 2) / 3, (size.y - Setting_Keyboard_Spacing) / 2);
 		vec2 sideKeySize = keySize;
 
 		vec2 upPos = vec2(keySize.x + Setting_Keyboard_Spacing, 0);
@@ -19,7 +14,7 @@ class DashboardPadKeyboard : DashboardThing
 		vec2 rightPos = vec2(keySize.x * 2 + Setting_Keyboard_Spacing * 2, keySize.y + Setting_Keyboard_Spacing);
 
 		if (Setting_Keyboard_Shape == KeyboardShape::Compact) {
-			sideKeySize.y = m_size.y;
+			sideKeySize.y = size.y;
 			leftPos.y = 0;
 			rightPos.y = 0;
 		}

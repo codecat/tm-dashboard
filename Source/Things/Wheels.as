@@ -26,7 +26,27 @@ class DashboardWheels : DashboardThing
 
 	DashboardWheels()
 	{
+		super("Wheels");
 		LoadFont();
+	}
+
+	bool IsVisible(bool whenHidden) override { return whenHidden ? Setting_General_ShowWheelsHidden : Setting_General_ShowWheels; }
+	void SetVisible(bool visible, bool visibleWhenHidden) override
+	{
+		Setting_General_ShowWheels = visible;
+		Setting_General_ShowWheelsHidden = visibleWhenHidden;
+	}
+
+	void UpdateProportions() override
+	{
+		m_pos = Setting_General_WheelsPos;
+		m_size = Setting_General_WheelsSize;
+	}
+
+	void SetProportions(const vec2 &in pos, const vec2 &in size) override
+	{
+		Setting_General_WheelsPos = pos;
+		Setting_General_WheelsSize = size;
 	}
 
 	void LoadFont()

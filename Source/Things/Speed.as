@@ -5,7 +5,27 @@ class DashboardSpeed : DashboardThing
 
 	DashboardSpeed()
 	{
+		super("Speed");
 		LoadFont();
+	}
+
+	bool IsVisible(bool whenHidden) override { return whenHidden ? Setting_General_ShowSpeedHidden : Setting_General_ShowSpeed; }
+	void SetVisible(bool visible, bool visibleWhenHidden) override
+	{
+		Setting_General_ShowSpeed = visible;
+		Setting_General_ShowSpeedHidden = visibleWhenHidden;
+	}
+
+	void UpdateProportions() override
+	{
+		m_pos = Setting_General_SpeedPos;
+		m_size = Setting_General_SpeedSize;
+	}
+
+	void SetProportions(const vec2 &in pos, const vec2 &in size) override
+	{
+		Setting_General_SpeedPos = pos;
+		Setting_General_SpeedSize = size;
 	}
 
 	void LoadFont()

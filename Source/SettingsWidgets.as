@@ -21,40 +21,24 @@ void RenderSettingsWidgets()
 			UI::TableSetupColumn("Hidden UI", UI::TableColumnFlags::WidthFixed, 100);
 			UI::TableHeadersRow();
 
-			UI::TableNextColumn();
-			UI::Text("Controller/pad");
-			UI::TableNextColumn();
-			Setting_General_ShowPad = UI::Checkbox("##ControllerPad-Visible", Setting_General_ShowPad);
-			UI::TableNextColumn();
-			Setting_General_ShowPadHidden = UI::Checkbox("##ControllerPad-Hidden", Setting_General_ShowPadHidden);
+			for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
+				auto thing = g_dashboard.m_things[i];
 
-			UI::TableNextColumn();
-			UI::Text("Gearbox");
-			UI::TableNextColumn();
-			Setting_General_ShowGearbox = UI::Checkbox("##Gearbox-Visible", Setting_General_ShowGearbox);
-			UI::TableNextColumn();
-			Setting_General_ShowGearboxHidden = UI::Checkbox("##Gearbox-Hidden", Setting_General_ShowGearboxHidden);
+				UI::PushID(thing);
 
-			UI::TableNextColumn();
-			UI::Text("Wheels");
-			UI::TableNextColumn();
-			Setting_General_ShowWheels = UI::Checkbox("##Wheels-Visible", Setting_General_ShowWheels);
-			UI::TableNextColumn();
-			Setting_General_ShowWheelsHidden = UI::Checkbox("##Wheels-Hidden", Setting_General_ShowWheelsHidden);
+				UI::TableNextColumn();
+				UI::Text(thing.m_name);
 
-			UI::TableNextColumn();
-			UI::Text("Acceleration");
-			UI::TableNextColumn();
-			Setting_General_ShowAcceleration = UI::Checkbox("##Acceleration-Visible", Setting_General_ShowAcceleration);
-			UI::TableNextColumn();
-			Setting_General_ShowAccelerationHidden = UI::Checkbox("##Acceleration-Hidden", Setting_General_ShowAccelerationHidden);
+				UI::TableNextColumn();
+				bool whenVisible = UI::Checkbox("##WhenVisible", thing.IsVisible(false));
 
-			UI::TableNextColumn();
-			UI::Text("Speed");
-			UI::TableNextColumn();
-			Setting_General_ShowSpeed = UI::Checkbox("##Speed-Visible", Setting_General_ShowSpeed);
-			UI::TableNextColumn();
-			Setting_General_ShowSpeedHidden = UI::Checkbox("##Speed-Hidden", Setting_General_ShowSpeedHidden);
+				UI::TableNextColumn();
+				bool whenHidden = UI::Checkbox("##WhenHidden", thing.IsVisible(true));
+
+				thing.SetVisible(whenVisible, whenHidden);
+
+				UI::PopID();
+			}
 
 			UI::EndTable();
 		}
@@ -63,51 +47,36 @@ void RenderSettingsWidgets()
 		UI::TextWrapped("In the above table, select which widgets you want to display when the game UI is visible, and when the game UI is hidden. Note that this requires the option \"Hide overlay on hidden game UI\" under \"General\" to be disabled!");
 
 	} else {
-		Setting_General_ShowPadHidden = Setting_General_ShowPad = UI::Checkbox("Controller/pad", Setting_General_ShowPad);
-		Setting_General_ShowGearboxHidden = Setting_General_ShowGearbox = UI::Checkbox("Gearbox", Setting_General_ShowGearbox);
-		Setting_General_ShowWheelsHidden = Setting_General_ShowWheels = UI::Checkbox("Wheels", Setting_General_ShowWheels);
-		Setting_General_ShowAccelerationHidden = Setting_General_ShowAcceleration = UI::Checkbox("Acceleration", Setting_General_ShowAcceleration);
-		Setting_General_ShowSpeedHidden = Setting_General_ShowSpeed = UI::Checkbox("Speed", Setting_General_ShowSpeed);
+		for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
+			auto thing = g_dashboard.m_things[i];
+			bool visible = UI::Checkbox(thing.m_name, thing.IsVisible(false));
+		}
 	}
 }
 
 void RenderInterface()
 {
 	if (g_settingsMove) {
-		bool visiblePad          = UI::IsGameUIVisible() ? Setting_General_ShowPad          : Setting_General_ShowPadHidden;
-		bool visibleGearbox      = UI::IsGameUIVisible() ? Setting_General_ShowGearbox      : Setting_General_ShowGearboxHidden;
-		bool visibleWheels       = UI::IsGameUIVisible() ? Setting_General_ShowWheels       : Setting_General_ShowWheelsHidden;
-		bool visibleAcceleration = UI::IsGameUIVisible() ? Setting_General_ShowAcceleration : Setting_General_ShowAccelerationHidden;
-		bool visibleSpeed        = UI::IsGameUIVisible() ? Setting_General_ShowSpeed        : Setting_General_ShowSpeedHidden;
+		bool gameUIVisible = UI::IsGameUIVisible();
 
-		if (visiblePad) {
-			Locator::Render("Controller/pad", Setting_General_PadPos, Setting_General_PadSize);
-			Setting_General_PadPos = Locator::GetPos();
-			Setting_General_PadSize = Locator::GetSize();
-		}
+		for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
+			auto thing = g_dashboard.m_things[i];
+			if (thing.IsVisible(!gameUIVisible)) {
+				thing.UpdateProportions();
 
-		if (visibleGearbox) {
-			Locator::Render("Gearbox", Setting_General_GearboxPos, Setting_General_GearboxSize);
-			Setting_General_GearboxPos = Locator::GetPos();
-			Setting_General_GearboxSize = Locator::GetSize();
-		}
+				vec2 screenSize = vec2(Draw::GetWidth(), Draw::GetHeight());
+				vec2 pos = thing.m_pos * (screenSize - thing.m_size);
 
-		if (visibleWheels) {
-			Locator::Render("Wheels", Setting_General_WheelsPos, Setting_General_WheelsSize);
-			Setting_General_WheelsPos = Locator::GetPos();
-			Setting_General_WheelsSize = Locator::GetSize();
-		}
+				UI::SetNextWindowSize(int(thing.m_size.x), int(thing.m_size.y), UI::Cond::Appearing);
+				UI::SetNextWindowPos(int(pos.x), int(pos.y), UI::Cond::Appearing);
 
-		if (visibleAcceleration) {
-			Locator::Render("Acceleration", Setting_General_AccelerationPos, Setting_General_AccelerationSize);
-			Setting_General_AccelerationPos = Locator::GetPos();
-			Setting_General_AccelerationSize = Locator::GetSize();
-		}
+				UI::Begin(Icons::ArrowsAlt + " " + thing.m_name, UI::WindowFlags::NoCollapse | UI::WindowFlags::NoSavedSettings);
+				thing.m_size = UI::GetWindowSize();
+				thing.m_pos = UI::GetWindowPos() / (screenSize - thing.m_size);
+				UI::End();
 
-		if (visibleSpeed) {
-			Locator::Render("Speed", Setting_General_SpeedPos, Setting_General_SpeedSize);
-			Setting_General_SpeedPos = Locator::GetPos();
-			Setting_General_SpeedSize = Locator::GetSize();
+				thing.SetProportions(thing.m_pos, thing.m_size);
+			}
 		}
 	}
 

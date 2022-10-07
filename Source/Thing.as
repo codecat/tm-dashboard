@@ -1,7 +1,14 @@
 class DashboardThing
 {
+	string m_name;
+
 	vec2 m_pos;
 	vec2 m_size;
+
+	DashboardThing(const string &in name)
+	{
+		m_name = name;
+	}
 
 	void InternalRender(CSceneVehicleVisState@ vis)
 	{
@@ -13,5 +20,13 @@ class DashboardThing
 	}
 
 	void OnSettingsChanged() {}
-	void Render(CSceneVehicleVisState@ vis) {}
+	void UpdateAsync() {}
+
+	bool IsVisible(bool whenHidden) { throw("IsVisible is not implemented!"); return false; }
+	void SetVisible(bool visible, bool visibleWhenHidden) { throw("SetVisible is not implemented!"); }
+
+	void UpdateProportions() { throw("UpdateProportions is not implemented!"); }
+	void SetProportions(const vec2 &in pos, const vec2 &in size) { throw("SetProportions is not implemented!"); }
+
+	void Render(CSceneVehicleVisState@ vis) { throw("Render is not implemented!"); }
 }

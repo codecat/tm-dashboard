@@ -10,7 +10,27 @@ class DashboardAcceleration : DashboardThing
 
 	DashboardAcceleration()
 	{
+		super("Acceleration");
 		LoadFont();
+	}
+
+	bool IsVisible(bool whenHidden) override { return whenHidden ? Setting_General_ShowAccelerationHidden : Setting_General_ShowAcceleration; }
+	void SetVisible(bool visible, bool visibleWhenHidden) override
+	{
+		Setting_General_ShowAcceleration = visible;
+		Setting_General_ShowAccelerationHidden = visibleWhenHidden;
+	}
+
+	void UpdateProportions() override
+	{
+		m_pos = Setting_General_AccelerationPos;
+		m_size = Setting_General_AccelerationSize;
+	}
+
+	void SetProportions(const vec2 &in pos, const vec2 &in size) override
+	{
+		Setting_General_AccelerationPos = pos;
+		Setting_General_AccelerationSize = size;
 	}
 
 	void LoadFont()

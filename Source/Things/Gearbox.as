@@ -8,7 +8,27 @@ class DashboardGearbox : DashboardThing
 
 	DashboardGearbox()
 	{
+		super("Gearbox");
 		LoadFont();
+	}
+
+	bool IsVisible(bool whenHidden) override { return whenHidden ? Setting_General_ShowGearboxHidden : Setting_General_ShowGearbox; }
+	void SetVisible(bool visible, bool visibleWhenHidden) override
+	{
+		Setting_General_ShowGearbox = visible;
+		Setting_General_ShowGearboxHidden = visibleWhenHidden;
+	}
+
+	void UpdateProportions() override
+	{
+		m_pos = Setting_General_GearboxPos;
+		m_size = Setting_General_GearboxSize;
+	}
+
+	void SetProportions(const vec2 &in pos, const vec2 &in size) override
+	{
+		Setting_General_GearboxPos = pos;
+		Setting_General_GearboxSize = size;
 	}
 
 	void LoadFont()

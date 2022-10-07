@@ -108,6 +108,27 @@ class DashboardPadGamepad : DashboardThing
 			nvg::TextBox(midX, topSize / 2, midSize, Icons::AngleUp);
 			nvg::TextBox(midX, bottomY + bottomSize / 2, midSize, Icons::AngleDown);
 		}
+
+		// Steering percentage
+		if (Setting_Gamepad_SteerPercentage) {
+			nvg::FontFace(g_font);
+			nvg::FontSize(Setting_Gamepad_SteerPercentageSize);
+			nvg::FillColor(strokeColor);
+
+			// Left
+			if (steerLeft > 0) {
+				nvg::BeginPath();
+				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Right);
+				nvg::TextBox(0, m_size.y / 2, leftSize - Setting_Gamepad_Spacing, tostring(Math::Round(steerLeft * 100)) + "%");
+			}
+
+			// Right
+			if (steerRight > 0) {
+				nvg::BeginPath();
+				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
+				nvg::TextBox(rightX + Setting_Gamepad_Spacing, m_size.y / 2, rightSize, tostring(Math::Round(steerRight * 100)) + "%");
+			}
+		}
 	}
 
 	void RenderClassic(CSceneVehicleVisState@ vis)

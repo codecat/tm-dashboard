@@ -104,6 +104,12 @@ bool Setting_Gamepad_UpDownSymbols = true;
 [Setting category="Gamepad" name="Cateye use simple steer"]
 bool Setting_Gamepad_CateyeUseSimpleSteer = false;
 
+[Setting category="Gamepad" name="Display steer percentage"]
+bool Setting_Gamepad_SteerPercentage = false;
+
+[Setting category="Gamepad" name="Steer percentage size" drag min=2 max=40]
+int Setting_Gamepad_SteerPercentageSize = 16;
+
 
 
 enum KeyboardShape

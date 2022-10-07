@@ -11,49 +11,49 @@ ForcePadType Setting_General_ForcePadType = ForcePadType::None;
 [Setting category="General" name="Hide during Intro sequences"]
 bool Setting_General_HideWhenNotPlaying = false;
 
-[Setting hidden category="General" name="Show controller/pad"]
+[Setting hidden]
 bool Setting_General_ShowPad = true;
-
-[Setting hidden category="General" name="Controller/pad position"]
+[Setting hidden]
+bool Setting_General_ShowPadHidden = true;
+[Setting hidden]
 vec2 Setting_General_PadPos = vec2(0.9f, 0.1f);
-
-[Setting hidden category="General" name="Controller/pad size"]
+[Setting hidden]
 vec2 Setting_General_PadSize = vec2(350, 200);
 
-[Setting hidden category="General" name="Show gearbox"]
+[Setting hidden]
 bool Setting_General_ShowGearbox = true;
-
-[Setting hidden category="General" name="Gearbox position"]
+[Setting hidden]
+bool Setting_General_ShowGearboxHidden = true;
+[Setting hidden]
 vec2 Setting_General_GearboxPos = vec2(0.9f, 0.32f);
-
-[Setting hidden category="General" name="Gearbox size"]
+[Setting hidden]
 vec2 Setting_General_GearboxSize = vec2(350, 50);
 
-[Setting hidden category="General" name="Show wheels"]
+[Setting hidden]
 bool Setting_General_ShowWheels = false;
-
-[Setting hidden category="General" name="Wheels position"]
+[Setting hidden]
+bool Setting_General_ShowWheelsHidden = false;
+[Setting hidden]
 vec2 Setting_General_WheelsPos = vec2(0.909f, 0.9f);
-
-[Setting hidden category="General" name="Wheels size"]
+[Setting hidden]
 vec2 Setting_General_WheelsSize = vec2(230, 370);
 
-[Setting hidden category="General" name="Show acceleration"]
+[Setting hidden]
 bool Setting_General_ShowAcceleration = false;
-
-[Setting hidden category="General" name="Acceleration position"]
+[Setting hidden]
+bool Setting_General_ShowAccelerationHidden = false;
+[Setting hidden]
 vec2 Setting_General_AccelerationPos = vec2(0.720f, 0.120f);
-
-[Setting hidden category="General" name="Acceleration size"]
+[Setting hidden]
 vec2 Setting_General_AccelerationSize = vec2(50, 350);
 
-[Setting hidden category="General" name="Show speed"]
+[Setting hidden]
 bool Setting_General_ShowSpeed = true;
-
-[Setting hidden category="General" name="Speed position"]
+[Setting hidden]
+bool Setting_General_ShowSpeedHidden = true;
+[Setting hidden]
 vec2 Setting_General_SpeedPos = vec2(0.909f, 0.4f);
-
-[Setting hidden category="General" name="Speed size"]
+[Setting hidden]
 vec2 Setting_General_SpeedSize = vec2(230, 50);
 
 

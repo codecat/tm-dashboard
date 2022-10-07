@@ -69,31 +69,37 @@ class Dashboard
 			return;
 		}
 
-		if (Setting_General_ShowPad && m_pad !is null) {
+		bool visiblePad          = UI::IsGameUIVisible() ? Setting_General_ShowPad          : Setting_General_ShowPadHidden;
+		bool visibleGearbox      = UI::IsGameUIVisible() ? Setting_General_ShowGearbox      : Setting_General_ShowGearboxHidden;
+		bool visibleWheels       = UI::IsGameUIVisible() ? Setting_General_ShowWheels       : Setting_General_ShowWheelsHidden;
+		bool visibleAcceleration = UI::IsGameUIVisible() ? Setting_General_ShowAcceleration : Setting_General_ShowAccelerationHidden;
+		bool visibleSpeed        = UI::IsGameUIVisible() ? Setting_General_ShowSpeed        : Setting_General_ShowSpeedHidden;
+
+		if (visiblePad && m_pad !is null) {
 			m_pad.m_pos = Setting_General_PadPos;
 			m_pad.m_size = Setting_General_PadSize;
 			m_pad.InternalRender(visState);
 		}
 
-		if (Setting_General_ShowGearbox) {
+		if (visibleGearbox) {
 			m_gearbox.m_pos = Setting_General_GearboxPos;
 			m_gearbox.m_size = Setting_General_GearboxSize;
 			m_gearbox.InternalRender(visState);
 		}
 
-		if (Setting_General_ShowWheels) {
+		if (visibleWheels) {
 			m_wheels.m_pos = Setting_General_WheelsPos;
 			m_wheels.m_size = Setting_General_WheelsSize;
 			m_wheels.InternalRender(visState);
 		}
 
-		if (Setting_General_ShowAcceleration) {
+		if (visibleAcceleration) {
 			m_acc.m_pos = Setting_General_AccelerationPos;
 			m_acc.m_size = Setting_General_AccelerationSize;
 			m_acc.InternalRender(visState);
 		}
 
-		if (Setting_General_ShowSpeed) {
+		if (visibleSpeed) {
 			m_speed.m_pos = Setting_General_SpeedPos;
 			m_speed.m_size = Setting_General_SpeedSize;
 			m_speed.InternalRender(visState);

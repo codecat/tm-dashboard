@@ -1,6 +1,6 @@
 bool g_settingsMove = false;
 
-[SettingsTab name="Widgets"]
+[SettingsTab name="Widgets" icon="ArrowsAlt"]
 void RenderSettingsWidgets()
 {
 	g_settingsMove = true;

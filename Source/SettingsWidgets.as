@@ -50,6 +50,7 @@ void RenderSettingsWidgets()
 		for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
 			auto thing = g_dashboard.m_things[i];
 			bool visible = UI::Checkbox(thing.m_name, thing.IsVisible(false));
+			thing.SetVisible(visible, visible);
 		}
 	}
 }

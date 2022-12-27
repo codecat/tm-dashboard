@@ -200,6 +200,24 @@ vec4 Setting_Gearbox_TextColor = vec4(1, 1, 1, 1);
 [Setting category="Gearbox" name="Font"]
 string Setting_Gearbox_Font = "DroidSans.ttf";
 
+[Setting category="Gearbox" name="Use gear colors"]
+bool Setting_Gearbox_UseGearColors = false;
+
+[Setting category="Gearbox" name="Gear 1 color" color]
+vec4 Setting_Gearbox_Gear1Color = vec4(1, 1, 1, 1);
+
+[Setting category="Gearbox" name="Gear 2 color" color]
+vec4 Setting_Gearbox_Gear2Color = vec4(1, 1, 1, 1);
+
+[Setting category="Gearbox" name="Gear 3 color" color]
+vec4 Setting_Gearbox_Gear3Color = vec4(1, 1, 1, 1);
+
+[Setting category="Gearbox" name="Gear 4 color" color]
+vec4 Setting_Gearbox_Gear4Color = vec4(1, 1, 1, 1);
+
+[Setting category="Gearbox" name="Gear 5 color" color]
+vec4 Setting_Gearbox_Gear5Color = vec4(1, 1, 1, 1);
+
 
 enum AccelerationUnit
 {

@@ -221,6 +221,21 @@ vec4 Setting_Gearbox_Gear4Color = vec4(1, 1, 1, 1);
 [Setting category="Gearbox" name="Gear 5 color" color]
 vec4 Setting_Gearbox_Gear5Color = vec4(1, 1, 1, 1);
 
+#if MP4 || TURBO
+	[Setting category="Gearbox" name="Gear 6 color" color]
+	vec4 Setting_Gearbox_Gear6Color = vec4(1, 1, 1, 1);
+
+	[Setting category="Gearbox" name="Gear 7 color" color]
+	vec4 Setting_Gearbox_Gear7Color = vec4(1, 1, 1, 1);
+#endif
+
+#if TURBO
+	[Setting category="Gearbox" name="Gear 8 color" color]
+	vec4 Setting_Gearbox_Gear8Color = vec4(1, 1, 1, 1);
+
+	[Setting category="Gearbox" name="Gear 9 color" color]
+	vec4 Setting_Gearbox_Gear9Color = vec4(1, 1, 1, 1);
+#endif
 
 enum AccelerationUnit
 {

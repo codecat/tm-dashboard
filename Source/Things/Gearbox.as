@@ -71,6 +71,14 @@ class DashboardGearbox : DashboardThing
 				case 3: textColor = Setting_Gearbox_Gear3Color; break;
 				case 4: textColor = Setting_Gearbox_Gear4Color; break;
 				case 5: textColor = Setting_Gearbox_Gear5Color; break;
+				#if TM4 || TURBO
+					case 6: textColor = Setting_Gearbox_Gear6Color; break;
+					case 7: textColor = Setting_Gearbox_Gear7Color; break;
+				#endif
+				#if TURBO
+					case 8: textColor = Setting_Gearbox_Gear8Color; break;
+					case 9: textColor = Setting_Gearbox_Gear9Color; break;
+				#endif
 			}
 		}
 		nvg::FontFace(m_font);

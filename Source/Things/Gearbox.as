@@ -65,6 +65,7 @@ class DashboardGearbox : DashboardThing
 		if (Setting_Gearbox_UseGearColors) {
 
 			switch (gear) {
+				case 0: textColor = Setting_Gearbox_Gear0Color; break;
 				case 1: textColor = Setting_Gearbox_Gear1Color; break;
 				case 2: textColor = Setting_Gearbox_Gear2Color; break;
 				case 3: textColor = Setting_Gearbox_Gear3Color; break;

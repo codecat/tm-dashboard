@@ -203,6 +203,9 @@ string Setting_Gearbox_Font = "DroidSans.ttf";
 [Setting category="Gearbox" name="Use gear colors"]
 bool Setting_Gearbox_UseGearColors = false;
 
+[Setting category="Gearbox" name="Gear 0 (backwards) color" color]
+vec4 Setting_Gearbox_Gear0Color = vec4(1, 1, 1, 1);
+
 [Setting category="Gearbox" name="Gear 1 color" color]
 vec4 Setting_Gearbox_Gear1Color = vec4(1, 1, 1, 1);
 

@@ -61,8 +61,28 @@ class DashboardGearbox : DashboardThing
 		nvg::Fill();
 		nvg::Stroke();
 
+		vec4 textColor = Setting_Gearbox_TextColor;
+		if (Setting_Gearbox_UseGearColors) {
+
+			switch (gear) {
+				case 0: textColor = Setting_Gearbox_Gear0Color; break;
+				case 1: textColor = Setting_Gearbox_Gear1Color; break;
+				case 2: textColor = Setting_Gearbox_Gear2Color; break;
+				case 3: textColor = Setting_Gearbox_Gear3Color; break;
+				case 4: textColor = Setting_Gearbox_Gear4Color; break;
+				case 5: textColor = Setting_Gearbox_Gear5Color; break;
+				#if TM4 || TURBO
+					case 6: textColor = Setting_Gearbox_Gear6Color; break;
+					case 7: textColor = Setting_Gearbox_Gear7Color; break;
+				#endif
+				#if TURBO
+					case 8: textColor = Setting_Gearbox_Gear8Color; break;
+					case 9: textColor = Setting_Gearbox_Gear9Color; break;
+				#endif
+			}
+		}
 		nvg::FontFace(m_font);
-		nvg::FillColor(Setting_Gearbox_TextColor);
+		nvg::FillColor(textColor);
 		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 
 		float gearY = 0.37f;

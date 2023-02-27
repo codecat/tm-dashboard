@@ -42,8 +42,6 @@ void RenderSettingsWidgets()
 				thing.m_size = UI::InputFloat2("##Size", thing.m_size);
 				UI::PopItemWidth();
 
-				thing.SetProportions(thing.m_pos, thing.m_size);
-
 				UI::TableNextColumn();
 				bool whenVisible = UI::Checkbox("##WhenVisible", thing.IsVisible(false));
 
@@ -51,6 +49,7 @@ void RenderSettingsWidgets()
 				bool whenHidden = UI::Checkbox("##WhenHidden", thing.IsVisible(true));
 
 				thing.SetVisible(whenVisible, whenHidden);
+				thing.SetProportions(thing.m_pos, thing.m_size);
 
 				UI::PopID();
 			}

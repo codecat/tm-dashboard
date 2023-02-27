@@ -8,6 +8,7 @@ class DashboardThing
 	DashboardThing(const string &in name)
 	{
 		m_name = name;
+		UpdateProportions();
 	}
 
 	void InternalRender(CSceneVehicleVisState@ vis)

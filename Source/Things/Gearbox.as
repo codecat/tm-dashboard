@@ -31,6 +31,13 @@ class DashboardGearbox : DashboardThing
 		Setting_General_GearboxSize = size;
 	}
 
+	void ResetProportions() override
+	{
+		auto plugin = Meta::ExecutingPlugin();
+		plugin.GetSetting("Setting_General_GearboxPos").Reset();
+		plugin.GetSetting("Setting_General_GearboxSize").Reset();
+	}
+
 	void LoadFont()
 	{
 		if (Setting_Gearbox_Font == m_fontPath) {

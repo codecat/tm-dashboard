@@ -49,6 +49,13 @@ class DashboardWheels : DashboardThing
 		Setting_General_WheelsSize = size;
 	}
 
+	void ResetProportions() override
+	{
+		auto plugin = Meta::ExecutingPlugin();
+		plugin.GetSetting("Setting_General_WheelsPos").Reset();
+		plugin.GetSetting("Setting_General_WheelsSize").Reset();
+	}
+
 	void LoadFont()
 	{
 		if (Setting_Wheels_DetailsFont == m_fontPath) {

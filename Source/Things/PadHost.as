@@ -33,6 +33,13 @@ class DashboardPadHost : DashboardThing
 		Setting_General_PadSize = size;
 	}
 
+	void ResetProportions() override
+	{
+		auto plugin = Meta::ExecutingPlugin();
+		plugin.GetSetting("Setting_General_PadPos").Reset();
+		plugin.GetSetting("Setting_General_PadSize").Reset();
+	}
+
 	void Render(CSceneVehicleVisState@ vis) override
 	{
 		if (m_pad !is null) {

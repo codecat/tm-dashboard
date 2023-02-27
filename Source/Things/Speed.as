@@ -28,6 +28,13 @@ class DashboardSpeed : DashboardThing
 		Setting_General_SpeedSize = size;
 	}
 
+	void ResetProportions() override
+	{
+		auto plugin = Meta::ExecutingPlugin();
+		plugin.GetSetting("Setting_General_SpeedPos").Reset();
+		plugin.GetSetting("Setting_General_SpeedSize").Reset();
+	}
+
 	void LoadFont()
 	{
 		if (Setting_Speed_Font == m_fontPath) {

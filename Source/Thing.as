@@ -27,6 +27,7 @@ class DashboardThing
 
 	void UpdateProportions() { throw("UpdateProportions is not implemented!"); }
 	void SetProportions(const vec2 &in pos, const vec2 &in size) { throw("SetProportions is not implemented!"); }
+	void ResetProportions() { throw("ResetProportions is not implemented!"); }
 
 	void Render(CSceneVehicleVisState@ vis) { throw("Render is not implemented!"); }
 }

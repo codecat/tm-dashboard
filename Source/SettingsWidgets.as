@@ -1,4 +1,5 @@
 bool g_settingsMove = false;
+UI::Cond g_settingsMoveCond = UI::Cond::Appearing;
 
 [Setting hidden]
 bool Setting_AdvancedWidgetSettings = false;
@@ -15,10 +16,12 @@ void RenderSettingsWidgets()
 	UI::Separator();
 
 	if (Setting_AdvancedWidgetSettings) {
-		if (UI::BeginTable("Widgets", 3)) {
+		if (UI::BeginTable("Widgets", 5)) {
 			UI::TableSetupColumn("Widget", UI::TableColumnFlags::WidthStretch, 0.9f);
-			UI::TableSetupColumn("Visible UI", UI::TableColumnFlags::WidthFixed, 100);
-			UI::TableSetupColumn("Hidden UI", UI::TableColumnFlags::WidthFixed, 100);
+			UI::TableSetupColumn("Position", UI::TableColumnFlags::WidthFixed, 130);
+			UI::TableSetupColumn("Size", UI::TableColumnFlags::WidthFixed, 130);
+			UI::TableSetupColumn("Visible UI", UI::TableColumnFlags::WidthFixed, 80);
+			UI::TableSetupColumn("Hidden UI", UI::TableColumnFlags::WidthFixed, 80);
 			UI::TableHeadersRow();
 
 			for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
@@ -28,6 +31,18 @@ void RenderSettingsWidgets()
 
 				UI::TableNextColumn();
 				UI::Text(thing.m_name);
+
+				UI::TableNextColumn();
+				UI::PushItemWidth(-1);
+				thing.m_pos = UI::InputFloat2("##Position", thing.m_pos);
+				UI::PopItemWidth();
+
+				UI::TableNextColumn();
+				UI::PushItemWidth(-1);
+				thing.m_size = UI::InputFloat2("##Size", thing.m_size);
+				UI::PopItemWidth();
+
+				thing.SetProportions(thing.m_pos, thing.m_size);
 
 				UI::TableNextColumn();
 				bool whenVisible = UI::Checkbox("##WhenVisible", thing.IsVisible(false));
@@ -53,33 +68,50 @@ void RenderSettingsWidgets()
 			thing.SetVisible(visible, visible);
 		}
 	}
+
+	UI::Separator();
+	if (UI::Button("Reset proportions to defaults")) {
+		for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
+			auto thing = g_dashboard.m_things[i];
+			thing.ResetProportions();
+			thing.UpdateProportions();
+		}
+
+		// This is required to force the locator windows to reset on the next frame, rather than use the same positions from the last frame
+		g_settingsMoveCond = UI::Cond::Always;
+	}
 }
 
 void RenderInterface()
 {
-	if (g_settingsMove) {
-		bool gameUIVisible = UI::IsGameUIVisible();
+	if (!g_settingsMove) {
+		return;
+	}
 
-		for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
-			auto thing = g_dashboard.m_things[i];
-			if (thing.IsVisible(!gameUIVisible)) {
-				thing.UpdateProportions();
+	bool gameUIVisible = UI::IsGameUIVisible();
 
-				vec2 screenSize = vec2(Draw::GetWidth(), Draw::GetHeight());
-				vec2 pos = thing.m_pos * (screenSize - thing.m_size);
-
-				UI::SetNextWindowSize(int(thing.m_size.x), int(thing.m_size.y), UI::Cond::Appearing);
-				UI::SetNextWindowPos(int(pos.x), int(pos.y), UI::Cond::Appearing);
-
-				UI::Begin(Icons::ArrowsAlt + " " + thing.m_name, UI::WindowFlags::NoCollapse | UI::WindowFlags::NoSavedSettings);
-				thing.m_size = UI::GetWindowSize();
-				thing.m_pos = UI::GetWindowPos() / (screenSize - thing.m_size);
-				UI::End();
-
-				thing.SetProportions(thing.m_pos, thing.m_size);
-			}
+	for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
+		auto thing = g_dashboard.m_things[i];
+		if (!thing.IsVisible(!gameUIVisible)) {
+			continue;
 		}
+
+		thing.UpdateProportions();
+
+		vec2 screenSize = vec2(Draw::GetWidth(), Draw::GetHeight());
+		vec2 pos = thing.m_pos * (screenSize - thing.m_size);
+
+		UI::SetNextWindowSize(int(thing.m_size.x), int(thing.m_size.y), g_settingsMoveCond);
+		UI::SetNextWindowPos(int(pos.x), int(pos.y), g_settingsMoveCond);
+
+		UI::Begin(Icons::ArrowsAlt + " " + thing.m_name, UI::WindowFlags::NoCollapse | UI::WindowFlags::NoSavedSettings);
+		thing.m_size = UI::GetWindowSize();
+		thing.m_pos = UI::GetWindowPos() / (screenSize - thing.m_size);
+		UI::End();
+
+		thing.SetProportions(thing.m_pos, thing.m_size);
 	}
 
 	g_settingsMove = false;
+	g_settingsMoveCond = UI::Cond::Appearing;
 }

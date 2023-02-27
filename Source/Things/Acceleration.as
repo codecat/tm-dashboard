@@ -33,6 +33,13 @@ class DashboardAcceleration : DashboardThing
 		Setting_General_AccelerationSize = size;
 	}
 
+	void ResetProportions() override
+	{
+		auto plugin = Meta::ExecutingPlugin();
+		plugin.GetSetting("Setting_General_AccelerationPos").Reset();
+		plugin.GetSetting("Setting_General_AccelerationSize").Reset();
+	}
+
 	void LoadFont()
 	{
 		if (Setting_Acceleration_Font == m_fontPath) {

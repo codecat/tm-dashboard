@@ -110,6 +110,9 @@ bool Setting_Gamepad_SteerPercentage = false;
 [Setting category="Gamepad" name="Steer percentage size" drag min=2 max=40]
 int Setting_Gamepad_SteerPercentageSize = 16;
 
+[Setting category="Gamepad" name="Text and symbol color" color]
+vec4 Setting_Gamepad_TextColor = vec4(1, 1, 1, 1);
+
 
 
 enum KeyboardShape

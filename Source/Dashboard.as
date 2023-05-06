@@ -40,19 +40,19 @@ class Dashboard
 			}
 		}
 
-		auto visState = VehicleState::ViewingPlayerState();
-		if (visState is null) {
-			return;
-		}
-
 		bool gameUIVisible = UI::IsGameUIVisible();
 
-		for (uint i = 0; i < m_things.Length; i++) {
-			auto thing = m_things[i];
-			if (thing.IsVisible(!gameUIVisible)) {
-				thing.UpdateProportions();
-				thing.InternalRender(visState);
+		try {
+			auto @vis = VehicleState::GetAllVis(app.GameScene);
+			auto visState = vis[0].AsyncState;
+
+			for (uint i = 0; i < m_things.Length; i++) {
+				auto thing = m_things[i];
+				if (thing.IsVisible(!gameUIVisible)) {
+					thing.UpdateProportions();
+					thing.InternalRender(visState);
+				}
 			}
-		}
+		} catch { return; }
 	}
 }

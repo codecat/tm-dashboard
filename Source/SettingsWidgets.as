@@ -87,6 +87,8 @@ void RenderInterface()
 		return;
 	}
 
+	float scale = UI::GetScale();
+
 	for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
 		auto thing = g_dashboard.m_things[i];
 		if (!thing.IsVisible(true) && !thing.IsVisible(false)) {
@@ -102,8 +104,8 @@ void RenderInterface()
 		UI::SetNextWindowPos(int(pos.x), int(pos.y), g_settingsMoveCond);
 
 		UI::Begin(Icons::ArrowsAlt + " " + thing.m_name, UI::WindowFlags::NoCollapse | UI::WindowFlags::NoSavedSettings);
-		thing.m_size = UI::GetWindowSize();
-		thing.m_pos = UI::GetWindowPos() / (screenSize - thing.m_size);
+		thing.m_size = UI::GetWindowSize() / scale;
+		thing.m_pos = UI::GetWindowPos() / scale / (screenSize - thing.m_size);
 		UI::End();
 
 		thing.SetProportions(thing.m_pos, thing.m_size);

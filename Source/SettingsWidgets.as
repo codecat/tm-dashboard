@@ -100,12 +100,12 @@ void RenderInterface()
 		vec2 screenSize = vec2(Draw::GetWidth(), Draw::GetHeight());
 		vec2 pos = thing.m_pos * (screenSize - thing.m_size);
 
-		UI::SetNextWindowSize(int(thing.m_size.x), int(thing.m_size.y), g_settingsMoveCond);
-		UI::SetNextWindowPos(int(pos.x), int(pos.y), g_settingsMoveCond);
+		UI::SetNextWindowSize(int(thing.m_size.x / scale), int(thing.m_size.y / scale), g_settingsMoveCond);
+		UI::SetNextWindowPos(int(pos.x / scale), int(pos.y / scale), g_settingsMoveCond);
 
 		UI::Begin(Icons::ArrowsAlt + " " + thing.m_name, UI::WindowFlags::NoCollapse | UI::WindowFlags::NoSavedSettings);
-		thing.m_size = UI::GetWindowSize() / scale;
-		thing.m_pos = UI::GetWindowPos() / scale / (screenSize - thing.m_size);
+		thing.m_size = UI::GetWindowSize();
+		thing.m_pos = UI::GetWindowPos() / (screenSize - thing.m_size);
 		UI::End();
 
 		thing.SetProportions(thing.m_pos, thing.m_size);

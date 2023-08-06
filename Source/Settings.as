@@ -11,6 +11,12 @@ ForcePadType Setting_General_ForcePadType = ForcePadType::None;
 [Setting category="General" name="Hide during Intro sequences"]
 bool Setting_General_HideWhenNotPlaying = false;
 
+[Setting category="General" name="Hide when game UI is hidden"]
+bool Setting_General_HideWithGameUI = true;
+
+[Setting category="General" name="Hide when Openplanet UI is hidden"]
+bool Setting_General_HideWithOpenplanetUI = false;
+
 [Setting hidden]
 bool Setting_General_ShowPad = true;
 [Setting hidden]

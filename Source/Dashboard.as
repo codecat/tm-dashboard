@@ -46,6 +46,8 @@ class Dashboard
 		}
 
 		bool gameUIVisible = UI::IsGameUIVisible();
+		if (Setting_General_HideWithGameUI && !gameUIVisible) return;
+		if (Setting_General_HideWithOpenplanetUI && !UI::IsOverlayShown()) return;
 
 		for (uint i = 0; i < m_things.Length; i++) {
 			auto thing = m_things[i];

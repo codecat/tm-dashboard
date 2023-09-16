@@ -9,6 +9,7 @@ class Dashboard
 		m_things.InsertLast(DashboardWheels());
 		m_things.InsertLast(DashboardAcceleration());
 		m_things.InsertLast(DashboardSpeed());
+		m_things.InsertLast(DashboardClock());
 	}
 
 	void Main()

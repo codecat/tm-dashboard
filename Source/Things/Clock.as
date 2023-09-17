@@ -55,7 +55,14 @@ class DashboardClock : DashboardThing
 
 	void Render(CSceneVehicleVisState@ vis) override
 	{
-		string clockTime = Time::FormatString(Setting_Clock_Format);
+		string clockTime;
+
+		switch (Setting_Clock_Mode){
+			case ClockMode::LocalTime: clockTime = Time::FormatString(Setting_Clock_Format); break;
+			case ClockMode::UTCTime: clockTime = Time::FormatStringUTC(Setting_Clock_Format); break;
+			case ClockMode::SessionTime: clockTime = Time::Format(Time::get_Now(), Setting_Clock_Fractions); break;
+		}
+
 		switch (Setting_Clock_Icon) {
 			case ClockIcon::Left: clockTime = Icons::ClockO + " " + clockTime; break;
 			case ClockIcon::Right: clockTime = clockTime + " " + Icons::ClockO; break;

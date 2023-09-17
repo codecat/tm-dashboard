@@ -56,6 +56,15 @@ vec2 Setting_General_SpeedPos = vec2(0.909f, 0.4f);
 [Setting hidden]
 vec2 Setting_General_SpeedSize = vec2(230, 50);
 
+[Setting hidden]
+bool Setting_General_ShowClock = false;
+[Setting hidden]
+bool Setting_General_ShowClockHidden = false;
+[Setting hidden]
+vec2 Setting_General_ClockPos = vec2(0.906f, 0.48f);
+[Setting hidden]
+vec2 Setting_General_ClockSize = vec2(286, 50);
+
 
 
 enum GamepadStyle
@@ -425,3 +434,38 @@ string Setting_Wheels_DetailsFont = "DroidSans.ttf";
 
 [Setting category="Wheels" name="Details font size" drag min=0 max=100]
 float Setting_Wheels_DetailsFontSize = 16.0f;
+
+
+enum ClockIcon
+{
+	None,
+	Left,
+	Right,
+}
+
+[Setting category="Clock" name="Format"]
+string Setting_Clock_Format = "%F | %r";
+
+[Setting category="Clock" name="Clock icon"]
+ClockIcon Setting_Clock_Icon = ClockIcon::Right;
+
+[Setting category="Clock" name="Backdrop color" color]
+vec4 Setting_Clock_BackdropColor = vec4(0, 0, 0, 0.7f);
+
+[Setting category="Clock" name="Border color" color]
+vec4 Setting_Clock_BorderColor = vec4(1, 1, 1, 1);
+
+[Setting category="Clock" name="Text color" color]
+vec4 Setting_Clock_TextColor = vec4(1, 1, 1, 1);
+
+[Setting category="Clock" name="Border width" drag min=0 max=10]
+float Setting_Clock_BorderWidth = 3.0f;
+
+[Setting category="Clock" name="Border radius" drag min=0 max=50]
+float Setting_Clock_BorderRadius = 5.0f;
+
+[Setting category="Clock" name="Font"]
+string Setting_Clock_Font = "DroidSans.ttf";
+
+[Setting category="Clock" name="Font size" drag min=0 max=100]
+float Setting_Clock_FontSize = 20.0f;

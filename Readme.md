@@ -9,6 +9,7 @@ Plugin for Openplanet that displays a bunch of Trackmania vehicle information on
 * Wheel info visualization
 * Speed visualization
 * Acceleration visualization
+* Clock widget
 * Makes use of `VehicleState` (works in solo, online, spectating online, watching replays)
 * Fully customizable with many settings
 	* Toggle each widget

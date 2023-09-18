@@ -440,7 +440,6 @@ enum ClockMode
 {
 	LocalTime,
 	UTCTime,
-	SessionTime,
 }
 
 enum ClockIcon
@@ -455,9 +454,6 @@ ClockMode Setting_Clock_Mode = ClockMode::LocalTime;
 
 [Setting category="Clock" name="Format"]
 string Setting_Clock_Format = "%F | %r";
-
-[Setting category="Clock" name="Fractions (Session Time only)"]
-bool Setting_Clock_Fractions = false;
 
 [Setting category="Clock" name="Clock icon"]
 ClockIcon Setting_Clock_Icon = ClockIcon::Right;

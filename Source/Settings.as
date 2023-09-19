@@ -436,12 +436,21 @@ string Setting_Wheels_DetailsFont = "DroidSans.ttf";
 float Setting_Wheels_DetailsFontSize = 16.0f;
 
 
+enum ClockMode
+{
+	LocalTime,
+	UTCTime,
+}
+
 enum ClockIcon
 {
 	None,
 	Left,
 	Right,
 }
+
+[Setting category="Clock" name="Mode"]
+ClockMode Setting_Clock_Mode = ClockMode::LocalTime;
 
 [Setting category="Clock" name="Format"]
 string Setting_Clock_Format = "%F | %r";

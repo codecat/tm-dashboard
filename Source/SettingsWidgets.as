@@ -16,10 +16,11 @@ void RenderSettingsWidgets()
 	UI::Separator();
 
 	if (Setting_AdvancedWidgetSettings) {
-		if (UI::BeginTable("Widgets", 5)) {
+		if (UI::BeginTable("Widgets", 6)) {
 			UI::TableSetupColumn("Widget", UI::TableColumnFlags::WidthStretch, 0.9f);
 			UI::TableSetupColumn("Position", UI::TableColumnFlags::WidthFixed, 130);
 			UI::TableSetupColumn("Size", UI::TableColumnFlags::WidthFixed, 130);
+			UI::TableSetupColumn("Proportions", UI::TableColumnFlags::WidthFixed, 80);
 			UI::TableSetupColumn("Visible UI", UI::TableColumnFlags::WidthFixed, 80);
 			UI::TableSetupColumn("Hidden UI", UI::TableColumnFlags::WidthFixed, 80);
 			UI::TableHeadersRow();
@@ -43,6 +44,13 @@ void RenderSettingsWidgets()
 				UI::PopItemWidth();
 
 				UI::TableNextColumn();
+				if (UI::Button("Reset")) {
+					thing.ResetProportions();
+					thing.UpdateProportions();
+					g_settingsMoveCond = UI::Cond::Always;
+				}
+
+				UI::TableNextColumn();
 				bool whenVisible = UI::Checkbox("##WhenVisible", thing.IsVisible(false));
 
 				UI::TableNextColumn();
@@ -63,13 +71,25 @@ void RenderSettingsWidgets()
 	} else {
 		for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
 			auto thing = g_dashboard.m_things[i];
+
+			UI::PushID(thing);
+
 			bool visible = UI::Checkbox(thing.m_name, thing.IsVisible(false));
+			UI::SameLine();
+			if (UI::Button("Reset proportions")) {
+				thing.ResetProportions();
+				thing.UpdateProportions();
+				g_settingsMoveCond = UI::Cond::Always;
+			}
+			
 			thing.SetVisible(visible, visible);
+
+			UI::PopID();
 		}
 	}
 
 	UI::Separator();
-	if (UI::Button("Reset proportions to defaults")) {
+	if (UI::Button("Reset all proportions to defaults")) {
 		for (uint i = 0; i < g_dashboard.m_things.Length; i++) {
 			auto thing = g_dashboard.m_things[i];
 			thing.ResetProportions();

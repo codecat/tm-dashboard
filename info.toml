@@ -9,3 +9,4 @@ blocks = [ "Plugin_Dashboard" ]
 [script]
 dependencies = [ "VehicleState" ]
 timeout = 0
+exports = ["Source/Exports.as"]

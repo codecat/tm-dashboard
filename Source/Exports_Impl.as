@@ -3,7 +3,8 @@ uint g_InformedCurrentEntIdLastAt;
 
 namespace Dashboard
 {
-	void InformCurrentEntityId(uint EntId) {
+	void InformCurrentEntityId(uint EntId)
+    {
         g_InformedCurrentEntId = EntId;
         g_InformedCurrentEntIdLastAt = Time::Now;
     }

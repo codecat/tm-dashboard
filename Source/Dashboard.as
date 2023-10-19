@@ -42,6 +42,7 @@ class Dashboard
 		}
 
 		auto visState = VehicleState::ViewingPlayerState();
+
 		// If we didn't find a vis state, use the vehicle entity ID provided by another plugin if it is recent
 		if (visState is null && g_InformedCurrentEntId > 0 && Time::Now - g_InformedCurrentEntIdLastAt < 100 && app.GameScene !is null) {
 			array<CSceneVehicleVis@>@ allVis = VehicleState::GetAllVis(app.GameScene);
@@ -54,6 +55,7 @@ class Dashboard
 				}
 			}
 		}
+
 		if (visState is null) {
 			return;
 		}

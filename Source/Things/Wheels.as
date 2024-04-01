@@ -16,6 +16,7 @@ class WheelState
 	float m_tireWear;
 	float m_icing;
 	float m_wetness;
+	EPlugSurfaceMaterialId m_groundMaterial;
 #endif
 }
 
@@ -88,6 +89,7 @@ class DashboardWheels : DashboardThing
 				ret.m_breakCoef = vis.FLBreakNormedCoef;
 				ret.m_tireWear = vis.FLTireWear01;
 				ret.m_icing = vis.FLIcing01;
+				ret.m_groundMaterial = vis.FLGroundContactMaterial;
 #endif
 				break;
 			case WheelType::FR:
@@ -100,6 +102,7 @@ class DashboardWheels : DashboardThing
 				ret.m_breakCoef = vis.FRBreakNormedCoef;
 				ret.m_tireWear = vis.FRTireWear01;
 				ret.m_icing = vis.FRIcing01;
+				ret.m_groundMaterial = vis.FLGroundContactMaterial;
 #endif
 				break;
 			case WheelType::RL:
@@ -112,6 +115,7 @@ class DashboardWheels : DashboardThing
 				ret.m_breakCoef = vis.RLBreakNormedCoef;
 				ret.m_tireWear = vis.RLTireWear01;
 				ret.m_icing = vis.RLIcing01;
+				ret.m_groundMaterial = vis.RLGroundContactMaterial;
 #endif
 				break;
 			case WheelType::RR:
@@ -124,6 +128,7 @@ class DashboardWheels : DashboardThing
 				ret.m_breakCoef = vis.RRBreakNormedCoef;
 				ret.m_tireWear = vis.RRTireWear01;
 				ret.m_icing = vis.RRIcing01;
+				ret.m_groundMaterial = vis.RRGroundContactMaterial;
 #endif
 				break;
 		}
@@ -133,6 +138,22 @@ class DashboardWheels : DashboardThing
 		ret.m_wetness = vis.WetnessValue01;
 #endif
 
+		return ret;
+	}
+
+	vec3 GetWheelGroundColor(const WheelState& state) {
+		vec3 ret(0,0,0);
+		switch (state.m_groundMaterial) {
+			case EPlugSurfaceMaterialId::Ice:
+				ret = Setting_Wheels_IceSurfaceColor;
+				break;
+			case EPlugSurfaceMaterialId::Grass:
+				ret = Setting_Wheels_GrassSurfaceColor;
+				break;
+			case EPlugSurfaceMaterialId::Dirt:
+				ret = Setting_Wheels_DirtSurfaceColor;
+				break;
+		}
 		return ret;
 	}
 
@@ -184,7 +205,8 @@ class DashboardWheels : DashboardThing
 			int numLines = int(size.y / (lineHeight + lineSpacing)) + 1;
 
 			nvg::Scissor(pos.x, pos.y, size.x, size.y);
-			nvg::FillColor(vec4(0, 0, 0, Setting_Wheels_WheelMotionAlpha));
+			vec3 color = GetWheelGroundColor(state);
+			nvg::FillColor(vec4(color[0], color[1], color[2], Setting_Wheels_WheelMotionAlpha));
 			for (int i = -1; i < numLines; i++) {
 				float offset = i * (lineHeight + lineSpacing);
 				offset = Math::Round(offset + ((state.m_rot * Setting_Wheels_MotionScale) % (lineHeight + lineSpacing)));

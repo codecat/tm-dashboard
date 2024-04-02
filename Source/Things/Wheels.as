@@ -102,7 +102,7 @@ class DashboardWheels : DashboardThing
 				ret.m_breakCoef = vis.FRBreakNormedCoef;
 				ret.m_tireWear = vis.FRTireWear01;
 				ret.m_icing = vis.FRIcing01;
-				ret.m_groundMaterial = vis.FLGroundContactMaterial;
+				ret.m_groundMaterial = vis.FRGroundContactMaterial;
 #endif
 				break;
 			case WheelType::RL:
@@ -141,18 +141,31 @@ class DashboardWheels : DashboardThing
 		return ret;
 	}
 
-	vec3 GetWheelGroundColor(const WheelState& state) {
+	vec3 GetWheelSurfaceColor(const WheelState& state) {
 		vec3 ret(0,0,0);
 		switch (state.m_groundMaterial) {
 			case EPlugSurfaceMaterialId::Ice:
+			case EPlugSurfaceMaterialId::RoadIce:
 				ret = Setting_Wheels_IceSurfaceColor;
 				break;
 			case EPlugSurfaceMaterialId::Grass:
+			case EPlugSurfaceMaterialId::Green:
 				ret = Setting_Wheels_GrassSurfaceColor;
 				break;
 			case EPlugSurfaceMaterialId::Dirt:
 				ret = Setting_Wheels_DirtSurfaceColor;
 				break;
+			case EPlugSurfaceMaterialId::Wood:
+				ret = Setting_Wheels_WoodSurfaceColor;
+				break;
+			case EPlugSurfaceMaterialId::Plastic:
+				ret = Setting_Wheels_PlasticSurfaceColor;
+				break;
+			case EPlugSurfaceMaterialId::Snow:
+				ret = Setting_Wheels_SnowSurfaceColor;
+				break;
+			case EPlugSurfaceMaterialId::Sand:
+				ret = Setting_Wheels_SandSurfaceColor;
 		}
 		return ret;
 	}
@@ -203,10 +216,12 @@ class DashboardWheels : DashboardThing
 			const float lineHeight = 7;
 			const float lineSpacing = 5;
 			int numLines = int(size.y / (lineHeight + lineSpacing)) + 1;
-
 			nvg::Scissor(pos.x, pos.y, size.x, size.y);
-			vec3 color = GetWheelGroundColor(state);
-			nvg::FillColor(vec4(color[0], color[1], color[2], Setting_Wheels_WheelMotionAlpha));
+			vec3 surfaceColor(0,0,0);
+#if TMNEXT
+			surfaceColor = Setting_Wheels_WheelSurface ? GetWheelSurfaceColor(state) : vec3(0,0,0);
+#endif
+			nvg::FillColor(vec4(surfaceColor.x, surfaceColor.y, surfaceColor.z, Setting_Wheels_WheelMotionAlpha));
 			for (int i = -1; i < numLines; i++) {
 				float offset = i * (lineHeight + lineSpacing);
 				offset = Math::Round(offset + ((state.m_rot * Setting_Wheels_MotionScale) % (lineHeight + lineSpacing)));

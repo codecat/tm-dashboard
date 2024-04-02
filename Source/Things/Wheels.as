@@ -217,9 +217,10 @@ class DashboardWheels : DashboardThing
 			const float lineSpacing = 5;
 			int numLines = int(size.y / (lineHeight + lineSpacing)) + 1;
 			nvg::Scissor(pos.x, pos.y, size.x, size.y);
-			vec3 surfaceColor(0,0,0);
 #if TMNEXT
-			surfaceColor = Setting_Wheels_WheelSurface ? GetWheelSurfaceColor(state) : vec3(0,0,0);
+			vec3 surfaceColor = Setting_Wheels_WheelSurface ? GetWheelSurfaceColor(state) : vec3(0,0,0);
+#else
+			vec3 surfaceColor(0,0,0);
 #endif
 			nvg::FillColor(vec4(surfaceColor.x, surfaceColor.y, surfaceColor.z, Setting_Wheels_WheelMotionAlpha));
 			for (int i = -1; i < numLines; i++) {

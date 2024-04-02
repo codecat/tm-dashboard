@@ -141,8 +141,10 @@ class DashboardWheels : DashboardThing
 		return ret;
 	}
 
-	vec3 GetWheelSurfaceColor(const WheelState& state) {
+	vec3 GetWheelSurfaceColor(const WheelState& state) 
+	{
 		vec3 ret(0,0,0);
+
 		switch (state.m_groundMaterial) {
 			case EPlugSurfaceMaterialId::Ice:
 			case EPlugSurfaceMaterialId::RoadIce:
@@ -167,6 +169,7 @@ class DashboardWheels : DashboardThing
 			case EPlugSurfaceMaterialId::Sand:
 				ret = Setting_Wheels_SandSurfaceColor;
 		}
+
 		return ret;
 	}
 

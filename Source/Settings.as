@@ -435,6 +435,29 @@ string Setting_Wheels_DetailsFont = "DroidSans.ttf";
 [Setting category="Wheels" name="Details font size" drag min=0 max=100]
 float Setting_Wheels_DetailsFontSize = 16.0f;
 
+[Setting category="Wheels" name="Show wheel surface"]
+bool Setting_Wheels_WheelSurface = false;
+
+[Setting category="Wheels" name="Ice Surface Color" color]
+vec3 Setting_Wheels_IceSurfaceColor = vec3(0.6f, 1, 0.95f);
+
+[Setting category="Wheels" name="Grass Surface Color" color]
+vec3 Setting_Wheels_GrassSurfaceColor = vec3(0, 1, 0);
+
+[Setting category="Wheels" name="Dirt Surface Color" color]
+vec3 Setting_Wheels_DirtSurfaceColor = vec3(0.8f, 0.5f, 0);
+
+[Setting category="Wheels" name="Wood Surface Color" color]
+vec3 Setting_Wheels_WoodSurfaceColor = vec3(0.3f, 0.1f, 0);
+
+[Setting category="Wheels" name="Plastic Surface Color" color]
+vec3 Setting_Wheels_PlasticSurfaceColor = vec3(0.5f, 0, 0);
+
+[Setting category="Wheels" name="Snow Surface Color" color]
+vec3 Setting_Wheels_SnowSurfaceColor = vec3(0.7f, 1, 1);
+
+[Setting category="Wheels" name="Sand Surface Color" color]
+vec3 Setting_Wheels_SandSurfaceColor = vec3(1, 1, 0);
 
 enum ClockMode
 {

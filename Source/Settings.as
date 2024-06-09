@@ -158,7 +158,7 @@ float Setting_Keyboard_BorderRadius = 5.0f;
 float Setting_Keyboard_Spacing = 10.0f;
 
 [Setting category="Keyboard" name="Inactive alpha" drag min=0 max=1]
-float Setting_Keyboard_InactiveAlpha = 0.4f;
+float Setting_Keyboard_InactiveAlpha = 1.0f;
 
 
 

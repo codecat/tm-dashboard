@@ -80,11 +80,23 @@ GamepadStyle Setting_Gamepad_Style = GamepadStyle::Uniform;
 [Setting category="Gamepad" name="Empty fill color" color if="!Setting_Gamepad_Style Classic"]
 vec4 Setting_Gamepad_EmptyFillColor = vec4(0, 0, 0, 0.7f);
 
-[Setting category="Gamepad" name="Fill color" color]
+[Setting category="Gamepad" name="Fill gradient"]
+bool Setting_Gamepad_UseFillGradient = false;
+
+[Setting category="Gamepad" name="Fill color" color if="!Setting_Gamepad_UseFillGradient"]
 vec4 Setting_Gamepad_FillColor = vec4(1, 0.2f, 0.6f, 1);
 
-[Setting category="Gamepad" name="Border color" color if="!Setting_Gamepad_Style Classic"]
+[Setting category="Gamepad" name="Fill gradient" if="Setting_Gamepad_UseFillGradient"]
+SettingsGradient Setting_Gamepad_FillGradient = SettingsGradient(vec4(1, 0.2f, 0.6f, 1), vec4(1, 0.6f, 0.9f, 1));
+
+[Setting category="Gamepad" name="Border gradient"]
+bool Setting_Gamepad_UseBorderGradient = false;
+
+[Setting category="Gamepad" name="Border color" color if="!Setting_Gamepad_UseBorderGradient"]
 vec4 Setting_Gamepad_BorderColor = vec4(1, 1, 1, 1);
+
+[Setting category="Gamepad" name="Border gradient" if="Setting_Gamepad_UseBorderGradient"]
+SettingsGradient Setting_Gamepad_BorderGradient = SettingsGradient(vec4(1, 0.6f, 0.9f, 1), vec4(1, 0.9f, 0.95f, 1), 300);
 
 [Setting category="Gamepad" name="Border width" drag min=0 max=10 if="!Setting_Gamepad_Style Classic"]
 float Setting_Gamepad_BorderWidth = 3.0f;
@@ -141,11 +153,23 @@ KeyboardShape Setting_Keyboard_Shape = KeyboardShape::Rectangle;
 [Setting category="Keyboard" name="Empty fill color" color]
 vec4 Setting_Keyboard_EmptyFillColor = vec4(0, 0, 0, 0.7f);
 
-[Setting category="Keyboard" name="Fill color" color]
+[Setting category="Keyboard" name="Fill gradient"]
+bool Setting_Keyboard_UseFillGradient = false;
+
+[Setting category="Keyboard" name="Fill color" color if="!Setting_Keyboard_UseFillGradient"]
 vec4 Setting_Keyboard_FillColor = vec4(1, 0.2f, 0.6f, 1);
 
-[Setting category="Keyboard" name="Border color" color]
+[Setting category="Keyboard" name="Fill gradient" if="Setting_Keyboard_UseFillGradient"]
+SettingsGradient Setting_Keyboard_FillGradient = SettingsGradient(vec4(1, 0.2f, 0.6f, 1), vec4(1, 0.6f, 0.9f, 1));
+
+[Setting category="Keyboard" name="Border gradient"]
+bool Setting_Keyboard_UseBorderGradient = false;
+
+[Setting category="Keyboard" name="Border color" color if="!Setting_Keyboard_UseBorderGradient"]
 vec4 Setting_Keyboard_BorderColor = vec4(1, 1, 1, 1);
+
+[Setting category="Keyboard" name="Border gradient" if="Setting_Keyboard_UseBorderGradient"]
+SettingsGradient Setting_Keyboard_BorderGradient = SettingsGradient(vec4(1, 0.6f, 0.9f, 1), vec4(1, 0.9f, 0.95f, 1), 300);
 
 [Setting category="Keyboard" name="Border width" drag min=0 max=10]
 float Setting_Keyboard_BorderWidth = 3.0f;

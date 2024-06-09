@@ -1,7 +1,11 @@
 class DashboardPadKeyboard : IDashboardPad
 {
+	vec2 m_size;
+
 	void Render(const vec2 &in size, CSceneVehicleVisState@ vis) override
 	{
+		m_size = size;
+
 		float steerLeft = vis.InputSteer < 0 ? Math::Abs(vis.InputSteer) : 0.0f;
 		float steerRight = vis.InputSteer > 0 ? vis.InputSteer : 0.0f;
 
@@ -28,13 +32,6 @@ class DashboardPadKeyboard : IDashboardPad
 
 	void RenderKey(const vec2 &in pos, const vec2 &in size, const string &in text, float value, int fillDir = 0)
 	{
-		vec4 borderColor = Setting_Keyboard_BorderColor;
-		if (fillDir == 0) {
-			borderColor.w *= Math::Abs(value) > 0.1f ? 1.0f : Setting_Keyboard_InactiveAlpha;
-		} else {
-			borderColor.w *= Math::Lerp(Setting_Keyboard_InactiveAlpha, 1.0f, value);
-		}
-
 		nvg::BeginPath();
 		nvg::StrokeWidth(Setting_Keyboard_BorderWidth);
 
@@ -53,7 +50,11 @@ class DashboardPadKeyboard : IDashboardPad
 
 		if (fillDir == 0) {
 			if (Math::Abs(value) > 0.1f) {
-				nvg::FillColor(Setting_Keyboard_FillColor);
+				if (Setting_Keyboard_UseFillGradient) {
+					nvg::FillPaint(Setting_Keyboard_FillGradient.GetPaint(vec2(), m_size));
+				} else {
+					nvg::FillColor(Setting_Keyboard_FillColor);
+				}
 				nvg::Fill();
 			}
 		} else if (value > 0) {
@@ -64,18 +65,40 @@ class DashboardPadKeyboard : IDashboardPad
 				float valueWidth = value * size.x;
 				nvg::Scissor(pos.x, pos.y, valueWidth, size.y);
 			}
-			nvg::FillColor(Setting_Keyboard_FillColor);
+			if (Setting_Keyboard_UseFillGradient) {
+				nvg::FillPaint(Setting_Keyboard_FillGradient.GetPaint(vec2(), m_size));
+			} else {
+				nvg::FillColor(Setting_Keyboard_FillColor);
+			}
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
 
-		nvg::StrokeColor(borderColor);
+		float fillAlpha;
+		if (fillDir == 0) {
+			fillAlpha = Math::Abs(value) > 0.1f ? 1.0f : Setting_Keyboard_InactiveAlpha;
+		} else {
+			fillAlpha = Math::Lerp(Setting_Keyboard_InactiveAlpha, 1.0f, value);
+		}
+
+		vec4 borderColor = Setting_Keyboard_BorderColor;
+		borderColor.w *= fillAlpha;
+
+		if (Setting_Keyboard_UseBorderGradient) {
+			nvg::StrokePaint(Setting_Keyboard_BorderGradient.GetPaint(vec2(), m_size, fillAlpha));
+		} else {
+			nvg::StrokeColor(borderColor);
+		}
 		nvg::Stroke();
 
 		nvg::BeginPath();
 		nvg::FontFace(g_font);
 		nvg::FontSize(size.x / 2);
-		nvg::FillColor(borderColor);
+		if (Setting_Keyboard_UseBorderGradient) {
+			nvg::FillPaint(Setting_Keyboard_BorderGradient.GetPaint(vec2(), m_size, fillAlpha));
+		} else {
+			nvg::FillColor(borderColor);
+		}
 		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 		nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, text);
 	}

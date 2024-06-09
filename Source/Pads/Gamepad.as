@@ -2,9 +2,6 @@ class DashboardPadGamepad : IDashboardPad
 {
 	void RenderUniform(const vec2 &in size, CSceneVehicleVisState@ vis)
 	{
-		vec4 strokeColor = Setting_Gamepad_BorderColor;
-		vec4 fillColor = Setting_Gamepad_FillColor;
-
 		float leftSize = size.x * (0.5f - Setting_Gamepad_MiddleScale / 2) - Setting_Gamepad_Spacing;
 		float midX = leftSize + Setting_Gamepad_Spacing;
 		float midSize = size.x * Setting_Gamepad_MiddleScale;
@@ -15,7 +12,11 @@ class DashboardPadGamepad : IDashboardPad
 		float bottomSize = size.y - bottomY;
 
 		nvg::StrokeWidth(Setting_Gamepad_BorderWidth);
-		nvg::StrokeColor(strokeColor);
+		if (Setting_Gamepad_UseBorderGradient) {
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size));
+		} else {
+			nvg::StrokeColor(Setting_Gamepad_BorderColor);
+		}
 		nvg::LineJoin(nvg::LineCapType::Round);
 
 		// Steering scales
@@ -42,7 +43,11 @@ class DashboardPadGamepad : IDashboardPad
 		if (steerLeft > 0) {
 			float valueWidth = steerLeft * leftSize;
 			nvg::Scissor(leftSize - valueWidth, 0, valueWidth, size.y);
-			nvg::FillColor(fillColor);
+			if (Setting_Gamepad_UseFillGradient) {
+				nvg::FillPaint(Setting_Gamepad_FillGradient.GetPaint(vec2(), size));
+			} else {
+				nvg::FillColor(Setting_Gamepad_FillColor);
+			}
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
@@ -59,7 +64,11 @@ class DashboardPadGamepad : IDashboardPad
 		if (steerRight > 0) {
 			float valueWidth = steerRight * rightSize;
 			nvg::Scissor(rightX, 0, valueWidth, size.y);
-			nvg::FillColor(fillColor);
+			if (Setting_Gamepad_UseFillGradient) {
+				nvg::FillPaint(Setting_Gamepad_FillGradient.GetPaint(vec2(), size));
+			} else {
+				nvg::FillColor(Setting_Gamepad_FillColor);
+			}
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
@@ -73,7 +82,11 @@ class DashboardPadGamepad : IDashboardPad
 		if (pedalGas > 0) {
 			float valueHeight = pedalGas * topSize;
 			nvg::Scissor(midX, topSize - valueHeight, midSize, valueHeight);
-			nvg::FillColor(fillColor);
+			if (Setting_Gamepad_UseFillGradient) {
+				nvg::FillPaint(Setting_Gamepad_FillGradient.GetPaint(vec2(), size));
+			} else {
+				nvg::FillColor(Setting_Gamepad_FillColor);
+			}
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
@@ -87,7 +100,11 @@ class DashboardPadGamepad : IDashboardPad
 		if (pedalBrake > 0) {
 			float valueHeight = pedalBrake * bottomSize;
 			nvg::Scissor(midX, bottomY, midSize, valueHeight);
-			nvg::FillColor(fillColor);
+			if (Setting_Gamepad_UseFillGradient) {
+				nvg::FillPaint(Setting_Gamepad_FillGradient.GetPaint(vec2(), size));
+			} else {
+				nvg::FillColor(Setting_Gamepad_FillColor);
+			}
 			nvg::Fill();
 			nvg::ResetScissor();
 		}

@@ -249,6 +249,8 @@ vec4 Setting_Gearbox_Gear5Color = vec4(1, 1, 1, 1);
 	vec4 Setting_Gearbox_Gear9Color = vec4(1, 1, 1, 1);
 #endif
 
+
+
 enum AccelerationUnit
 {
 	MetersPerSecondPerSecond,
@@ -458,6 +460,8 @@ vec3 Setting_Wheels_SnowSurfaceColor = vec3(0.7f, 1, 1);
 
 [Setting category="Wheels" name="Sand Surface Color" color]
 vec3 Setting_Wheels_SandSurfaceColor = vec3(1, 1, 0);
+
+
 
 enum ClockMode
 {

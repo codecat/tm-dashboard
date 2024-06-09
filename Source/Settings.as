@@ -120,7 +120,6 @@ bool Setting_Gamepad_SteerPercentage = false;
 	category="Gamepad"
 	name="Steer percentage size"
 	drag min=2 max=40
-	if="Setting_Gamepad_SteerPercentage"
 	if="Setting_Gamepad_Style Uniform"]
 int Setting_Gamepad_SteerPercentageSize = 16;
 

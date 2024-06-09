@@ -77,49 +77,54 @@ enum GamepadStyle
 [Setting category="Gamepad" name="Style" description="Note: Not all styles use all customization options. Use Uniform for the best experience."]
 GamepadStyle Setting_Gamepad_Style = GamepadStyle::Uniform;
 
-[Setting category="Gamepad" name="Empty fill color" color]
+[Setting category="Gamepad" name="Empty fill color" color if="!Setting_Gamepad_Style Classic"]
 vec4 Setting_Gamepad_EmptyFillColor = vec4(0, 0, 0, 0.7f);
 
 [Setting category="Gamepad" name="Fill color" color]
 vec4 Setting_Gamepad_FillColor = vec4(1, 0.2f, 0.6f, 1);
 
-[Setting category="Gamepad" name="Border color" color]
+[Setting category="Gamepad" name="Border color" color if="!Setting_Gamepad_Style Classic"]
 vec4 Setting_Gamepad_BorderColor = vec4(1, 1, 1, 1);
 
-[Setting category="Gamepad" name="Border width" drag min=0 max=10]
+[Setting category="Gamepad" name="Border width" drag min=0 max=10 if="!Setting_Gamepad_Style Classic"]
 float Setting_Gamepad_BorderWidth = 3.0f;
 
 [Setting category="Gamepad" name="Spacing" drag min=0 max=100]
 float Setting_Gamepad_Spacing = 10.0f;
 
-[Setting category="Gamepad" name="Arrow padding" drag min=0 max=0.5]
+[Setting category="Gamepad" name="Arrow padding" drag min=0 max=0.5 if="!Setting_Gamepad_Style Classic"]
 float Setting_Gamepad_ArrowPadding = 0.15f;
 
 [Setting category="Gamepad" name="Middle scale" drag min=0 max=1]
 float Setting_Gamepad_MiddleScale = 0.2f;
 
-[Setting category="Gamepad" name="Classic up color" color]
+[Setting category="Gamepad" name="Classic up color" color if="Setting_Gamepad_Style Classic"]
 vec4 Setting_Gamepad_ClassicUpColor = vec4(0.2f, 1, 0.6f, 1);
 
-[Setting category="Gamepad" name="Classic down color" color]
+[Setting category="Gamepad" name="Classic down color" color if="Setting_Gamepad_Style Classic"]
 vec4 Setting_Gamepad_ClassicDownColor = vec4(1, 0.6f, 0.2f, 1);
 
-[Setting category="Gamepad" name="Classic off alpha" drag min=0 max=1]
+[Setting category="Gamepad" name="Classic off alpha" drag min=0 max=1 if="Setting_Gamepad_Style Classic"]
 float Setting_Gamepad_OffAlpha = 0.33f;
 
-[Setting category="Gamepad" name="Display up/down arrow symbols"]
+[Setting category="Gamepad" name="Display up/down arrow symbols" if="Setting_Gamepad_Style Uniform"]
 bool Setting_Gamepad_UpDownSymbols = true;
 
-[Setting category="Gamepad" name="Cateye use simple steer"]
+[Setting category="Gamepad" name="Cateye use simple steer" if="Setting_Gamepad_Style Cateye"]
 bool Setting_Gamepad_CateyeUseSimpleSteer = false;
 
-[Setting category="Gamepad" name="Display steer percentage"]
+[Setting category="Gamepad" name="Display steer percentage" if="Setting_Gamepad_Style Uniform"]
 bool Setting_Gamepad_SteerPercentage = false;
 
-[Setting category="Gamepad" name="Steer percentage size" drag min=2 max=40]
+[Setting
+	category="Gamepad"
+	name="Steer percentage size"
+	drag min=2 max=40
+	if="Setting_Gamepad_SteerPercentage"
+	if="Setting_Gamepad_Style Uniform"]
 int Setting_Gamepad_SteerPercentageSize = 16;
 
-[Setting category="Gamepad" name="Text and symbol color" color]
+[Setting category="Gamepad" name="Text and symbol color" color if="Setting_Gamepad_Style Uniform"]
 vec4 Setting_Gamepad_TextColor = vec4(1, 1, 1, 1);
 
 
@@ -146,7 +151,7 @@ vec4 Setting_Keyboard_BorderColor = vec4(1, 1, 1, 1);
 [Setting category="Keyboard" name="Border width" drag min=0 max=10]
 float Setting_Keyboard_BorderWidth = 3.0f;
 
-[Setting category="Keyboard" name="Border radius" drag min=0 max=50]
+[Setting category="Keyboard" name="Border radius" drag min=0 max=50 if="!Setting_Keyboard_Shape Ellipse"]
 float Setting_Keyboard_BorderRadius = 5.0f;
 
 [Setting category="Keyboard" name="Spacing" drag min=0 max=100]
@@ -173,7 +178,7 @@ enum GearboxTachometerStyle
 	Blocks,
 }
 
-[Setting category="Gearbox" name="Tachometer style"]
+[Setting category="Gearbox" name="Tachometer style" if="Setting_Gearbox_ShowTachometer"]
 GearboxTachometerStyle Setting_Gearbox_TachometerStyle = GearboxTachometerStyle::Blocks;
 
 [Setting category="Gearbox" name="Downshift threshold" drag min=0 max=11000]
@@ -194,58 +199,58 @@ float Setting_Gearbox_BorderWidth = 3.0f;
 [Setting category="Gearbox" name="Border radius" drag min=0 max=50]
 float Setting_Gearbox_BorderRadius = 5.0f;
 
-[Setting category="Gearbox" name="Spacing" drag min=0 max=100]
+[Setting category="Gearbox" name="Spacing" drag min=0 max=100 if="Setting_Gearbox_ShowText"]
 float Setting_Gearbox_Spacing = 10.0f;
 
-[Setting category="Gearbox" name="Low RPM color" color]
+[Setting category="Gearbox" name="Low RPM color" color if="Setting_Gearbox_ShowTachometer"]
 vec4 Setting_Gearbox_LowRPMColor = vec4(1, 0.7f, 0, 1);
 
-[Setting category="Gearbox" name="Mid RPM color" color]
+[Setting category="Gearbox" name="Mid RPM color" color if="Setting_Gearbox_ShowTachometer"]
 vec4 Setting_Gearbox_MidRPMColor = vec4(0, 0.9f, 0, 1);
 
-[Setting category="Gearbox" name="High RPM color" color]
+[Setting category="Gearbox" name="High RPM color" color if="Setting_Gearbox_ShowTachometer"]
 vec4 Setting_Gearbox_HighRPMColor = vec4(0.8f, 0, 0, 1);
 
-[Setting category="Gearbox" name="Text color" color]
+[Setting category="Gearbox" name="Text color" color if="Setting_Gearbox_ShowText"]
 vec4 Setting_Gearbox_TextColor = vec4(1, 1, 1, 1);
 
-[Setting category="Gearbox" name="Font"]
+[Setting category="Gearbox" name="Font" if="Setting_Gearbox_ShowText"]
 string Setting_Gearbox_Font = "DroidSans.ttf";
 
 [Setting category="Gearbox" name="Use gear colors"]
 bool Setting_Gearbox_UseGearColors = false;
 
-[Setting category="Gearbox" name="Gear 0 (backwards) color" color]
+[Setting category="Gearbox" name="Gear 0 (backwards) color" color if="Setting_Gearbox_UseGearColors"]
 vec4 Setting_Gearbox_Gear0Color = vec4(1, 1, 1, 1);
 
-[Setting category="Gearbox" name="Gear 1 color" color]
+[Setting category="Gearbox" name="Gear 1 color" color if="Setting_Gearbox_UseGearColors"]
 vec4 Setting_Gearbox_Gear1Color = vec4(1, 1, 1, 1);
 
-[Setting category="Gearbox" name="Gear 2 color" color]
+[Setting category="Gearbox" name="Gear 2 color" color if="Setting_Gearbox_UseGearColors"]
 vec4 Setting_Gearbox_Gear2Color = vec4(1, 1, 1, 1);
 
-[Setting category="Gearbox" name="Gear 3 color" color]
+[Setting category="Gearbox" name="Gear 3 color" color if="Setting_Gearbox_UseGearColors"]
 vec4 Setting_Gearbox_Gear3Color = vec4(1, 1, 1, 1);
 
-[Setting category="Gearbox" name="Gear 4 color" color]
+[Setting category="Gearbox" name="Gear 4 color" color if="Setting_Gearbox_UseGearColors"]
 vec4 Setting_Gearbox_Gear4Color = vec4(1, 1, 1, 1);
 
-[Setting category="Gearbox" name="Gear 5 color" color]
+[Setting category="Gearbox" name="Gear 5 color" color if="Setting_Gearbox_UseGearColors"]
 vec4 Setting_Gearbox_Gear5Color = vec4(1, 1, 1, 1);
 
 #if MP4 || TURBO
-	[Setting category="Gearbox" name="Gear 6 color" color]
+	[Setting category="Gearbox" name="Gear 6 color" color if="Setting_Gearbox_UseGearColors"]
 	vec4 Setting_Gearbox_Gear6Color = vec4(1, 1, 1, 1);
 
-	[Setting category="Gearbox" name="Gear 7 color" color]
+	[Setting category="Gearbox" name="Gear 7 color" color if="Setting_Gearbox_UseGearColors"]
 	vec4 Setting_Gearbox_Gear7Color = vec4(1, 1, 1, 1);
 #endif
 
 #if TURBO
-	[Setting category="Gearbox" name="Gear 8 color" color]
+	[Setting category="Gearbox" name="Gear 8 color" color if="Setting_Gearbox_UseGearColors"]
 	vec4 Setting_Gearbox_Gear8Color = vec4(1, 1, 1, 1);
 
-	[Setting category="Gearbox" name="Gear 9 color" color]
+	[Setting category="Gearbox" name="Gear 9 color" color if="Setting_Gearbox_UseGearColors"]
 	vec4 Setting_Gearbox_Gear9Color = vec4(1, 1, 1, 1);
 #endif
 
@@ -257,13 +262,13 @@ enum AccelerationUnit
 	KilometersPerHourPerSecond
 }
 
-[Setting category="Acceleration" name="Acceleration unit of measurement"]
+[Setting category="Acceleration" name="Unit of measurement"]
 AccelerationUnit Setting_Acceleration_Unit = AccelerationUnit::MetersPerSecondPerSecond;
 
-[Setting category="Acceleration" name="Positive acceleration color" color]
+[Setting category="Acceleration" name="Positive color" color]
 vec4 Setting_Acceleration_Positive_Color = vec4(0, 0.9f, 0, 1);
 
-[Setting category="Acceleration" name="Negative acceleration color" color]
+[Setting category="Acceleration" name="Negative color" color]
 vec4 Setting_Acceleration_Negative_Color = vec4(0.8f, 0, 0, 1);
 
 [Setting category="Acceleration" name="Backdrop color" color]
@@ -278,32 +283,32 @@ float Setting_Acceleration_BorderWidth = 3.0f;
 [Setting category="Acceleration" name="Border radius" drag min=0 max=50]
 float Setting_Acceleration_BorderRadius = 5.0f;
 
-[Setting category="Acceleration" name="Maximum acceleration value for m/s/s" drag min=0 max=250]
+[Setting category="Acceleration" name="Maximum m/s/s" drag min=0 max=250 if="Setting_Acceleration_Unit MetersPerSecondPerSecond"]
 float Setting_Acceleration_MaximumAccelerationMSS = 15.0f;
 
-[Setting category="Acceleration" name="Maximum acceleration value for km/h/s" drag min=0 max=250]
+[Setting category="Acceleration" name="Maximum km/h/s" drag min=0 max=250 if="Setting_Acceleration_Unit KilometersPerHourPerSecond"]
 float Setting_Acceleration_MaximumAccelerationKMHS = 54.0f;
 
-[Setting category="Acceleration" name="Show text value"]
-bool Setting_Acceleration_ShowTextValue = true;
-
-[Setting category="Acceleration" name="Text padding" drag min=0 max=100]
-float Setting_Acceleration_TextPadding = 20.0f;
-
-[Setting category="Acceleration" name="Padding between negative and position bars" drag min=0 max=100]
+[Setting category="Acceleration" name="Bar padding" drag min=0 max=100]
 float Setting_Acceleration_BarPadding = 7.5f;
-
-[Setting category="Acceleration" name="Text color" color]
-vec4 Setting_Acceleration_TextColor = vec4(1, 1, 1, 1);
-
-[Setting category="Acceleration" name="Font size" drag min=0 max=100]
-float Setting_Acceleration_FontSize = 15.0f;
 
 [Setting category="Acceleration" name="Enable smoothing"]
 bool Setting_Acceleration_Smoothing = true;
 
-[Setting category="Acceleration" name="Font"]
+[Setting category="Acceleration" name="Show text value"]
+bool Setting_Acceleration_ShowTextValue = true;
+
+[Setting category="Acceleration" name="Text padding" drag min=0 max=100 if="Setting_Acceleration_ShowTextValue"]
+float Setting_Acceleration_TextPadding = 20.0f;
+
+[Setting category="Acceleration" name="Text color" color if="Setting_Acceleration_ShowTextValue"]
+vec4 Setting_Acceleration_TextColor = vec4(1, 1, 1, 1);
+
+[Setting category="Acceleration" name="Font" if="Setting_Acceleration_ShowTextValue"]
 string Setting_Acceleration_Font = "DroidSans.ttf";
+
+[Setting category="Acceleration" name="Font size" drag min=0 max=100 if="Setting_Acceleration_ShowTextValue"]
+float Setting_Acceleration_FontSize = 15.0f;
 
 
 
@@ -365,10 +370,10 @@ WheelsStyle Setting_Wheels_Style = WheelsStyle::Detailed;
 [Setting category="Wheels" name="Show wheel motion"]
 bool Setting_Wheels_WheelMotion = true;
 
-[Setting category="Wheels" name="Wheel motion scale" drag min=0.1 max=10]
+[Setting category="Wheels" name="Wheel motion scale" drag min=0.1 max=10 if="Setting_Wheels_WheelMotion" if="!Setting_Wheels_Style Unified"]
 float Setting_Wheels_MotionScale = 5.0f;
 
-[Setting category="Wheels" name="Show wheel angle"]
+[Setting category="Wheels" name="Show wheel angle" if="!Setting_Wheels_Style Unified"]
 bool Setting_Wheels_WheelAngle = true;
 
 [Setting category="Wheels" name="Backdrop color" color]
@@ -383,16 +388,16 @@ float Setting_Wheels_BorderWidth = 3.0f;
 [Setting category="Wheels" name="Border radius" drag min=0 max=50]
 float Setting_Wheels_BorderRadius = 5.0f;
 
-[Setting category="Wheels" name="Wheel fill color" color]
+[Setting category="Wheels" name="Wheel fill color" color if="!Setting_Wheels_Style Unified"]
 vec3 Setting_Wheels_WheelFillColor = vec3(0, 0, 0);
 
-[Setting category="Wheels" name="Wheel border color" color]
+[Setting category="Wheels" name="Wheel border color" color if="!Setting_Wheels_Style Unified"]
 vec4 Setting_Wheels_WheelBorderColor = vec4(1, 1, 1, 1);
 
-[Setting category="Wheels" name="Wheel border width" drag min=0 max=10]
+[Setting category="Wheels" name="Wheel border width" drag min=0 max=10 if="!Setting_Wheels_Style Unified"]
 float Setting_Wheels_WheelBorderWidth = 3.0f;
 
-[Setting category="Wheels" name="Wheel border radius" drag min=0 max=5]
+[Setting category="Wheels" name="Wheel border radius" drag min=0 max=5 if="!Setting_Wheels_Style Unified"]
 float Setting_Wheels_WheelBorderRadius = 5.0f;
 
 [Setting category="Wheels" name="Slip color" color]
@@ -413,13 +418,13 @@ vec3 Setting_Wheels_WearColor = vec3(1, 1, 0);
 [Setting category="Wheels" name="Wet color" color]
 vec3 Setting_Wheels_WetColor = vec3(0, 0.5f, 1);
 
-[Setting category="Wheels" name="Wheel width" drag min=0 max=100]
+[Setting category="Wheels" name="Wheel width" drag min=0 max=100 if="!Setting_Wheels_Style Unified"]
 float Setting_Wheels_WheelWidth = 32.0f;
 
-[Setting category="Wheels" name="Wheel fill alpha" drag min=0 max=1]
+[Setting category="Wheels" name="Wheel fill alpha" drag min=0 max=1 if="!Setting_Wheels_Style Unified"]
 float Setting_Wheels_WheelFillAlpha = 0.7f;
 
-[Setting category="Wheels" name="Wheel motion alpha" drag min=0 max=1]
+[Setting category="Wheels" name="Wheel motion alpha" drag min=0 max=1 if="!Setting_Wheels_Style Unified"]
 float Setting_Wheels_WheelMotionAlpha = 0.5f;
 
 [Setting category="Wheels" name="Padding" drag min=0 max=100]
@@ -440,25 +445,25 @@ float Setting_Wheels_DetailsFontSize = 16.0f;
 [Setting category="Wheels" name="Show wheel surface"]
 bool Setting_Wheels_WheelSurface = false;
 
-[Setting category="Wheels" name="Ice Surface Color" color]
+[Setting category="Wheels" name="Ice Surface Color" color if="Setting_Wheels_WheelSurface"]
 vec3 Setting_Wheels_IceSurfaceColor = vec3(0.6f, 1, 0.95f);
 
-[Setting category="Wheels" name="Grass Surface Color" color]
+[Setting category="Wheels" name="Grass Surface Color" color if="Setting_Wheels_WheelSurface"]
 vec3 Setting_Wheels_GrassSurfaceColor = vec3(0, 1, 0);
 
-[Setting category="Wheels" name="Dirt Surface Color" color]
+[Setting category="Wheels" name="Dirt Surface Color" color if="Setting_Wheels_WheelSurface"]
 vec3 Setting_Wheels_DirtSurfaceColor = vec3(0.8f, 0.5f, 0);
 
-[Setting category="Wheels" name="Wood Surface Color" color]
+[Setting category="Wheels" name="Wood Surface Color" color if="Setting_Wheels_WheelSurface"]
 vec3 Setting_Wheels_WoodSurfaceColor = vec3(0.3f, 0.1f, 0);
 
-[Setting category="Wheels" name="Plastic Surface Color" color]
+[Setting category="Wheels" name="Plastic Surface Color" color if="Setting_Wheels_WheelSurface"]
 vec3 Setting_Wheels_PlasticSurfaceColor = vec3(0.5f, 0, 0);
 
-[Setting category="Wheels" name="Snow Surface Color" color]
+[Setting category="Wheels" name="Snow Surface Color" color if="Setting_Wheels_WheelSurface"]
 vec3 Setting_Wheels_SnowSurfaceColor = vec3(0.7f, 1, 1);
 
-[Setting category="Wheels" name="Sand Surface Color" color]
+[Setting category="Wheels" name="Sand Surface Color" color if="Setting_Wheels_WheelSurface"]
 vec3 Setting_Wheels_SandSurfaceColor = vec3(1, 1, 0);
 
 

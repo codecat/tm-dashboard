@@ -39,8 +39,8 @@ void OnSettingsChanged()
 
 void Main()
 {
-	g_font = nvg::LoadFont("DroidSans.ttf", true);
-	g_fontBold = nvg::LoadFont("DroidSans-Bold.ttf", true);
+	g_font = nvg::LoadFont("DroidSans.ttf");
+	g_fontBold = nvg::LoadFont("DroidSans-Bold.ttf");
 
 	@g_dashboard = Dashboard();
 	g_dashboard.Main();

@@ -351,7 +351,7 @@ enum SpeedStyle
 	Directional,
 }
 
-[Setting category="Speed" name="Style"]
+[Setting category="Speed" name="Style" description="Note: Double and directional only available in school and developer modes."]
 SpeedStyle Setting_Speed_Style = SpeedStyle::Double;
 
 [Setting category="Speed" name="Backdrop color" color]

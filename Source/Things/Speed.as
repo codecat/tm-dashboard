@@ -81,7 +81,12 @@ class DashboardSpeed : DashboardThing
 		nvg::FontSize(Setting_Speed_FontSize);
 		nvg::FillColor(Setting_Speed_TextColor);
 
-		switch (Setting_Speed_Style) {
+		auto speedStyle = Setting_Speed_Style;
+#if !SIG_SCHOOL
+		speedStyle = SpeedStyle::Single;
+#endif
+
+		switch (speedStyle) {
 			case SpeedStyle::Single: {
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 				nvg::TextBox(Setting_Speed_Padding, m_size.y / 2, m_size.x - Setting_Speed_Padding * 2, Text::Format("%.0f", displaySpeed));

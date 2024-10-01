@@ -2,7 +2,7 @@
 name = "Dashboard"
 author = "Miss"
 category = "Overlay"
-version = "1.9.6"
+version = "1.9.7"
 
 blocks = [ "Plugin_Dashboard" ]
 

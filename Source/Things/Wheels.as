@@ -141,7 +141,7 @@ class DashboardWheels : DashboardThing
 		return ret;
 	}
 
-	vec3 GetWheelSurfaceColor(const WheelState& state) 
+	vec3 GetWheelSurfaceColor(const WheelState& state)
 	{
 		vec3 ret(0,0,0);
 

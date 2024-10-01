@@ -141,6 +141,7 @@ class DashboardWheels : DashboardThing
 		return ret;
 	}
 
+#if TMNEXT
 	vec3 GetWheelSurfaceColor(const WheelState& state)
 	{
 		vec3 ret(0,0,0);
@@ -172,6 +173,7 @@ class DashboardWheels : DashboardThing
 
 		return ret;
 	}
+#endif
 
 	void RenderWheelVisual(const WheelState &in state, const vec2 &in pos, const vec2 &in size)
 	{

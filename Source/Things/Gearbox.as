@@ -99,7 +99,7 @@ class DashboardGearbox : DashboardThing
 		}
 
 		nvg::BeginPath();
-		nvg::FontSize(24);
+		nvg::FontSize(Setting_Gearbox_FontSize);
 		nvg::TextBox(0, size.y * gearY, size.x, "" + gear);
 
 		if (Setting_Gearbox_ShowRPMText) {

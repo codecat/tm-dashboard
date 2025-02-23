@@ -240,6 +240,9 @@ vec4 Setting_Gearbox_TextColor = vec4(1, 1, 1, 1);
 [Setting category="Gearbox" name="Font" if="Setting_Gearbox_ShowText"]
 string Setting_Gearbox_Font = "DroidSans.ttf";
 
+[Setting category="Gearbox" name="Font size" drag min=0 max=100 if="Setting_Gearbox_ShowText"]
+float Setting_Gearbox_FontSize = 24.0f;
+
 [Setting category="Gearbox" name="Use gear colors"]
 bool Setting_Gearbox_UseGearColors = false;
 

@@ -99,7 +99,9 @@ class DashboardPadKeyboard : IDashboardPad
 		} else {
 			nvg::FillColor(borderColor);
 		}
-		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
-		nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, text);
+		if (Setting_Keyboard_ArrowSymbols) {
+			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
+			nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, text);
+		}
 	}
 }

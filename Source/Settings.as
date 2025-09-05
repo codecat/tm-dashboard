@@ -183,6 +183,9 @@ float Setting_Keyboard_Spacing = 10.0f;
 [Setting category="Keyboard" name="Inactive alpha" drag min=0 max=1]
 float Setting_Keyboard_InactiveAlpha = 1.0f;
 
+[Setting category="Keyboard" name="Display arrow symbols"]
+bool Setting_Keyboard_ArrowSymbols = true;
+
 
 
 [Setting category="Gearbox" name="Show text"]

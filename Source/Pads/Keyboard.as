@@ -94,11 +94,7 @@ class DashboardPadKeyboard : IDashboardPad
 		nvg::BeginPath();
 		nvg::FontFace(g_font);
 		nvg::FontSize(size.x / 2);
-		if (Setting_Keyboard_UseBorderGradient) {
-			nvg::FillPaint(Setting_Keyboard_BorderGradient.GetPaint(vec2(), m_size, fillAlpha));
-		} else {
-			nvg::FillColor(borderColor);
-		}
+		nvg::FillColor(Setting_Keyboard_TextColor);
 		if (Setting_Keyboard_ArrowSymbols) {
 			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 			nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, text);

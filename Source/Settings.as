@@ -186,6 +186,9 @@ float Setting_Keyboard_InactiveAlpha = 1.0f;
 [Setting category="Keyboard" name="Display arrow symbols"]
 bool Setting_Keyboard_ArrowSymbols = true;
 
+[Setting category="Keyboard" name="Text and symbol color" color]
+vec4 Setting_Keyboard_TextColor = vec4(1, 1, 1, 1);
+
 
 
 [Setting category="Gearbox" name="Show text"]

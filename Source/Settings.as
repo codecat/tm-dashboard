@@ -135,6 +135,9 @@ bool Setting_Gamepad_SteerPercentage = false;
 	if="Setting_Gamepad_Style Uniform"]
 int Setting_Gamepad_SteerPercentageSize = 16;
 
+[Setting category="Gamepad" name="Font" if="Setting_Gamepad_Style Uniform"]
+string Setting_Gamepad_Font = "DroidSans.ttf";
+
 [Setting category="Gamepad" name="Text and symbol color" color if="Setting_Gamepad_Style Uniform"]
 vec4 Setting_Gamepad_TextColor = vec4(1, 1, 1, 1);
 
@@ -194,6 +197,9 @@ bool Setting_Keyboard_SteerPercentage = false;
 	name="Steer percentage size"
 	drag min=2 max=40]
 int Setting_Keyboard_SteerPercentageSize = 16;
+
+[Setting category="Keyboard" name="Font"]
+string Setting_Keyboard_Font = "DroidSans.ttf";
 
 [Setting category="Keyboard" name="Text and symbol color" color]
 vec4 Setting_Keyboard_TextColor = vec4(1, 1, 1, 1);

@@ -1,5 +1,6 @@
 interface IDashboardPad
 {
+	void OnSettingsChanged();
 	void Render(const vec2 &in size, CSceneVehicleVisState@ vis);
 }
 
@@ -101,6 +102,12 @@ class DashboardPadHost : DashboardThing
 			case CInputScriptPad::EPadType::PlayStation:
 				@m_pad = DashboardPadGamepad();
 				break;
+		}
+	}
+
+	void OnSettingsChanged() override {
+		if (m_pad !is null) {
+			m_pad.OnSettingsChanged();
 		}
 	}
 }

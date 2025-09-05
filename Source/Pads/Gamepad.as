@@ -1,5 +1,31 @@
 class DashboardPadGamepad : IDashboardPad
 {
+	nvg::Font m_font;
+	string m_fontPath;
+
+	DashboardPadGamepad()
+	{
+		LoadFont();
+	}
+
+	void LoadFont()
+	{
+		if (Setting_Gamepad_Font == m_fontPath) {
+			return;
+		}
+
+		auto font = nvg::LoadFont(Setting_Gamepad_Font);
+		if (font >= 0) {
+			m_fontPath = Setting_Gamepad_Font;
+			m_font = font;
+		}
+	}
+
+	void OnSettingsChanged() override
+	{
+		LoadFont();
+	}
+
 	void RenderUniform(const vec2 &in size, CSceneVehicleVisState@ vis)
 	{
 		float leftSize = size.x * (0.5f - Setting_Gamepad_MiddleScale / 2) - Setting_Gamepad_Spacing;
@@ -123,7 +149,7 @@ class DashboardPadGamepad : IDashboardPad
 
 		// Steering percentage
 		if (Setting_Gamepad_SteerPercentage) {
-			nvg::FontFace(g_font);
+			nvg::FontFace(m_font);
 			nvg::FontSize(Setting_Gamepad_SteerPercentageSize);
 			nvg::FillColor(Setting_Gamepad_TextColor);
 

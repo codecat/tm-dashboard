@@ -1,6 +1,32 @@
 class DashboardPadKeyboard : IDashboardPad
 {
+	nvg::Font m_font;
+	string m_fontPath;
+
 	vec2 m_size;
+
+	DashboardPadKeyboard()
+	{
+		LoadFont();
+	}
+
+	void LoadFont()
+	{
+		if (Setting_Keyboard_Font == m_fontPath) {
+			return;
+		}
+
+		auto font = nvg::LoadFont(Setting_Keyboard_Font);
+		if (font >= 0) {
+			m_fontPath = Setting_Keyboard_Font;
+			m_font = font;
+		}
+	}
+
+	void OnSettingsChanged() override
+	{
+		LoadFont();
+	}
 
 	void Render(const vec2 &in size, CSceneVehicleVisState@ vis) override
 	{
@@ -92,7 +118,7 @@ class DashboardPadKeyboard : IDashboardPad
 		nvg::Stroke();
 
 		nvg::BeginPath();
-		nvg::FontFace(g_font);
+		nvg::FontFace(m_font);
 		nvg::FontSize(size.x / 2);
 		nvg::FillColor(Setting_Keyboard_TextColor);
 		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);

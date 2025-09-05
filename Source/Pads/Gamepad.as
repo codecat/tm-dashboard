@@ -157,14 +157,14 @@ class DashboardPadGamepad : IDashboardPad
 			if (steerLeft > 0) {
 				nvg::BeginPath();
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Right);
-				nvg::TextBox(0, size.y / 2, leftSize - Setting_Gamepad_Spacing, tostring(Math::Round(steerLeft * 100)) + "%");
+				nvg::TextBox(0, size.y / 2, leftSize - Setting_Gamepad_Spacing, Text::Format("%.f%%", steerLeft * 100.0f));
 			}
 
 			// Right
 			if (steerRight > 0) {
 				nvg::BeginPath();
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
-				nvg::TextBox(rightX + Setting_Gamepad_Spacing, size.y / 2, rightSize, tostring(Math::Round(steerRight * 100)) + "%");
+				nvg::TextBox(rightX + Setting_Gamepad_Spacing, size.y / 2, rightSize, Text::Format("%.f%%", steerRight * 100.0f));
 			}
 		}
 	}

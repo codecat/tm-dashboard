@@ -186,6 +186,15 @@ float Setting_Keyboard_InactiveAlpha = 1.0f;
 [Setting category="Keyboard" name="Display arrow symbols"]
 bool Setting_Keyboard_ArrowSymbols = true;
 
+[Setting category="Keyboard" name="Display steer percentage" description="Overrides left/right arrows of setting above"]
+bool Setting_Keyboard_SteerPercentage = false;
+
+[Setting
+	category="Keyboard"
+	name="Steer percentage size"
+	drag min=2 max=40]
+int Setting_Keyboard_SteerPercentageSize = 16;
+
 [Setting category="Keyboard" name="Text and symbol color" color]
 vec4 Setting_Keyboard_TextColor = vec4(1, 1, 1, 1);
 

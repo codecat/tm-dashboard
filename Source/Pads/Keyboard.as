@@ -95,8 +95,13 @@ class DashboardPadKeyboard : IDashboardPad
 		nvg::FontFace(g_font);
 		nvg::FontSize(size.x / 2);
 		nvg::FillColor(Setting_Keyboard_TextColor);
-		if (Setting_Keyboard_ArrowSymbols) {
-			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
+		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
+		if (Setting_Keyboard_SteerPercentage && fillDir != 0) {
+			if (value > 0.0f) {
+				nvg::FontSize(Setting_Keyboard_SteerPercentageSize);
+				nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, tostring(Math::Round(value * 100)) + "%");
+			}
+		} else if (Setting_Keyboard_ArrowSymbols) {
 			nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, text);
 		}
 	}

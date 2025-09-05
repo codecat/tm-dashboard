@@ -47,7 +47,7 @@ class DashboardAcceleration : DashboardThing
 		}
 
 		auto font = nvg::LoadFont(Setting_Acceleration_Font);
-		if (font > 0) {
+		if (font >= 0) {
 			m_fontPath = Setting_Acceleration_Font;
 			m_font = font;
 		}

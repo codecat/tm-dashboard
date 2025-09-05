@@ -45,7 +45,7 @@ class DashboardGearbox : DashboardThing
 		}
 
 		auto font = nvg::LoadFont(Setting_Gearbox_Font);
-		if (font > 0) {
+		if (font >= 0) {
 			m_fontPath = Setting_Gearbox_Font;
 			m_font = font;
 		}

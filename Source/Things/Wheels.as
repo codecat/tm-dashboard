@@ -64,7 +64,7 @@ class DashboardWheels : DashboardThing
 		}
 
 		auto font = nvg::LoadFont(Setting_Wheels_DetailsFont);
-		if (font > 0) {
+		if (font >= 0) {
 			m_fontPath = Setting_Wheels_DetailsFont;
 			m_font = font;
 		}

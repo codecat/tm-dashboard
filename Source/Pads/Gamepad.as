@@ -139,9 +139,9 @@ class DashboardPadGamepad : IDashboardPad
 		// Up & Down texts
 		if (Setting_Gamepad_UpDownSymbols) {
 			nvg::BeginPath();
-			nvg::FontFace(g_font);
-			nvg::FontSize(midSize / 2);
-			nvg::FillColor(Setting_Gamepad_TextColor);
+			nvg::FontFace(m_font);
+			nvg::FontSize(Setting_Gamepad_FontSize * 1.5f);
+			nvg::FillColor(Setting_Gamepad_FontColor);
 			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 			nvg::TextBox(midX, topSize / 2, midSize, Icons::AngleUp);
 			nvg::TextBox(midX, bottomY + bottomSize / 2, midSize, Icons::AngleDown);
@@ -150,8 +150,8 @@ class DashboardPadGamepad : IDashboardPad
 		// Steering percentage
 		if (Setting_Gamepad_SteerPercentage) {
 			nvg::FontFace(m_font);
-			nvg::FontSize(Setting_Gamepad_SteerPercentageSize);
-			nvg::FillColor(Setting_Gamepad_TextColor);
+			nvg::FontSize(Setting_Gamepad_FontSize);
+			nvg::FillColor(Setting_Gamepad_FontColor);
 
 			// Left
 			if (steerLeft > 0) {

@@ -117,20 +117,20 @@ class DashboardPadKeyboard : IDashboardPad
 		}
 		nvg::Stroke();
 
-		vec4 textColor = Setting_Keyboard_TextColor;
+		vec4 textColor = Setting_Keyboard_FontColor;
 		textColor.w *= fillAlpha;
 
 		nvg::BeginPath();
 		nvg::FontFace(m_font);
-		nvg::FontSize(size.x / 2);
 		nvg::FillColor(textColor);
 		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 		if (Setting_Keyboard_SteerPercentage && fillDir != 0) {
 			if (value > 0.0f) {
-				nvg::FontSize(Setting_Keyboard_SteerPercentageSize);
+				nvg::FontSize(Setting_Keyboard_FontSize);
 				nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, Text::Format("%.f%%", value * 100.0f));
 			}
 		} else if (Setting_Keyboard_ArrowSymbols) {
+			nvg::FontSize(Setting_Keyboard_FontSize * 1.5f);
 			nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, text);
 		}
 	}

@@ -72,9 +72,9 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
-		float fillAlpha = Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerLeft);
+		float fillAlphaLeft = Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerLeft);
 		if (Setting_Gamepad_UseBorderGradient) {
-			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlpha));
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaLeft));
 		} else {
 			nvg::StrokeColor(Setting_Gamepad_BorderColor);
 		}
@@ -99,9 +99,9 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
-		fillAlpha = Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerRight);
+		float fillAlphaRight = Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerRight);
 		if (Setting_Gamepad_UseBorderGradient) {
-			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlpha));
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaRight));
 		} else {
 			nvg::StrokeColor(Setting_Gamepad_BorderColor);
 		}
@@ -123,9 +123,9 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
-		fillAlpha = pedalGas > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha;
+		float fillAlphaUp = pedalGas > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha;
 		if (Setting_Gamepad_UseBorderGradient) {
-			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlpha));
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaUp));
 		} else {
 			nvg::StrokeColor(Setting_Gamepad_BorderColor);
 		}
@@ -147,9 +147,9 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
-		fillAlpha = pedalBrake > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha;
+		float fillAlphaDown = pedalBrake > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha;
 		if (Setting_Gamepad_UseBorderGradient) {
-			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlpha));
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaDown));
 		} else {
 			nvg::StrokeColor(Setting_Gamepad_BorderColor);
 		}
@@ -160,9 +160,10 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::BeginPath();
 			nvg::FontFace(m_font);
 			nvg::FontSize(Setting_Gamepad_FontSize * 1.5f);
-			nvg::FillColor(Setting_Gamepad_FontColor);
 			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
+			nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaUp));
 			nvg::TextBox(midX, topSize / 2, midSize, Icons::AngleUp);
+			nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaDown));
 			nvg::TextBox(midX, bottomY + bottomSize / 2, midSize, Icons::AngleDown);
 		}
 
@@ -170,12 +171,12 @@ class DashboardPadGamepad : IDashboardPad
 		if (Setting_Gamepad_SteerPercentage) {
 			nvg::FontFace(m_font);
 			nvg::FontSize(Setting_Gamepad_FontSize);
-			nvg::FillColor(Setting_Gamepad_FontColor);
 
 			// Left
 			if (steerLeft > 0) {
 				nvg::BeginPath();
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Right);
+				nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaLeft));
 				nvg::TextBox(
 					-Setting_Gamepad_SteerPercentageSpacing,
 					size.y / 2,
@@ -188,6 +189,7 @@ class DashboardPadGamepad : IDashboardPad
 			if (steerRight > 0) {
 				nvg::BeginPath();
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
+				nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaRight));
 				nvg::TextBox(
 					Setting_Gamepad_SteerPercentageSpacing + rightX + Setting_Gamepad_Spacing,
 					size.y / 2,

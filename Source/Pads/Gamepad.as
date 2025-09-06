@@ -176,14 +176,24 @@ class DashboardPadGamepad : IDashboardPad
 			if (steerLeft > 0) {
 				nvg::BeginPath();
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Right);
-				nvg::TextBox(0, size.y / 2, leftSize - Setting_Gamepad_Spacing, Text::Format("%.f%%", steerLeft * 100.0f));
+				nvg::TextBox(
+					-Setting_Gamepad_SteerPercentageSpacing,
+					size.y / 2,
+					leftSize - Setting_Gamepad_Spacing,
+					Text::Format("%.f" + (Setting_Gamepad_SteerPercentageSymbol ? "%%" : ""), steerLeft * 100.0f)
+				);
 			}
 
 			// Right
 			if (steerRight > 0) {
 				nvg::BeginPath();
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
-				nvg::TextBox(rightX + Setting_Gamepad_Spacing, size.y / 2, rightSize, Text::Format("%.f%%", steerRight * 100.0f));
+				nvg::TextBox(
+					Setting_Gamepad_SteerPercentageSpacing + rightX + Setting_Gamepad_Spacing,
+					size.y / 2,
+					rightSize,
+					Text::Format("%.f" + (Setting_Gamepad_SteerPercentageSymbol ? "%%" : ""), steerRight * 100.0f)
+				);
 			}
 		}
 	}
@@ -268,14 +278,24 @@ class DashboardPadGamepad : IDashboardPad
 			if (steerLeft > 0) {
 				nvg::BeginPath();
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Right);
-				nvg::TextBox(0, size.y / 2, leftSize - Setting_Gamepad_Spacing, Text::Format("%.f%%", steerLeft * 100.0f));
+				nvg::TextBox(
+					-Setting_Gamepad_SteerPercentageSpacing,
+					size.y / 2,
+					leftSize - Setting_Gamepad_Spacing,
+					Text::Format("%.f" + (Setting_Gamepad_SteerPercentageSymbol ? "%%" : ""), steerLeft * 100.0f)
+				);
 			}
 
 			// Right
 			if (steerRight > 0) {
 				nvg::BeginPath();
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
-				nvg::TextBox(rightX + Setting_Gamepad_Spacing, size.y / 2, rightSize, Text::Format("%.f%%", steerRight * 100.0f));
+				nvg::TextBox(
+					Setting_Gamepad_SteerPercentageSpacing + rightX + Setting_Gamepad_Spacing,
+					size.y / 2,
+					rightSize,
+					Text::Format("%.f" + (Setting_Gamepad_SteerPercentageSymbol ? "%%" : ""), steerRight * 100.0f)
+				);
 			}
 		}
 	}

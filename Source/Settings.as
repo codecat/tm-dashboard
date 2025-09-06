@@ -128,6 +128,12 @@ bool Setting_Gamepad_CateyeUseSimpleSteer = false;
 [Setting category="Gamepad" name="Display steer percentage" if="!Setting_Gamepad_Style Cateye"]
 bool Setting_Gamepad_SteerPercentage = false;
 
+[Setting category="Gamepad" name="Display steer percentage symbol" if="!Setting_Gamepad_Style Cateye"]
+bool Setting_Gamepad_SteerPercentageSymbol = true;
+
+[Setting category="Gamepad" name="Steer percentage spacing" min=-100 max=100 if="!Setting_Gamepad_Style Cateye"]
+float Setting_Gamepad_SteerPercentageSpacing = 0.0f;
+
 [Setting category="Gamepad" name="Font" if="!Setting_Gamepad_Style Cateye"]
 string Setting_Gamepad_Font = "DroidSans.ttf";
 
@@ -191,6 +197,9 @@ bool Setting_Keyboard_ArrowSymbols = true;
 
 [Setting category="Keyboard" name="Display steer percentage" description="Overrides left/right arrows of setting above"]
 bool Setting_Keyboard_SteerPercentage = false;
+
+[Setting category="Keyboard" name="Display steer percentage symbol"]
+bool Setting_Keyboard_SteerPercentageSymbol = true;
 
 [Setting category="Keyboard" name="Font"]
 string Setting_Keyboard_Font = "DroidSans.ttf";

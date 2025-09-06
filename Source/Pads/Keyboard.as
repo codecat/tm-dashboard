@@ -127,7 +127,12 @@ class DashboardPadKeyboard : IDashboardPad
 		if (Setting_Keyboard_SteerPercentage && fillDir != 0) {
 			if (value > 0.0f) {
 				nvg::FontSize(Setting_Keyboard_FontSize);
-				nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, Text::Format("%.f%%", value * 100.0f));
+				nvg::TextBox(
+					pos.x,
+					pos.y + size.y / 2,
+					size.x,
+					Text::Format("%.f" + (Setting_Keyboard_SteerPercentageSymbol ? "%%" : ""), value * 100.0f)
+				);
 			}
 		} else if (Setting_Keyboard_ArrowSymbols) {
 			nvg::FontSize(Setting_Keyboard_FontSize * 1.5f);

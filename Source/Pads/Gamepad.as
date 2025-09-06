@@ -38,11 +38,6 @@ class DashboardPadGamepad : IDashboardPad
 		float bottomSize = size.y - bottomY;
 
 		nvg::StrokeWidth(Setting_Gamepad_BorderWidth);
-		if (Setting_Gamepad_UseBorderGradient) {
-			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size));
-		} else {
-			nvg::StrokeColor(Setting_Gamepad_BorderColor);
-		}
 		nvg::LineJoin(nvg::LineCapType::Round);
 
 		// Steering scales
@@ -77,6 +72,12 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
+		float fillAlpha = Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerLeft);
+		if (Setting_Gamepad_UseBorderGradient) {
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlpha));
+		} else {
+			nvg::StrokeColor(Setting_Gamepad_BorderColor);
+		}
 		nvg::Stroke();
 
 		// Right
@@ -98,6 +99,12 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
+		fillAlpha = Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerRight);
+		if (Setting_Gamepad_UseBorderGradient) {
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlpha));
+		} else {
+			nvg::StrokeColor(Setting_Gamepad_BorderColor);
+		}
 		nvg::Stroke();
 
 		// Up
@@ -116,6 +123,12 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::Fill();
 			nvg::ResetScissor();
 		}
+		fillAlpha = pedalGas > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha;
+		if (Setting_Gamepad_UseBorderGradient) {
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlpha));
+		} else {
+			nvg::StrokeColor(Setting_Gamepad_BorderColor);
+		}
 		nvg::Stroke();
 
 		// Down
@@ -133,6 +146,12 @@ class DashboardPadGamepad : IDashboardPad
 			}
 			nvg::Fill();
 			nvg::ResetScissor();
+		}
+		fillAlpha = pedalBrake > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha;
+		if (Setting_Gamepad_UseBorderGradient) {
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlpha));
+		} else {
+			nvg::StrokeColor(Setting_Gamepad_BorderColor);
 		}
 		nvg::Stroke();
 

@@ -116,7 +116,7 @@ vec4 Setting_Gamepad_ClassicUpColor = vec4(0.2f, 1, 0.6f, 1);
 [Setting category="Gamepad" name="Classic down color" color if="Setting_Gamepad_Style Classic"]
 vec4 Setting_Gamepad_ClassicDownColor = vec4(1, 0.6f, 0.2f, 1);
 
-[Setting category="Gamepad" name="Classic off alpha" drag min=0 max=1 if="Setting_Gamepad_Style Classic"]
+[Setting category="Gamepad" name="Inactive alpha" min=0 max=1]
 float Setting_Gamepad_OffAlpha = 0.33f;
 
 [Setting category="Gamepad" name="Display up/down arrow symbols" if="Setting_Gamepad_Style Uniform"]

@@ -125,20 +125,20 @@ bool Setting_Gamepad_UpDownSymbols = true;
 [Setting category="Gamepad" name="Cateye use simple steer" if="Setting_Gamepad_Style Cateye"]
 bool Setting_Gamepad_CateyeUseSimpleSteer = false;
 
-[Setting category="Gamepad" name="Display steer percentage" if="Setting_Gamepad_Style Uniform"]
+[Setting category="Gamepad" name="Display steer percentage" if="!Setting_Gamepad_Style Cateye"]
 bool Setting_Gamepad_SteerPercentage = false;
 
-[Setting category="Gamepad" name="Font" if="Setting_Gamepad_Style Uniform"]
+[Setting category="Gamepad" name="Font" if="!Setting_Gamepad_Style Cateye"]
 string Setting_Gamepad_Font = "DroidSans.ttf";
 
 [Setting
 	category="Gamepad"
 	name="Font size"
 	min=2 max=40
-	if="Setting_Gamepad_Style Uniform"]
+	if="!Setting_Gamepad_Style Cateye"]
 int Setting_Gamepad_FontSize = 16;
 
-[Setting category="Gamepad" name="Font color" color if="Setting_Gamepad_Style Uniform"]
+[Setting category="Gamepad" name="Font color" color if="!Setting_Gamepad_Style Cateye"]
 vec4 Setting_Gamepad_FontColor = vec4(1, 1, 1, 1);
 
 

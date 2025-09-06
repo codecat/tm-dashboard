@@ -257,6 +257,27 @@ class DashboardPadGamepad : IDashboardPad
 		nvg::FillColor(WithAlpha(Setting_Gamepad_ClassicDownColor, pedalBrake > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha));
 		nvg::Fill();
 		nvg::ResetScissor();
+
+		// Steering percentage
+		if (Setting_Gamepad_SteerPercentage) {
+			nvg::FontFace(m_font);
+			nvg::FontSize(Setting_Gamepad_FontSize);
+			nvg::FillColor(Setting_Gamepad_FontColor);
+
+			// Left
+			if (steerLeft > 0) {
+				nvg::BeginPath();
+				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Right);
+				nvg::TextBox(0, size.y / 2, leftSize - Setting_Gamepad_Spacing, Text::Format("%.f%%", steerLeft * 100.0f));
+			}
+
+			// Right
+			if (steerRight > 0) {
+				nvg::BeginPath();
+				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
+				nvg::TextBox(rightX + Setting_Gamepad_Spacing, size.y / 2, rightSize, Text::Format("%.f%%", steerRight * 100.0f));
+			}
+		}
 	}
 
 	void RenderCateye(const vec2 &in size, CSceneVehicleVisState@ vis)

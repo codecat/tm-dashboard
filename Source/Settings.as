@@ -80,7 +80,7 @@ GamepadStyle Setting_Gamepad_Style = GamepadStyle::Uniform;
 [Setting category="Gamepad" name="Empty fill color" color if="!Setting_Gamepad_Style Classic"]
 vec4 Setting_Gamepad_EmptyFillColor = vec4(0, 0, 0, 0.7f);
 
-[Setting category="Gamepad" name="Fill gradient"]
+[Setting category="Gamepad" name="Fill gradient" description="Only applies to Uniform and Cateye styles"]
 bool Setting_Gamepad_UseFillGradient = false;
 
 [Setting category="Gamepad" name="Fill color" color if="!Setting_Gamepad_UseFillGradient"]
@@ -89,7 +89,7 @@ vec4 Setting_Gamepad_FillColor = vec4(1, 0.2f, 0.6f, 1);
 [Setting category="Gamepad" name="Fill gradient" if="Setting_Gamepad_UseFillGradient"]
 SettingsGradient Setting_Gamepad_FillGradient = SettingsGradient(vec4(1, 0.2f, 0.6f, 1), vec4(1, 0.6f, 0.9f, 1));
 
-[Setting category="Gamepad" name="Border gradient"]
+[Setting category="Gamepad" name="Border gradient" description="Only applies to Uniform and Cateye styles"]
 bool Setting_Gamepad_UseBorderGradient = false;
 
 [Setting category="Gamepad" name="Border color" color if="!Setting_Gamepad_UseBorderGradient"]

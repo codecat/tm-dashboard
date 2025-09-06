@@ -306,7 +306,6 @@ class DashboardPadGamepad : IDashboardPad
 	void RenderCateye(const vec2 &in size, CSceneVehicleVisState@ vis)
 	{
 		nvg::StrokeWidth(Setting_Gamepad_BorderWidth);
-		nvg::StrokeColor(Setting_Gamepad_BorderColor);
 		nvg::LineJoin(nvg::LineCapType::Round);
 
 		// Steering scales
@@ -361,6 +360,12 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::FillColor(Setting_Gamepad_FillColor);
 			FillInflectedTriangle(posLeftSteer, posLeftInflection, posTop, posBottom);
 		}
+		float fillAlphaLeft = Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerLeft);
+		if (Setting_Gamepad_UseBorderGradient) {
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaLeft));
+		} else {
+			nvg::StrokeColor(WithAlpha(Setting_Gamepad_BorderColor, fillAlphaLeft));
+		}
 		StrokeInflectedTriangle(posLeft, posLeftInflection, posTop, posBottom);
 
 		// Right
@@ -375,16 +380,34 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::FillColor(Setting_Gamepad_FillColor);
 			FillInflectedTriangle(posRightSteer, posRightInflection, posTop, posBottom);
 		}
+		float fillAlphaRight = Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerRight);
+		if (Setting_Gamepad_UseBorderGradient) {
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaRight));
+		} else {
+			nvg::StrokeColor(WithAlpha(Setting_Gamepad_BorderColor, fillAlphaRight));
+		}
 		StrokeInflectedTriangle(posRight, posRightInflection, posTop, posBottom);
 
 		// Up
 		nvg::FillColor(pedalGas > 0.1f ? Setting_Gamepad_FillColor : Setting_Gamepad_EmptyFillColor);
 		FillInflectedTriangle(posMidTop, posTopInflection, posMidLeft, posMidRight);
+		float fillAlphaUp = pedalGas > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha;
+		if (Setting_Gamepad_UseBorderGradient) {
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaUp));
+		} else {
+			nvg::StrokeColor(WithAlpha(Setting_Gamepad_BorderColor, fillAlphaUp));
+		}
 		StrokeInflectedTriangle(posMidTop, posTopInflection, posMidLeft, posMidRight);
 
 		// Down
 		nvg::FillColor(pedalBrake > 0.1f ? Setting_Gamepad_FillColor : Setting_Gamepad_EmptyFillColor);
 		FillInflectedTriangle(posMidBot, posBotInflection, posMidLeft, posMidRight);
+		float fillAlphaDown = pedalBrake > 0.1f ? 1.0f : Setting_Gamepad_OffAlpha;
+		if (Setting_Gamepad_UseBorderGradient) {
+			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaDown));
+		} else {
+			nvg::StrokeColor(WithAlpha(Setting_Gamepad_BorderColor, fillAlphaDown));
+		}
 		StrokeInflectedTriangle(posMidBot, posBotInflection, posMidLeft, posMidRight);
 	}
 

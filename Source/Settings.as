@@ -122,7 +122,7 @@ float Setting_Gamepad_OffAlpha = 0.33f;
 [Setting category="Gamepad" name="Display up/down arrow symbols" if="Setting_Gamepad_Style Uniform"]
 bool Setting_Gamepad_UpDownSymbols = true;
 
-[Setting category="Gamepad" name="Cateye use simple steer" if="Setting_Gamepad_Style Cateye"]
+[Setting category="Gamepad" name="Cateye use simple steer" description="Does not yet show fill gradient correctly" if="Setting_Gamepad_Style Cateye"]
 bool Setting_Gamepad_CateyeUseSimpleSteer = false;
 
 [Setting category="Gamepad" name="Display steer percentage" if="!Setting_Gamepad_Style Cateye"]

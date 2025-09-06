@@ -169,34 +169,17 @@ class DashboardPadGamepad : IDashboardPad
 
 		// Steering percentage
 		if (Setting_Gamepad_SteerPercentage) {
-			nvg::FontFace(m_font);
-			nvg::FontSize(Setting_Gamepad_FontSize);
-
-			// Left
-			if (steerLeft > 0) {
-				nvg::BeginPath();
-				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Right);
-				nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaLeft));
-				nvg::TextBox(
-					-Setting_Gamepad_SteerPercentageSpacing,
-					size.y / 2,
-					leftSize - Setting_Gamepad_Spacing,
-					Text::Format("%.f" + (Setting_Gamepad_SteerPercentageSymbol ? "%%" : ""), steerLeft * 100.0f)
-				);
-			}
-
-			// Right
-			if (steerRight > 0) {
-				nvg::BeginPath();
-				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
-				nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaRight));
-				nvg::TextBox(
-					Setting_Gamepad_SteerPercentageSpacing + rightX + Setting_Gamepad_Spacing,
-					size.y / 2,
-					rightSize,
-					Text::Format("%.f" + (Setting_Gamepad_SteerPercentageSymbol ? "%%" : ""), steerRight * 100.0f)
-				);
-			}
+			RenderSteerPercentage(
+				size.y / 2.0f,
+				Setting_Gamepad_Spacing,
+				steerLeft,
+				fillAlphaLeft,
+				leftSize,
+				steerRight,
+				fillAlphaRight,
+				rightX,
+				rightSize
+			);
 		}
 	}
 
@@ -272,34 +255,17 @@ class DashboardPadGamepad : IDashboardPad
 
 		// Steering percentage
 		if (Setting_Gamepad_SteerPercentage) {
-			nvg::FontFace(m_font);
-			nvg::FontSize(Setting_Gamepad_FontSize);
-
-			// Left
-			if (steerLeft > 0) {
-				nvg::BeginPath();
-				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Right);
-				nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerLeft)));
-				nvg::TextBox(
-					-Setting_Gamepad_SteerPercentageSpacing,
-					size.y / 2,
-					leftSize - Setting_Gamepad_Spacing,
-					Text::Format("%.f" + (Setting_Gamepad_SteerPercentageSymbol ? "%%" : ""), steerLeft * 100.0f)
-				);
-			}
-
-			// Right
-			if (steerRight > 0) {
-				nvg::BeginPath();
-				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
-				nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerRight)));
-				nvg::TextBox(
-					Setting_Gamepad_SteerPercentageSpacing + rightX + Setting_Gamepad_Spacing,
-					size.y / 2,
-					rightSize,
-					Text::Format("%.f" + (Setting_Gamepad_SteerPercentageSymbol ? "%%" : ""), steerRight * 100.0f)
-				);
-			}
+			RenderSteerPercentage(
+				size.y / 2.0f,
+				Setting_Gamepad_Spacing,
+				steerLeft,
+				Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerLeft),
+				leftSize,
+				steerRight,
+				Math::Lerp(Setting_Gamepad_OffAlpha, 1.0f, steerRight),
+				rightX,
+				rightSize
+			);
 		}
 	}
 
@@ -435,6 +401,55 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::StrokeColor(WithAlpha(Setting_Gamepad_BorderColor, fillAlphaDown));
 		}
 		StrokeInflectedTriangle(posMidBot, posBotInflection, posMidLeft, posMidRight);
+
+		if (Setting_Gamepad_SteerPercentage) {
+			float leftSize = size.x * (0.5f - Setting_Gamepad_MiddleScale / 2);
+			float midSize = size.x * Setting_Gamepad_MiddleScale;
+			float rightX = leftSize + midSize;
+			float rightSize = size.x - rightX;
+			RenderSteerPercentage(
+				size.y / 2.0f,
+				0.0f,
+				steerLeft,
+				fillAlphaLeft,
+				leftSize,
+				steerRight,
+				fillAlphaRight,
+				rightX,
+				rightSize
+			);
+		}
+	}
+
+	void RenderSteerPercentage(float y, float spacing, float steerLeft, float fillAlphaLeft, float leftSize, float steerRight, float fillAlphaRight, float rightX, float rightSize) {
+		nvg::FontFace(m_font);
+		nvg::FontSize(Setting_Gamepad_FontSize);
+
+		// Left
+		if (steerLeft > 0) {
+			nvg::BeginPath();
+			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Right);
+			nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaLeft));
+			nvg::TextBox(
+				-Setting_Gamepad_SteerPercentageSpacing,
+				y,
+				leftSize - spacing,
+				Text::Format("%.f" + (Setting_Gamepad_SteerPercentageSymbol ? "%%" : ""), steerLeft * 100.0f)
+			);
+		}
+
+		// Right
+		if (steerRight > 0) {
+			nvg::BeginPath();
+			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
+			nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaRight));
+			nvg::TextBox(
+				Setting_Gamepad_SteerPercentageSpacing + rightX + spacing,
+				y,
+				rightSize,
+				Text::Format("%.f" + (Setting_Gamepad_SteerPercentageSymbol ? "%%" : ""), steerRight * 100.0f)
+			);
+		}
 	}
 
 	private void FillInflectedTriangle(const vec2 &in posApex, const vec2 &in posInflection, const vec2 &in posSide1, const vec2 &in posSide2)

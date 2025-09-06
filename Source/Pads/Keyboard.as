@@ -117,10 +117,13 @@ class DashboardPadKeyboard : IDashboardPad
 		}
 		nvg::Stroke();
 
+		vec4 textColor = Setting_Keyboard_TextColor;
+		textColor.w *= fillAlpha;
+
 		nvg::BeginPath();
 		nvg::FontFace(m_font);
 		nvg::FontSize(size.x / 2);
-		nvg::FillColor(Setting_Keyboard_TextColor);
+		nvg::FillColor(textColor);
 		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
 		if (Setting_Keyboard_SteerPercentage && fillDir != 0) {
 			if (value > 0.0f) {

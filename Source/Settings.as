@@ -143,8 +143,8 @@ string Setting_Gamepad_Font = "DroidSans.ttf";
 	min=2 max=40]
 int Setting_Gamepad_FontSize = 16;
 
-[Setting category="Gamepad" name="Font color" color]
-vec4 Setting_Gamepad_FontColor = vec4(1, 1, 1, 1);
+[Setting category="Gamepad" name="Text color" color]
+vec4 Setting_Gamepad_TextColor = vec4(1, 1, 1, 1);
 
 
 
@@ -209,8 +209,8 @@ string Setting_Keyboard_Font = "DroidSans.ttf";
 	min=2 max=40]
 int Setting_Keyboard_FontSize = 16;
 
-[Setting category="Keyboard" name="Font color" color]
-vec4 Setting_Keyboard_FontColor = vec4(1, 1, 1, 1);
+[Setting category="Keyboard" name="Text color" color]
+vec4 Setting_Keyboard_TextColor = vec4(1, 1, 1, 1);
 
 
 

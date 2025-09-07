@@ -117,7 +117,7 @@ class DashboardPadKeyboard : IDashboardPad
 		}
 		nvg::Stroke();
 
-		vec4 textColor = Setting_Keyboard_FontColor;
+		vec4 textColor = Setting_Keyboard_TextColor;
 		textColor.w *= fillAlpha;
 
 		nvg::BeginPath();

@@ -161,9 +161,9 @@ class DashboardPadGamepad : IDashboardPad
 			nvg::FontFace(m_font);
 			nvg::FontSize(Setting_Gamepad_FontSize * 1.5f);
 			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
-			nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaUp));
+			nvg::FillColor(WithAlpha(Setting_Gamepad_TextColor, fillAlphaUp));
 			nvg::TextBox(midX, topSize / 2, midSize, Icons::AngleUp);
-			nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaDown));
+			nvg::FillColor(WithAlpha(Setting_Gamepad_TextColor, fillAlphaDown));
 			nvg::TextBox(midX, bottomY + bottomSize / 2, midSize, Icons::AngleDown);
 		}
 
@@ -429,7 +429,7 @@ class DashboardPadGamepad : IDashboardPad
 		if (steerLeft > 0) {
 			nvg::BeginPath();
 			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Right);
-			nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaLeft));
+			nvg::FillColor(WithAlpha(Setting_Gamepad_TextColor, fillAlphaLeft));
 			nvg::TextBox(
 				-Setting_Gamepad_SteerPercentageSpacing,
 				y,
@@ -442,7 +442,7 @@ class DashboardPadGamepad : IDashboardPad
 		if (steerRight > 0) {
 			nvg::BeginPath();
 			nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
-			nvg::FillColor(WithAlpha(Setting_Gamepad_FontColor, fillAlphaRight));
+			nvg::FillColor(WithAlpha(Setting_Gamepad_TextColor, fillAlphaRight));
 			nvg::TextBox(
 				Setting_Gamepad_SteerPercentageSpacing + rightX + spacing,
 				y,

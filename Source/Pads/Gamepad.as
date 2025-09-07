@@ -76,7 +76,7 @@ class DashboardPadGamepad : IDashboardPad
 		if (Setting_Gamepad_UseBorderGradient) {
 			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaLeft));
 		} else {
-			nvg::StrokeColor(Setting_Gamepad_BorderColor);
+			nvg::StrokeColor(WithAlpha(Setting_Gamepad_BorderColor, fillAlphaLeft));
 		}
 		nvg::Stroke();
 
@@ -103,7 +103,7 @@ class DashboardPadGamepad : IDashboardPad
 		if (Setting_Gamepad_UseBorderGradient) {
 			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaRight));
 		} else {
-			nvg::StrokeColor(Setting_Gamepad_BorderColor);
+			nvg::StrokeColor(WithAlpha(Setting_Gamepad_BorderColor, fillAlphaRight));
 		}
 		nvg::Stroke();
 
@@ -127,7 +127,7 @@ class DashboardPadGamepad : IDashboardPad
 		if (Setting_Gamepad_UseBorderGradient) {
 			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaUp));
 		} else {
-			nvg::StrokeColor(Setting_Gamepad_BorderColor);
+			nvg::StrokeColor(WithAlpha(Setting_Gamepad_BorderColor, fillAlphaUp));
 		}
 		nvg::Stroke();
 
@@ -151,7 +151,7 @@ class DashboardPadGamepad : IDashboardPad
 		if (Setting_Gamepad_UseBorderGradient) {
 			nvg::StrokePaint(Setting_Gamepad_BorderGradient.GetPaint(vec2(), size, fillAlphaDown));
 		} else {
-			nvg::StrokeColor(Setting_Gamepad_BorderColor);
+			nvg::StrokeColor(WithAlpha(Setting_Gamepad_BorderColor, fillAlphaDown));
 		}
 		nvg::Stroke();
 

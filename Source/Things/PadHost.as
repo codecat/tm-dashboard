@@ -105,7 +105,8 @@ class DashboardPadHost : DashboardThing
 		}
 	}
 
-	void OnSettingsChanged() override {
+	void OnSettingsChanged() override
+	{
 		if (m_pad !is null) {
 			m_pad.OnSettingsChanged();
 		}

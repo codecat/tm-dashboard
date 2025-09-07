@@ -197,7 +197,7 @@ bool Setting_Keyboard_ArrowSymbols = true;
 [Setting category="Keyboard" name="Display steer percentage" description="Overrides left/right arrows of setting above"]
 bool Setting_Keyboard_SteerPercentage = false;
 
-[Setting category="Keyboard" name="Display steer percentage symbol"]
+[Setting category="Keyboard" name="Display steer percentage symbol" if="Setting_Keyboard_SteerPercentage"]
 bool Setting_Keyboard_SteerPercentageSymbol = true;
 
 [Setting category="Keyboard" name="Font"]

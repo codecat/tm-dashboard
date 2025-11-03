@@ -97,7 +97,7 @@ void RenderInterface()
 
 		thing.UpdateProportions();
 
-		vec2 screenSize = vec2(Draw::GetWidth(), Draw::GetHeight());
+		vec2 screenSize = Display::GetSize();
 		vec2 pos = thing.m_pos * (screenSize - thing.m_size);
 
 		UI::SetNextWindowSize(int(thing.m_size.x / scale), int(thing.m_size.y / scale), g_settingsMoveCond);

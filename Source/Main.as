@@ -42,6 +42,14 @@ void Main()
 	g_font = nvg::LoadFont("DroidSans.ttf");
 	g_fontBold = nvg::LoadFont("DroidSans-Bold.ttf");
 
+#if FOREVER
+	ForeverLastInputHook::Start();
+#endif
+
 	@g_dashboard = Dashboard();
 	g_dashboard.Main();
 }
+
+#if FOREVER
+void OnDestroyed() { ForeverLastInputHook::Stop(); }
+#endif

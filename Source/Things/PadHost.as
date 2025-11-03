@@ -55,6 +55,15 @@ class DashboardPadHost : DashboardThing
 			return;
 		}
 
+#if FOREVER
+		// Use the most recently used pad from the hook
+		auto lastDevice = ForeverLastInputHook::g_device;
+		if (cast<CInputDeviceDx8Pad>(lastDevice) !is null) {
+			SetPad(PadType::Gamepad);
+		} else {
+			SetPad(PadType::Keyboard);
+		}
+#else
 		// Find the most recently used pad
 		CInputScriptPad@ mostRecentPad;
 
@@ -86,6 +95,7 @@ class DashboardPadHost : DashboardThing
 				SetPad(PadType::Gamepad);
 				break;
 		}
+#endif
 	}
 
 	void ClearPad()

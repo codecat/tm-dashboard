@@ -34,11 +34,15 @@ class Dashboard
 		auto app = GetApp();
 
 		if (Setting_General_HideWhenNotPlaying) {
+#if FOREVER
+			//todo
+#else
 			if (app.CurrentPlayground !is null && (app.CurrentPlayground.UIConfigs.Length > 0)) {
 				if (app.CurrentPlayground.UIConfigs[0].UISequence == CGamePlaygroundUIConfig::EUISequence::Intro) {
 					return;
 				}
 			}
+#endif
 		}
 
 		auto visState = VehicleState::ViewingPlayerState();

@@ -1,4 +1,4 @@
-enum ForcePadType
+enum PadType
 {
 	None,
 	Gamepad,
@@ -6,7 +6,7 @@ enum ForcePadType
 }
 
 [Setting category="General" name="Force pad type"]
-ForcePadType Setting_General_ForcePadType = ForcePadType::None;
+PadType Setting_General_ForcePadType = PadType::None;
 
 [Setting category="General" name="Hide during Intro sequences"]
 bool Setting_General_HideWhenNotPlaying = false;

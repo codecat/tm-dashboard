@@ -109,7 +109,7 @@ class DashboardGearbox : DashboardThing
 		}
 	}
 
-	void RenderTachometer(const vec2 &in pos, const vec2 &in size, float rpm)
+	void RenderTachometer(const vec2 &in pos, const vec2 &in size, float rpm, uint gear)
 	{
 		float rpmWidth = rpm / m_maxRpm * size.x;
 		float downWidth = Setting_Gearbox_Downshift / m_maxRpm * size.x;
@@ -208,6 +208,50 @@ class DashboardGearbox : DashboardThing
 				}
 				break;
 			}
+
+			case GearboxTachometerStyle::Lights: {
+				uint lights = gear;
+				vec4 color = Setting_Gearbox_Lights_Color;
+
+				if (gear == 0) {
+					lights = 5;
+					color = Setting_Gearbox_Lights_Color_Reverse;
+				}
+
+				if (Setting_Gearbox_Lights_UseGearColors) {
+					switch (gear) {
+						case 0: color = Setting_Gearbox_Gear0Color; break;
+						case 1: color = Setting_Gearbox_Gear1Color; break;
+						case 2: color = Setting_Gearbox_Gear2Color; break;
+						case 3: color = Setting_Gearbox_Gear3Color; break;
+						case 4: color = Setting_Gearbox_Gear4Color; break;
+						case 5: color = Setting_Gearbox_Gear5Color; break;
+					}
+				}
+
+				float lightPadding = 8.0f;
+				float spaceForPadding = lightPadding * 6.0;
+				float lightSize = (size.x - spaceForPadding) / 5.0;
+
+				for (uint i = 0; i < 5; i++) {
+					nvg::BeginPath();
+					nvg::RoundedRect(
+						pos.x + (i + 1) * lightPadding + i * lightSize,
+						pos.y + lightPadding,
+						lightSize,
+						size.y - 2 * lightPadding,
+						4
+					);
+					if (i < lights) {
+						nvg::FillColor(color);
+					} else {
+						nvg::FillColor(Setting_Gearbox_Lights_Color_Background);
+					}
+					nvg::Fill();
+				}
+
+				break;
+			}
 		}
 
 		// Border
@@ -237,7 +281,7 @@ class DashboardGearbox : DashboardThing
 		}
 
 		if (Setting_Gearbox_ShowTachometer) {
-			RenderTachometer(offset, size, rpm);
+			RenderTachometer(offset, size, rpm, gear);
 		}
 	}
 }

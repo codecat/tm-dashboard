@@ -271,10 +271,10 @@ bool Setting_Gearbox_Lights_UseGearColors = false;
 [Setting category="Gearbox" name="Gear light color" color if="Setting_Gearbox_TachometerStyle Lights"]
 vec4 Setting_Gearbox_Lights_Color = vec4(0.568f, 1, 0.961f, 1);
 
-[Setting category="Gearbox" name="Gear light reverse color" color if="Setting_Gearbox_TachometerStyle Lights"]
+[Setting category="Gearbox" name="Gear light color for gear 0 (reverse)" color if="Setting_Gearbox_TachometerStyle Lights"]
 vec4 Setting_Gearbox_Lights_Color_Reverse = vec4(1, 0.216f, 0.216f, 1);
 
-[Setting category="Gearbox" name="Gear light background color" color if="Setting_Gearbox_TachometerStyle Lights"]
+[Setting category="Gearbox" name="Background color for unlit gear lights" color if="Setting_Gearbox_TachometerStyle Lights"]
 vec4 Setting_Gearbox_Lights_Color_Background = vec4(0.1f, 0.1f, 0.1f, 1);
 
 #if MP4 || TURBO

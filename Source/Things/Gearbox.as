@@ -218,7 +218,7 @@ class DashboardGearbox : DashboardThing
 					color = Setting_Gearbox_Lights_Color_Reverse;
 				}
 
-				if (Setting_Gearbox_Lights_UseGearColors) {
+				if (Setting_Gearbox_UseGearColors && Setting_Gearbox_Lights_UseGearColors) {
 					switch (gear) {
 						case 0: color = Setting_Gearbox_Gear0Color; break;
 						case 1: color = Setting_Gearbox_Gear1Color; break;

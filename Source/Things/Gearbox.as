@@ -56,6 +56,27 @@ class DashboardGearbox : DashboardThing
 		LoadFont();
 	}
 
+	vec4 GearColor(uint gear)
+	{
+		switch (gear) {
+			case 0: return Setting_Gearbox_Gear0Color;
+			case 1: return Setting_Gearbox_Gear1Color;
+			case 2: return Setting_Gearbox_Gear2Color;
+			case 3: return Setting_Gearbox_Gear3Color;
+			case 4: return Setting_Gearbox_Gear4Color;
+			case 5: return Setting_Gearbox_Gear5Color;
+#if MP4 || TURBO
+			case 6: return Setting_Gearbox_Gear6Color;
+			case 7: return Setting_Gearbox_Gear7Color;
+#endif
+#if TURBO
+			case 8: return Setting_Gearbox_Gear8Color;
+			case 9: return Setting_Gearbox_Gear9Color;
+#endif
+			default: return Setting_Gearbox_Gear0Color;
+		}
+	}
+
 	void RenderNumbers(const vec2 &in pos, const vec2 &in size, uint gear, float rpm)
 	{
 		nvg::BeginPath();
@@ -70,23 +91,7 @@ class DashboardGearbox : DashboardThing
 
 		vec4 textColor = Setting_Gearbox_TextColor;
 		if (Setting_Gearbox_UseGearColors) {
-
-			switch (gear) {
-				case 0: textColor = Setting_Gearbox_Gear0Color; break;
-				case 1: textColor = Setting_Gearbox_Gear1Color; break;
-				case 2: textColor = Setting_Gearbox_Gear2Color; break;
-				case 3: textColor = Setting_Gearbox_Gear3Color; break;
-				case 4: textColor = Setting_Gearbox_Gear4Color; break;
-				case 5: textColor = Setting_Gearbox_Gear5Color; break;
-#if MP4 || TURBO
-				case 6: textColor = Setting_Gearbox_Gear6Color; break;
-				case 7: textColor = Setting_Gearbox_Gear7Color; break;
-#endif
-#if TURBO
-				case 8: textColor = Setting_Gearbox_Gear8Color; break;
-				case 9: textColor = Setting_Gearbox_Gear9Color; break;
-#endif
-			}
+			textColor = GearColor(gear);
 		}
 		nvg::FontFace(m_font);
 		nvg::FillColor(textColor);
@@ -109,7 +114,7 @@ class DashboardGearbox : DashboardThing
 		}
 	}
 
-	void RenderTachometer(const vec2 &in pos, const vec2 &in size, float rpm)
+	void RenderTachometer(const vec2 &in pos, const vec2 &in size, float rpm, uint gear)
 	{
 		float rpmWidth = rpm / m_maxRpm * size.x;
 		float downWidth = Setting_Gearbox_Downshift / m_maxRpm * size.x;
@@ -208,6 +213,59 @@ class DashboardGearbox : DashboardThing
 				}
 				break;
 			}
+
+			case GearboxTachometerStyle::Lights: {
+				uint lights = gear;
+				vec4 color = Setting_Gearbox_Lights_Color;
+
+#if MP4
+				const uint gearCount = 7;
+#elif TURBO
+				const uint gearCount = 9;
+#else
+				const uint gearCount = 5;
+#endif
+
+				if (gear == 0) {
+					lights = gearCount;
+					color = Setting_Gearbox_Lights_Color_Reverse;
+				}
+
+				if (Setting_Gearbox_UseGearColors) {
+					color = GearColor(gear);
+				}
+
+				if (Setting_Gearbox_Lights_ShowLowHighRPM) {
+					if (rpm <= Setting_Gearbox_Downshift && gear >= 2) {
+						color = Setting_Gearbox_LowRPMColor;
+					} else if (rpm >= Setting_Gearbox_Upshift && gear <= gearCount - 1) {
+						color = Setting_Gearbox_HighRPMColor;
+					}
+				}
+
+				float lightPadding = 8.0f;
+				float spaceForPadding = lightPadding * float(gearCount + 1);
+				float lightSize = (size.x - spaceForPadding) / float(gearCount);
+
+				for (uint i = 0; i < gearCount; i++) {
+					nvg::BeginPath();
+					nvg::RoundedRect(
+						pos.x + (i + 1) * lightPadding + i * lightSize,
+						pos.y + lightPadding,
+						lightSize,
+						size.y - 2 * lightPadding,
+						Setting_Gearbox_BorderRadius
+					);
+					if (i < lights) {
+						nvg::FillColor(color);
+					} else {
+						nvg::FillColor(Setting_Gearbox_Lights_Color_Background);
+					}
+					nvg::Fill();
+				}
+
+				break;
+			}
 		}
 
 		// Border
@@ -237,7 +295,7 @@ class DashboardGearbox : DashboardThing
 		}
 
 		if (Setting_Gearbox_ShowTachometer) {
-			RenderTachometer(offset, size, rpm);
+			RenderTachometer(offset, size, rpm, gear);
 		}
 	}
 }

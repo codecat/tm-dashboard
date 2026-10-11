@@ -381,6 +381,18 @@ string Setting_Speed_Font = "DroidSans.ttf";
 [Setting category="Speed" name="Font size" drag min=0 max=100]
 float Setting_Speed_FontSize = 24.0f;
 
+[Setting category="Speed" name="Drop shadow"]
+bool Setting_Speed_DropShadow = false;
+
+[Setting category="Speed" name="Shadow color" color if="Setting_Speed_DropShadow"]
+vec4 Setting_Speed_ShadowColor = vec4(0, 0, 0, 0.8f);
+
+[Setting category="Speed" name="Shadow offset X" drag min=-20 max=20 if="Setting_Speed_DropShadow"]
+float Setting_Speed_ShadowOffsetX = 2.0f;
+
+[Setting category="Speed" name="Shadow offset Y" drag min=-20 max=20 if="Setting_Speed_DropShadow"]
+float Setting_Speed_ShadowOffsetY = 2.0f;
+
 
 
 enum WheelsStyle

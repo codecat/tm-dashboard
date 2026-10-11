@@ -53,6 +53,16 @@ class DashboardSpeed : DashboardThing
 		LoadFont();
 	}
 
+	void DrawText(float x, float y, float w, const string &in text)
+	{
+		if (Setting_Speed_DropShadow) {
+			nvg::FillColor(Setting_Speed_ShadowColor);
+			nvg::TextBox(x + Setting_Speed_ShadowOffsetX, y + Setting_Speed_ShadowOffsetY, w, text);
+			nvg::FillColor(Setting_Speed_TextColor);
+		}
+		nvg::TextBox(x, y, w, text);
+	}
+
 	void Render(CSceneVehicleVisState@ vis) override
 	{
 		float displaySpeed;
@@ -89,21 +99,21 @@ class DashboardSpeed : DashboardThing
 		switch (speedStyle) {
 			case SpeedStyle::Single: {
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
-				nvg::TextBox(Setting_Speed_Padding, m_size.y / 2, m_size.x - Setting_Speed_Padding * 2, Text::Format("%.0f", displaySpeed));
+				DrawText(Setting_Speed_Padding, m_size.y / 2, m_size.x - Setting_Speed_Padding * 2, Text::Format("%.0f", displaySpeed));
 				break;
 			}
 
 			case SpeedStyle::Double: {
 				float textSize = (m_size.x - Setting_Speed_Padding * 2) / 2;
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
-				nvg::TextBox(Setting_Speed_Padding, m_size.y / 2, textSize, Icons::AngleDoubleUp + " " + Text::Format("%.0f", displaySpeed));
+				DrawText(Setting_Speed_Padding, m_size.y / 2, textSize, Icons::AngleDoubleUp + " " + Text::Format("%.0f", displaySpeed));
 
 				float sideSpeed = VehicleState::GetSideSpeed(vis) * 3.6f;
 				// Avoid flickering negative sign
 				if (sideSpeed < 0 && sideSpeed > -0.99f) {
 					sideSpeed = 0;
 				}
-				nvg::TextBox(Setting_Speed_Padding + textSize, m_size.y / 2, textSize, Icons::AngleDoubleRight + " " + Text::Format("%.0f", sideSpeed));
+				DrawText(Setting_Speed_Padding + textSize, m_size.y / 2, textSize, Icons::AngleDoubleRight + " " + Text::Format("%.0f", sideSpeed));
 				break;
 			}
 
@@ -113,7 +123,7 @@ class DashboardSpeed : DashboardThing
 
 				float textSize = (m_size.x - Setting_Speed_Padding * 2) / 2;
 				nvg::TextAlign(nvg::Align::Middle | nvg::Align::Left);
-				nvg::TextBox(Setting_Speed_Padding, m_size.y / 2, textSize, Icons::ArrowUp + " " + Text::Format("%.0f", absSpeed));
+				DrawText(Setting_Speed_Padding, m_size.y / 2, textSize, Icons::ArrowUp + " " + Text::Format("%.0f", absSpeed));
 				float carAngle = 0;
 				if (absSpeed != 0) {
 					carAngle = Math::Abs((Math::Asin(vis.FrontSpeed * 3.6f / absSpeed) * 57) - 90);
@@ -122,7 +132,7 @@ class DashboardSpeed : DashboardThing
 				if (absSpeed < 0.99f && absSpeed > -0.99f) {
 					carAngle = 0;
 				}
-				nvg::TextBox(Setting_Speed_Padding + textSize, m_size.y / 2, textSize, Icons::Repeat + " " + Text::Format("%.0f", carAngle));
+				DrawText(Setting_Speed_Padding + textSize, m_size.y / 2, textSize, Icons::Repeat + " " + Text::Format("%.0f", carAngle));
 				break;
 			}
 		}

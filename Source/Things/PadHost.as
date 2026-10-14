@@ -1,5 +1,6 @@
 interface IDashboardPad
 {
+	void OnSettingsChanged();
 	void Render(const vec2 &in size, CSceneVehicleVisState@ vis);
 }
 
@@ -114,6 +115,13 @@ class DashboardPadHost : DashboardThing
 		switch (type) {
 			case PadType::Keyboard: @m_pad = DashboardPadKeyboard(); break;
 			case PadType::Gamepad: @m_pad = DashboardPadGamepad(); break;
+		}
+	}
+
+	void OnSettingsChanged() override
+	{
+		if (m_pad !is null) {
+			m_pad.OnSettingsChanged();
 		}
 	}
 }

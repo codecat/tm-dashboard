@@ -42,7 +42,7 @@ class DashboardClock : DashboardThing
 		}
 
 		auto font = nvg::LoadFont(Setting_Clock_Font);
-		if (font > 0) {
+		if (font >= 0) {
 			m_fontPath = Setting_Clock_Font;
 			m_font = font;
 		}

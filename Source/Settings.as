@@ -116,8 +116,11 @@ vec4 Setting_Gamepad_ClassicUpColor = vec4(0.2f, 1, 0.6f, 1);
 [Setting category="Gamepad" name="Classic down color" color if="Setting_Gamepad_Style Classic"]
 vec4 Setting_Gamepad_ClassicDownColor = vec4(1, 0.6f, 0.2f, 1);
 
-[Setting category="Gamepad" name="Classic off alpha" drag min=0 max=1 if="Setting_Gamepad_Style Classic"]
+[Setting category="Gamepad" name="Inactive alpha" drag min=0 max=1]
 float Setting_Gamepad_OffAlpha = 0.33f;
+
+[Setting category="Gamepad" name="Use inactive alpha for text"]
+bool Setting_Gamepad_OffAlphaText = true;
 
 [Setting category="Gamepad" name="Display up/down arrow symbols" if="Setting_Gamepad_Style Uniform"]
 bool Setting_Gamepad_UpDownSymbols = true;
@@ -125,17 +128,23 @@ bool Setting_Gamepad_UpDownSymbols = true;
 [Setting category="Gamepad" name="Cateye use simple steer" if="Setting_Gamepad_Style Cateye"]
 bool Setting_Gamepad_CateyeUseSimpleSteer = false;
 
-[Setting category="Gamepad" name="Display steer percentage" if="Setting_Gamepad_Style Uniform"]
+[Setting category="Gamepad" name="Display steer percentage"]
 bool Setting_Gamepad_SteerPercentage = false;
 
-[Setting
-	category="Gamepad"
-	name="Steer percentage size"
-	drag min=2 max=40
-	if="Setting_Gamepad_Style Uniform"]
-int Setting_Gamepad_SteerPercentageSize = 16;
+[Setting category="Gamepad" name="Display steer percentage symbol" if="Setting_Gamepad_SteerPercentage"]
+bool Setting_Gamepad_SteerPercentageSymbol = true;
 
-[Setting category="Gamepad" name="Text and symbol color" color if="Setting_Gamepad_Style Uniform"]
+[Setting category="Gamepad" name="Steer percentage spacing" min=-100 max=100]
+float Setting_Gamepad_SteerPercentageSpacing = 0.0f;
+
+[Setting category="Gamepad" name="Font"]
+string Setting_Gamepad_Font = "DroidSans.ttf";
+
+[Setting category="Gamepad" name="Font size" min=2 max=40]
+[SettingAlias key="Setting_Gamepad_SteerPercentageSize"]
+int Setting_Gamepad_FontSize = 16;
+
+[Setting category="Gamepad" name="Text color" color]
 vec4 Setting_Gamepad_TextColor = vec4(1, 1, 1, 1);
 
 
@@ -182,6 +191,27 @@ float Setting_Keyboard_Spacing = 10.0f;
 
 [Setting category="Keyboard" name="Inactive alpha" drag min=0 max=1]
 float Setting_Keyboard_InactiveAlpha = 1.0f;
+
+[Setting category="Keyboard" name="Use inactive alpha for text"]
+bool Setting_Gamepad_InactiveAlphaText = true;
+
+[Setting category="Keyboard" name="Display arrow symbols"]
+bool Setting_Keyboard_ArrowSymbols = true;
+
+[Setting category="Keyboard" name="Display steer percentage" description="Overrides left/right arrows of setting above"]
+bool Setting_Keyboard_SteerPercentage = false;
+
+[Setting category="Keyboard" name="Display steer percentage symbol" if="Setting_Keyboard_SteerPercentage"]
+bool Setting_Keyboard_SteerPercentageSymbol = true;
+
+[Setting category="Keyboard" name="Font"]
+string Setting_Keyboard_Font = "DroidSans.ttf";
+
+[Setting category="Keyboard" name="Font size" min=2 max=40]
+int Setting_Keyboard_FontSize = 16;
+
+[Setting category="Keyboard" name="Text color" color]
+vec4 Setting_Keyboard_TextColor = vec4(1, 1, 1, 1);
 
 
 

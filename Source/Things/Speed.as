@@ -42,7 +42,7 @@ class DashboardSpeed : DashboardThing
 		}
 
 		auto font = nvg::LoadFont(Setting_Speed_Font);
-		if (font > 0) {
+		if (font >= 0) {
 			m_fontPath = Setting_Speed_Font;
 			m_font = font;
 		}

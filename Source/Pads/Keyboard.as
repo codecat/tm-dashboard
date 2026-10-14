@@ -1,6 +1,32 @@
 class DashboardPadKeyboard : IDashboardPad
 {
+	nvg::Font m_font;
+	string m_fontPath;
+
 	vec2 m_size;
+
+	DashboardPadKeyboard()
+	{
+		LoadFont();
+	}
+
+	void LoadFont()
+	{
+		if (Setting_Keyboard_Font == m_fontPath) {
+			return;
+		}
+
+		auto font = nvg::LoadFont(Setting_Keyboard_Font);
+		if (font >= 0) {
+			m_fontPath = Setting_Keyboard_Font;
+			m_font = font;
+		}
+	}
+
+	void OnSettingsChanged() override
+	{
+		LoadFont();
+	}
 
 	void Render(const vec2 &in size, CSceneVehicleVisState@ vis) override
 	{
@@ -91,15 +117,28 @@ class DashboardPadKeyboard : IDashboardPad
 		}
 		nvg::Stroke();
 
-		nvg::BeginPath();
-		nvg::FontFace(g_font);
-		nvg::FontSize(size.x / 2);
-		if (Setting_Keyboard_UseBorderGradient) {
-			nvg::FillPaint(Setting_Keyboard_BorderGradient.GetPaint(vec2(), m_size, fillAlpha));
-		} else {
-			nvg::FillColor(borderColor);
+		vec4 textColor = Setting_Keyboard_TextColor;
+		if (Setting_Gamepad_InactiveAlphaText) {
+			textColor.w *= fillAlpha;
 		}
+
+		nvg::BeginPath();
+		nvg::FontFace(m_font);
+		nvg::FillColor(textColor);
 		nvg::TextAlign(nvg::Align::Middle | nvg::Align::Center);
-		nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, text);
+		if (Setting_Keyboard_SteerPercentage && fillDir != 0) {
+			if (value > 0.0f) {
+				nvg::FontSize(Setting_Keyboard_FontSize);
+				nvg::TextBox(
+					pos.x,
+					pos.y + size.y / 2,
+					size.x,
+					Text::Format("%.f" + (Setting_Keyboard_SteerPercentageSymbol ? "%%" : ""), value * 100.0f)
+				);
+			}
+		} else if (Setting_Keyboard_ArrowSymbols) {
+			nvg::FontSize(Setting_Keyboard_FontSize * 1.5f);
+			nvg::TextBox(pos.x, pos.y + size.y / 2, size.x, text);
+		}
 	}
 }
